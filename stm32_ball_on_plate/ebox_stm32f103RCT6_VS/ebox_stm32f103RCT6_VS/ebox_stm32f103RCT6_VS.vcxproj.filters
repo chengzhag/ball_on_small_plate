@@ -1,0 +1,1336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{87ba9b96-aa5b-4ec7-a5cf-5513cc05355a}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx;CPP</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{5a1e4ff8-0840-4828-8df7-7d774e2c5b94}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;H</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{07c0e5b2-cfae-4e0e-be7f-6cc8115bbf83}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source files\common">
+      <UniqueIdentifier>{c1d1e361-9436-4102-835f-a67b9468e491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common">
+      <UniqueIdentifier>{128e83ed-073d-4f2b-a202-0c3644412144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\bigiot">
+      <UniqueIdentifier>{6396c262-c8e3-4ea9-bf1b-bc9ab69d96cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\cJSON">
+      <UniqueIdentifier>{fa871a88-3abe-4039-a991-ec2e321581b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\edriver">
+      <UniqueIdentifier>{65fca5c9-d7b1-421e-9b8f-b8820fc34f65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\edriver">
+      <UniqueIdentifier>{ec449777-9cec-4922-9e68-4dca61351983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\edriver\SFUD">
+      <UniqueIdentifier>{96b3b324-1943-4f6e-bd18-74dd12b79f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\edriver\SFUD\sfud">
+      <UniqueIdentifier>{ab43a6a1-0493-4035-bfa4-00ac15793d1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\edriver\SFUD\sfud\inc">
+      <UniqueIdentifier>{957072de-a53d-4d1e-aa8b-e682daf449e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\edriver\WiFi">
+      <UniqueIdentifier>{6036bb8a-c646-4a52-844d-9d4f2a0dafe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\fat">
+      <UniqueIdentifier>{871745af-7563-43ea-a6d6-c5ebffc1aab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\FreeModbus">
+      <UniqueIdentifier>{c22cd343-1e49-4645-985c-edf4d4c14cdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\FreeModbus\modbus">
+      <UniqueIdentifier>{59304d1f-b758-4847-bde2-fb39f8544b2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\FreeModbus\modbus\ascii">
+      <UniqueIdentifier>{539461df-7a70-4c08-ab80-5c3637840f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\FreeModbus">
+      <UniqueIdentifier>{c09262f5-bb17-4f18-831f-108fa9c62723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\FreeModbus\modbus">
+      <UniqueIdentifier>{dd29d5f0-bdec-43b8-a7fd-d885c25fce4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\FreeModbus\modbus\ascii">
+      <UniqueIdentifier>{aeede680-23fb-466a-8717-44a851973d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\FreeModbus\modbus\functions">
+      <UniqueIdentifier>{41fde682-d76f-43b3-84c7-816eacc37cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\FreeModbus\modbus\include">
+      <UniqueIdentifier>{cd38ecd1-5efe-489c-84bf-45c6cbb809e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\FreeModbus\modbus\rtu">
+      <UniqueIdentifier>{a75dcc86-6d50-411b-afb6-173a82790cbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\FreeModbus\modbus\rtu">
+      <UniqueIdentifier>{c5f43069-c551-4670-89b4-2e12222848d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\FreeModbus\modbus\tcp">
+      <UniqueIdentifier>{1bdf48ed-1716-44b7-b6b0-7147aa2c1ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\FreeModbus\modbus\tcp">
+      <UniqueIdentifier>{07658d42-c17e-4847-8e8e-a932d5fa69aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\FreeModbus\port">
+      <UniqueIdentifier>{91f12bf6-1556-4fd1-afd7-ba4ec5232964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\FreeModbus\port">
+      <UniqueIdentifier>{5690e7f0-d801-4325-a89a-1497c14cc5a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\gui">
+      <UniqueIdentifier>{71086d5f-a05f-4d6f-ad8d-01e55d8b1303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\gui">
+      <UniqueIdentifier>{77da71af-fb59-44f2-b96c-78b0ac9bd117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\network">
+      <UniqueIdentifier>{c94e97d5-f9e2-4889-a25e-60a0a0a0b430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\network">
+      <UniqueIdentifier>{42e9fe56-ff73-49d7-8efb-249fb209b6f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\network\MQTTPacket">
+      <UniqueIdentifier>{5c71c669-09a7-4945-9c09-cd21deb79f50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\network\MQTTPacket\interface">
+      <UniqueIdentifier>{c0cddb3e-76a5-467f-85e8-23e07c7edcca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\network\MQTTPacket\src">
+      <UniqueIdentifier>{26b96787-b8ad-4993-83bf-29fdc09a2d58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\usb_device_stack">
+      <UniqueIdentifier>{30214079-db4d-4afd-a024-8d59f1e98615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\usb_device_stack\USBAudio">
+      <UniqueIdentifier>{3e72e8ac-48c3-4142-8c3b-6ca54cb9c0c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\usb_device_stack\USBDevice">
+      <UniqueIdentifier>{30063af0-86d6-42f6-9700-b4504d3a1f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\usb_device_stack\USBHID">
+      <UniqueIdentifier>{1cfb29a0-b7c0-496b-b8de-ef5b260b8465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\usb_device_stack\USBMIDI">
+      <UniqueIdentifier>{438335ec-dfa1-46f8-835e-d71896d878a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\usb_device_stack\USBMSD">
+      <UniqueIdentifier>{e2782895-8aba-4727-89a3-6047c06ab40c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\usb_device_stack\USBSerial">
+      <UniqueIdentifier>{2e8de6a8-a35d-4c55-aca7-06e09a0d0490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\common\util">
+      <UniqueIdentifier>{3475756a-fa63-4d9c-a4a6-8bb0d81ef3e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\common\util">
+      <UniqueIdentifier>{9194281a-c7f3-4c3f-b92e-3d844808ae01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\example">
+      <UniqueIdentifier>{4002af6b-7358-4e88-9ef3-a00fcacb3788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\example\23.usb_device">
+      <UniqueIdentifier>{cee931ad-3de1-4e60-b44f-6f67ea0a8c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\example\23.usb_device\USB_msd_sd">
+      <UniqueIdentifier>{d7ece91c-adbc-4364-8459-e087a28be49f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\example\综合">
+      <UniqueIdentifier>{553ef882-325b-4045-b647-c143946d43b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu">
+      <UniqueIdentifier>{6f52a148-09e2-446a-a88f-9643190a6700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x">
+      <UniqueIdentifier>{e28f4488-e61d-467b-a546-111004a9a5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\ebox">
+      <UniqueIdentifier>{adbf6ba0-5ab2-49c6-af83-f0bc8e60e744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu">
+      <UniqueIdentifier>{84e5e853-95be-429e-8091-85b9a7afd40f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x">
+      <UniqueIdentifier>{2c3398ee-5560-4f26-9164-9699dc54fbbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\ebox">
+      <UniqueIdentifier>{ed7aee01-8ac9-4973-8cbb-8d915cc470cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries">
+      <UniqueIdentifier>{412b5818-ade9-4e88-94a8-72c44751e44c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\CMSIS">
+      <UniqueIdentifier>{fa7b9791-8ea3-477e-8a59-6ecee0ecebac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\CMSIS\CM3">
+      <UniqueIdentifier>{654f9aec-ee86-49b2-95f3-df1c7110fe79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport">
+      <UniqueIdentifier>{fec966ce-5b09-45f0-826f-c790413dd6ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries">
+      <UniqueIdentifier>{bf1cac46-579e-4fb9-93c5-70957cf197e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\CMSIS">
+      <UniqueIdentifier>{eab5913d-d9aa-40e8-917e-f87dec1664a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\CMSIS\CM3">
+      <UniqueIdentifier>{6bd245f0-6be3-4173-9b73-ab5b8c95e4de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport">
+      <UniqueIdentifier>{a75ad854-2b87-4d28-976f-df98e850255a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport">
+      <UniqueIdentifier>{5b674b0a-10f5-4ef9-918d-c5b21669d198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST">
+      <UniqueIdentifier>{a4ddcb70-be4a-4ba6-820f-8fc833604de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x">
+      <UniqueIdentifier>{6a1b287c-9c7b-4cd2-b823-a369e768ee1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport">
+      <UniqueIdentifier>{98b37694-cab7-4347-8560-02b3cf0f7820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST">
+      <UniqueIdentifier>{79b213b1-266e-4611-8f2a-e5aafc763b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x">
+      <UniqueIdentifier>{88fa845e-0db0-433b-87b0-593ed7a699f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver">
+      <UniqueIdentifier>{2ccde8a1-438f-4426-864f-5228af3a27c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc">
+      <UniqueIdentifier>{e7f09353-1c73-4866-9ecc-0d1d953f5f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver">
+      <UniqueIdentifier>{19985153-cc0b-45a9-a5b4-2901c2694c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src">
+      <UniqueIdentifier>{56a56129-f438-4793-805f-85280ce1ba5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\os">
+      <UniqueIdentifier>{74aa6740-d5ca-4f5d-8595-05b869811a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os">
+      <UniqueIdentifier>{57151038-1256-4e10-8375-8b55bb2026d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\ebox_os">
+      <UniqueIdentifier>{a00c3545-edcf-45ad-862c-b39c6476dcf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\os\FreeRTOS">
+      <UniqueIdentifier>{1ec18ee1-969f-4e86-949b-02adc9448d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\os\FreeRTOS\Source">
+      <UniqueIdentifier>{75b0085c-f0e3-466c-bd20-a723ac65615f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS">
+      <UniqueIdentifier>{2367a620-3b96-49a1-9961-dc3bbc064ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source">
+      <UniqueIdentifier>{124edb6b-9ed9-4489-afa4-fff0685937b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\include">
+      <UniqueIdentifier>{fc480a42-5ffa-47cb-b6c7-a6ca65c9b2a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\os\FreeRTOS\Source\portable">
+      <UniqueIdentifier>{206395e2-40e0-4e3f-9748-286eb3ce4d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\os\FreeRTOS\Source\portable\MemMang">
+      <UniqueIdentifier>{1246711b-0a32-4eae-a82e-7026b684d597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\os\FreeRTOS\Source\portable\RVDS">
+      <UniqueIdentifier>{699fe830-5ec3-4f51-ad2b-accc4b72a06c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable">
+      <UniqueIdentifier>{933f3ce3-89b5-43d2-87da-1ba5ef6a1493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS">
+      <UniqueIdentifier>{2c2f63d4-d76e-4e5d-99e5-981f54910f79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx">
+      <UniqueIdentifier>{c542ad1e-edb6-406a-b63d-370e67a9b2c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CA9">
+      <UniqueIdentifier>{e5a4b606-4351-4915-a387-c987ce1dec1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM0">
+      <UniqueIdentifier>{a67aef2f-996d-406b-a691-c2f0beb65467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\os\FreeRTOS\Source\portable\RVDS\ARM_CM3">
+      <UniqueIdentifier>{7fab7d17-e042-45fe-be95-dd974233dd58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM3">
+      <UniqueIdentifier>{8ad8135d-f290-4743-b8de-768d407e75bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM4F">
+      <UniqueIdentifier>{9d3e0641-8999-484b-b5c4-ca8933215e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM7">
+      <UniqueIdentifier>{9868d756-515d-41ca-acfe-dcc7e8095e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1">
+      <UniqueIdentifier>{936d2b74-6dc0-4b7e-919a-9edb04be0bcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\uCOS-II">
+      <UniqueIdentifier>{eaa5cc0c-bd3c-47e3-b8d0-a7fea4fb0421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\uCOS-II\Ports">
+      <UniqueIdentifier>{6dec2d51-ef0d-4c98-a7a2-6e9d0d71521b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\os\uCOS-II\Source">
+      <UniqueIdentifier>{df1ea410-3f1c-4210-994a-82c6bdd0ae66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\user">
+      <UniqueIdentifier>{ee71d616-f827-478e-8bf0-b3e4d13ef26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\user">
+      <UniqueIdentifier>{526d3700-89d3-4bc6-8731-dffde6104b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Make files">
+      <UniqueIdentifier>{b1e1dd1c-8f6e-4ee4-b7d0-128bdbb1c638}</UniqueIdentifier>
+      <Extensions>*.mak</Extensions>
+    </Filter>
+    <Filter Include="VisualGDB settings">
+      <UniqueIdentifier>{3926af0d-9262-45d1-a407-739c749eff50}</UniqueIdentifier>
+      <Extensions>*.vgdbsettings</Extensions>
+    </Filter>
+    <Filter Include="Source files\Device-specific files">
+      <UniqueIdentifier>{1b1f9234-f3d8-469e-a854-d4a5924705ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files">
+      <UniqueIdentifier>{7c9dce9d-f0c7-4255-96f9-6031ec1dae08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="common\edriver\74HC595.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\at24c02.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\at45db.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\Button.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\colorled.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\dht11.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\ds18b20.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\DS3231.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\encoder.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\fm25v.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\FT800.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\GP2Y1051.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\ir_decoder.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\ir_encoder.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\key_dm.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\L3G4200D.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\LCD1602.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\lcd_1.8.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\LED.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\led_segment.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\lsm303dhlc.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\LTC1446.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\Max7456.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\mmc_sd.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\Nokia5110.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\NRF24L01.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\OLED.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\OLED_ssd1306.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\parallel_gpio.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\si4432.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\TM1638.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\ultrasonic_wave.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\w25x16.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\w5500.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\ws2812.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\mb.c">
+      <Filter>Source files\common\FreeModbus\modbus</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\ascii\mbascii.c">
+      <Filter>Source files\common\FreeModbus\modbus\ascii</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfunccoils.c">
+      <Filter>Source files\common\FreeModbus\modbus\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncdiag.c">
+      <Filter>Source files\common\FreeModbus\modbus\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncdisc.c">
+      <Filter>Source files\common\FreeModbus\modbus\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncholding.c">
+      <Filter>Source files\common\FreeModbus\modbus\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncinput.c">
+      <Filter>Source files\common\FreeModbus\modbus\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncother.c">
+      <Filter>Source files\common\FreeModbus\modbus\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbutils.c">
+      <Filter>Source files\common\FreeModbus\modbus\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\rtu\mbcrc.c">
+      <Filter>Source files\common\FreeModbus\modbus\rtu</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\rtu\mbrtu.c">
+      <Filter>Source files\common\FreeModbus\modbus\rtu</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\modbus\tcp\mbtcp.c">
+      <Filter>Source files\common\FreeModbus\modbus\tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\port\FreeModbus.cpp">
+      <Filter>Source files\common\FreeModbus\port</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\port\portevent.c">
+      <Filter>Source files\common\FreeModbus\port</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\port\portserial.cpp">
+      <Filter>Source files\common\FreeModbus\port</Filter>
+    </ClCompile>
+    <ClCompile Include="common\FreeModbus\port\porttimer.cpp">
+      <Filter>Source files\common\FreeModbus\port</Filter>
+    </ClCompile>
+    <ClCompile Include="common\gui\Font16_ASCII.cpp">
+      <Filter>Source files\common\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="common\gui\Font16_HZ.cpp">
+      <Filter>Source files\common\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="common\gui\Font32_ASCII.cpp">
+      <Filter>Source files\common\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="common\gui\Font8_ASCII.cpp">
+      <Filter>Source files\common\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="common\gui\gui.cpp">
+      <Filter>Source files\common\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="common\gui\lcd_port.cpp">
+      <Filter>Source files\common\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\dhcp.cpp">
+      <Filter>Source files\common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\dns.cpp">
+      <Filter>Source files\common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\socket.cpp">
+      <Filter>Source files\common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\tcp.cpp">
+      <Filter>Source files\common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\network\udp.cpp">
+      <Filter>Source files\common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\calendar.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\color_convert.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\crc.c">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\dtostrf.c">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\ebox_mem.c">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\heap.c">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\itoa.c">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\print.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\ringbuf.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\util.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\WString.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\ebox_can.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\object.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\misc.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c">
+      <Filter>Source files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\croutine.c">
+      <Filter>Source files\os\FreeRTOS\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\event_groups.c">
+      <Filter>Source files\os\FreeRTOS\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\list.c">
+      <Filter>Source files\os\FreeRTOS\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\queue.c">
+      <Filter>Source files\os\FreeRTOS\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\tasks.c">
+      <Filter>Source files\os\FreeRTOS\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\timers.c">
+      <Filter>Source files\os\FreeRTOS\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\portable\MemMang\heap_4.c">
+      <Filter>Source files\os\FreeRTOS\Source\portable\MemMang</Filter>
+    </ClCompile>
+    <ClCompile Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM3\port.c">
+      <Filter>Source files\os\FreeRTOS\Source\portable\RVDS\ARM_CM3</Filter>
+    </ClCompile>
+    <ClCompile Include="user\bsp.cpp">
+      <Filter>Source files\user</Filter>
+    </ClCompile>
+    <ClCompile Include="user\main.cpp">
+      <Filter>Source files\user</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\MPU6050.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\encoder_exti.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\encoder_motor.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\encoder_timer.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\PID.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\tb6612fng.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\uart_string.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\ultrasonic_wave_uart.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\accurate_pwm.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\servo.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\my_math.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\uart_vcan.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\drv8825.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\bigiot\bigiot.h">
+      <Filter>Header files\common\bigiot</Filter>
+    </ClInclude>
+    <ClInclude Include="common\bigiot\bigiot_port.h">
+      <Filter>Header files\common\bigiot</Filter>
+    </ClInclude>
+    <ClInclude Include="common\cJSON\cJSON.h">
+      <Filter>Header files\common\cJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\74HC595.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\at24c02.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\at45db.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\Button.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\colorled.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\dht11.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\ds18b20.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\DS3231.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\encoder.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\fm25v.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\font.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\FT800.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\GP2Y1051.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\ir_decoder.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\ir_encoder.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\key_dm.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\L3G4200D.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\LCD1602.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\lcd_1.8.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\led.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\led_segment.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\lsm303dhlc.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\LTC1446.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\Max7456.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\mmc_sd.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\Nokia5110.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\NRF24L01.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\OLED.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\OLED_ssd1306.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\parallel_gpio.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\si4432.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\TM1638.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\ultrasonic_wave.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\w25x16.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\w5500.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\ws2812.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud.h">
+      <Filter>Header files\common\edriver\SFUD\sfud\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud_cfg.h">
+      <Filter>Header files\common\edriver\SFUD\sfud\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud_def.h">
+      <Filter>Header files\common\edriver\SFUD\sfud\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud_flash_def.h">
+      <Filter>Header files\common\edriver\SFUD\sfud\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\WiFi\ESP8266.h">
+      <Filter>Header files\common\edriver\WiFi</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\WiFi\esp8266_tcp.h">
+      <Filter>Header files\common\edriver\WiFi</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\WiFi\esp8266_udp.h">
+      <Filter>Header files\common\edriver\WiFi</Filter>
+    </ClInclude>
+    <ClInclude Include="common\fat\diskio.h">
+      <Filter>Header files\common\fat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\fat\ff.h">
+      <Filter>Header files\common\fat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\fat\ffconf.h">
+      <Filter>Header files\common\fat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\fat\integer.h">
+      <Filter>Header files\common\fat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\fat\wrapperdiskio.h">
+      <Filter>Header files\common\fat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\ascii\mbascii.h">
+      <Filter>Header files\common\FreeModbus\modbus\ascii</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\include\mb.h">
+      <Filter>Header files\common\FreeModbus\modbus\include</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\include\mbconfig.h">
+      <Filter>Header files\common\FreeModbus\modbus\include</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\include\mbframe.h">
+      <Filter>Header files\common\FreeModbus\modbus\include</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\include\mbfunc.h">
+      <Filter>Header files\common\FreeModbus\modbus\include</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\include\mbport.h">
+      <Filter>Header files\common\FreeModbus\modbus\include</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\include\mbproto.h">
+      <Filter>Header files\common\FreeModbus\modbus\include</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\include\mbutils.h">
+      <Filter>Header files\common\FreeModbus\modbus\include</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\rtu\mbcrc.h">
+      <Filter>Header files\common\FreeModbus\modbus\rtu</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\rtu\mbrtu.h">
+      <Filter>Header files\common\FreeModbus\modbus\rtu</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\modbus\tcp\mbtcp.h">
+      <Filter>Header files\common\FreeModbus\modbus\tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\port\FreeModbus.h">
+      <Filter>Header files\common\FreeModbus\port</Filter>
+    </ClInclude>
+    <ClInclude Include="common\FreeModbus\port\port.h">
+      <Filter>Header files\common\FreeModbus\port</Filter>
+    </ClInclude>
+    <ClInclude Include="common\gui\gui.h">
+      <Filter>Header files\common\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="common\gui\guiconfig.h">
+      <Filter>Header files\common\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="common\gui\lcd_port.h">
+      <Filter>Header files\common\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\dhcp.h">
+      <Filter>Header files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\dns.h">
+      <Filter>Header files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\netconfig.h">
+      <Filter>Header files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\socket.h">
+      <Filter>Header files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\tcp.h">
+      <Filter>Header files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\udp.h">
+      <Filter>Header files\common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\interface\mqtt_api.h">
+      <Filter>Header files\common\network\MQTTPacket\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\interface\transport.h">
+      <Filter>Header files\common\network\MQTTPacket\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTConnect.h">
+      <Filter>Header files\common\network\MQTTPacket\src</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTFormat.h">
+      <Filter>Header files\common\network\MQTTPacket\src</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTPacket.h">
+      <Filter>Header files\common\network\MQTTPacket\src</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTPublish.h">
+      <Filter>Header files\common\network\MQTTPacket\src</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTSubscribe.h">
+      <Filter>Header files\common\network\MQTTPacket\src</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTUnsubscribe.h">
+      <Filter>Header files\common\network\MQTTPacket\src</Filter>
+    </ClInclude>
+    <ClInclude Include="common\network\MQTTPacket\src\StackTrace.h">
+      <Filter>Header files\common\network\MQTTPacket\src</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBAudio\USBAudio.h">
+      <Filter>Header files\common\usb_device_stack\USBAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBAudio\USBAudio_Types.h">
+      <Filter>Header files\common\usb_device_stack\USBAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBDescriptor.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBDevice.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBDevice_Types.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBEndpoints.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBEndpoints_STM32F.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBHAL.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBRegs_STM32.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\usb_regs.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBDevice\usb_type.h">
+      <Filter>Header files\common\usb_device_stack\USBDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBHID\USBHID.h">
+      <Filter>Header files\common\usb_device_stack\USBHID</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBHID\USBHID_Types.h">
+      <Filter>Header files\common\usb_device_stack\USBHID</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBHID\USBKeyboard.h">
+      <Filter>Header files\common\usb_device_stack\USBHID</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBHID\USBMouse.h">
+      <Filter>Header files\common\usb_device_stack\USBHID</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBHID\USBMouseKeyboard.h">
+      <Filter>Header files\common\usb_device_stack\USBHID</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBMIDI\MIDIMessage.h">
+      <Filter>Header files\common\usb_device_stack\USBMIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBMIDI\USBMIDI.h">
+      <Filter>Header files\common\usb_device_stack\USBMIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBMSD\USBMSD.h">
+      <Filter>Header files\common\usb_device_stack\USBMSD</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBSerial\CircBuffer.h">
+      <Filter>Header files\common\usb_device_stack\USBSerial</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBSerial\USBCDC.h">
+      <Filter>Header files\common\usb_device_stack\USBSerial</Filter>
+    </ClInclude>
+    <ClInclude Include="common\usb_device_stack\USBSerial\USBSerial.h">
+      <Filter>Header files\common\usb_device_stack\USBSerial</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\calendar.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\color_convert.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\crc.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\dtostrf.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\ebox_mem.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\heap.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\itoa.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\print.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\printable.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\ringbuf.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\util.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\WString.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="example\23.usb_device\USB_msd_sd\usb_msd_sd.h">
+      <Filter>Header files\example\23.usb_device\USB_msd_sd</Filter>
+    </ClInclude>
+    <ClInclude Include="example\综合\includes.h">
+      <Filter>Header files\example\综合</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_analog.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_can.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_common.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_core.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_dac.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_exti.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_gpio.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_i2c.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_iflash.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_in_capture.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_pwm.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_rtc.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_spi.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer_it.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_uart.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_wdg.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\FunctionPointer.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\stm32f10x_conf.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\misc.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h">
+      <Filter>Header files\mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="os\ebox_os\cpu.h">
+      <Filter>Header files\os\ebox_os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\ebox_os\os.h">
+      <Filter>Header files\os\ebox_os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\croutine.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\deprecated_definitions.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\event_groups.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\FreeRTOS.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\list.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\mpu_wrappers.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\portable.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\projdefs.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\queue.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\semphr.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\StackMacros.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\task.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\include\timers.h">
+      <Filter>Header files\os\FreeRTOS\Source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h">
+      <Filter>Header files\os\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CA9\portmacro.h">
+      <Filter>Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CA9</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM0\portmacro.h">
+      <Filter>Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM0</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM3\portmacro.h">
+      <Filter>Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM3</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h">
+      <Filter>Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM4F</Filter>
+    </ClInclude>
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\portmacro.h">
+      <Filter>Header files\os\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1</Filter>
+    </ClInclude>
+    <ClInclude Include="os\uCOS-II\Ports\os_cpu.h">
+      <Filter>Header files\os\uCOS-II\Ports</Filter>
+    </ClInclude>
+    <ClInclude Include="os\uCOS-II\Source\ucos_ii.h">
+      <Filter>Header files\os\uCOS-II\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="user\app_cfg.h">
+      <Filter>Header files\user</Filter>
+    </ClInclude>
+    <ClInclude Include="user\bsp.h">
+      <Filter>Header files\user</Filter>
+    </ClInclude>
+    <ClInclude Include="user\FreeRTOSConfig.h">
+      <Filter>Header files\user</Filter>
+    </ClInclude>
+    <ClInclude Include="user\os_cfg.h">
+      <Filter>Header files\user</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\MPU6050.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\encoder_exti.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\encoder_motor.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\encoder_timer.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\PID.hpp">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\tb6612fng.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\uart_string.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\ultrasonic_wave_uart.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\uart_num.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\signal_stream.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\accurate_pwm.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\servo.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\my_math.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\uart_vcan.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\drv8825.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+    <None Include="debug.mak">
+      <Filter>Make files</Filter>
+    </None>
+    <None Include="ebox_stm32f103RCT6_VS-Debug.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="release.mak">
+      <Filter>Make files</Filter>
+    </None>
+    <None Include="ebox_stm32f103RCT6_VS-Release.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="mcu.mak">
+      <Filter>Source files\Device-specific files</Filter>
+    </None>
+    <None Include="keil.mak">
+      <Filter>Source files</Filter>
+    </None>
+    <None Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm\startup_stm32f10x_md.s">
+      <Filter>Source files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="MCU.xml">
+      <Filter>VisualGDB settings</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

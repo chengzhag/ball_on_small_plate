@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7756F43D-4EB0-46A8-887D-47306ACEAB0B}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include;C:\Keil_v5\ARM\CMSIS\Include;c:\sysgcc\arm-eabi\arm-eabi\include\c++\6.2.0;c:\sysgcc\arm-eabi\arm-eabi\include\c++\6.2.0\arm-eabi;c:\sysgcc\arm-eabi\arm-eabi\include\c++\6.2.0\backward;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\6.2.0\include;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\6.2.0\include-fixed;c:\sysgcc\arm-eabi\arm-eabi\sys-include;c:\sysgcc\arm-eabi\arm-eabi\include;mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport;mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc;mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x;mcu\stm32f10x\ebox;common\util;common\edriver;common\network;common\fat;common\edriver\WiFi;user;common\cJSON;common\edriver\SFUD\sfud\inc;common\edriver\SFUD\ebox;common\bigiot;common\usb_device_stack\USBDevice;common\usb_device_stack\USBHID;common\gui;common\FreeModbus\modbus\ascii;common\FreeModbus\modbus\include;common\FreeModbus\modbus\rtu;common\FreeModbus\modbus\tcp;common\FreeModbus\port;os\FreeRTOS\Source\include;os\FreeRTOS\Source\portable\RVDS\ARM_CM3;mcu/stm32f10x/libraries/CMSIS/CM3/CoreSupport;mcu/stm32f10x/libraries/STM32F10x_StdPeriph_Driver/inc;mcu/stm32f10x/libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x;mcu/stm32f10x/ebox;common/util;common/edriver;common/network;common/fat;common/edriver/WiFi;common/cJSON;common/edriver/SFUD/sfud/inc;common/edriver/SFUD/ebox;common/bigiot;common/usb_device_stack/USBDevice;common/usb_device_stack/USBHID;common/gui;common/FreeModbus/modbus/ascii;common/FreeModbus/modbus/include;common/FreeModbus/modbus/rtu;common/FreeModbus/modbus/tcp;common/FreeModbus/port;os/FreeRTOS/Source/include;os/FreeRTOS/Source/portable/RVDS/ARM_CM3;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(ProjectDir)\gcc_Debug.h;$(VISUALGDB_DIR)\gcc_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
+    <NMakeOutput>$(ProjectDir)ebox_stm32f103RCT6_VS-Debug.vgdbsettings</NMakeOutput>
+    <IncludePath />
+    <ReferencePath />
+    <LibraryPath />
+    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeIncludeSearchPath>c:\sysgcc\arm-eabi\arm-eabi\include\c++\6.2.0;c:\sysgcc\arm-eabi\arm-eabi\include\c++\6.2.0\arm-eabi;c:\sysgcc\arm-eabi\arm-eabi\include\c++\6.2.0\backward;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\6.2.0\include;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\6.2.0\include-fixed;c:\sysgcc\arm-eabi\arm-eabi\sys-include;c:\sysgcc\arm-eabi\arm-eabi\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(ProjectDir)\gcc_Release.h;$(VISUALGDB_DIR)\gcc_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Release;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
+    <NMakeOutput>$(ProjectDir)ebox_stm32f103RCT6_VS-Release.vgdbsettings</NMakeOutput>
+    <IncludePath />
+    <ReferencePath />
+    <LibraryPath />
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="debug.mak" />
+    <None Include="ebox_stm32f103RCT6_VS-Debug.vgdbsettings" />
+    <None Include="ebox_stm32f103RCT6_VS-Release.vgdbsettings" />
+    <None Include="keil.mak" />
+    <None Include="Makefile" />
+    <None Include="mcu.mak" />
+    <None Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm\startup_stm32f10x_md.s" />
+    <None Include="release.mak" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="common\edriver\74HC595.cpp" />
+    <ClCompile Include="common\edriver\accurate_pwm.cpp" />
+    <ClCompile Include="common\edriver\at24c02.cpp" />
+    <ClCompile Include="common\edriver\at45db.cpp" />
+    <ClCompile Include="common\edriver\Button.cpp" />
+    <ClCompile Include="common\edriver\colorled.cpp" />
+    <ClCompile Include="common\edriver\dht11.cpp" />
+    <ClCompile Include="common\edriver\drv8825.cpp" />
+    <ClCompile Include="common\edriver\ds18b20.cpp" />
+    <ClCompile Include="common\edriver\DS3231.cpp" />
+    <ClCompile Include="common\edriver\encoder.cpp" />
+    <ClCompile Include="common\edriver\encoder_exti.cpp" />
+    <ClCompile Include="common\edriver\encoder_motor.cpp" />
+    <ClCompile Include="common\edriver\encoder_timer.cpp" />
+    <ClCompile Include="common\edriver\fm25v.cpp" />
+    <ClCompile Include="common\edriver\FT800.cpp" />
+    <ClCompile Include="common\edriver\GP2Y1051.cpp" />
+    <ClCompile Include="common\edriver\ir_decoder.cpp" />
+    <ClCompile Include="common\edriver\ir_encoder.cpp" />
+    <ClCompile Include="common\edriver\key_dm.cpp" />
+    <ClCompile Include="common\edriver\L3G4200D.cpp" />
+    <ClCompile Include="common\edriver\LCD1602.cpp" />
+    <ClCompile Include="common\edriver\lcd_1.8.cpp" />
+    <ClCompile Include="common\edriver\LED.cpp" />
+    <ClCompile Include="common\edriver\led_segment.cpp" />
+    <ClCompile Include="common\edriver\lsm303dhlc.cpp" />
+    <ClCompile Include="common\edriver\LTC1446.cpp" />
+    <ClCompile Include="common\edriver\Max7456.cpp" />
+    <ClCompile Include="common\edriver\mmc_sd.cpp" />
+    <ClCompile Include="common\edriver\MPU6050.cpp" />
+    <ClCompile Include="common\edriver\Nokia5110.cpp" />
+    <ClCompile Include="common\edriver\NRF24L01.cpp" />
+    <ClCompile Include="common\edriver\OLED.cpp" />
+    <ClCompile Include="common\edriver\OLED_ssd1306.cpp" />
+    <ClCompile Include="common\edriver\parallel_gpio.cpp" />
+    <ClCompile Include="common\edriver\PID.cpp" />
+    <ClCompile Include="common\edriver\servo.cpp" />
+    <ClCompile Include="common\edriver\si4432.cpp" />
+    <ClCompile Include="common\edriver\tb6612fng.cpp" />
+    <ClCompile Include="common\edriver\TM1638.cpp" />
+    <ClCompile Include="common\edriver\uart_string.cpp" />
+    <ClCompile Include="common\edriver\uart_vcan.cpp" />
+    <ClCompile Include="common\edriver\ultrasonic_wave.cpp" />
+    <ClCompile Include="common\edriver\ultrasonic_wave_uart.cpp" />
+    <ClCompile Include="common\edriver\w25x16.cpp" />
+    <ClCompile Include="common\edriver\w5500.cpp" />
+    <ClCompile Include="common\edriver\ws2812.cpp" />
+    <ClCompile Include="common\FreeModbus\modbus\mb.c" />
+    <ClCompile Include="common\FreeModbus\modbus\ascii\mbascii.c" />
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfunccoils.c" />
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncdiag.c" />
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncdisc.c" />
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncholding.c" />
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncinput.c" />
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbfuncother.c" />
+    <ClCompile Include="common\FreeModbus\modbus\functions\mbutils.c" />
+    <ClCompile Include="common\FreeModbus\modbus\rtu\mbcrc.c" />
+    <ClCompile Include="common\FreeModbus\modbus\rtu\mbrtu.c" />
+    <ClCompile Include="common\FreeModbus\modbus\tcp\mbtcp.c" />
+    <ClCompile Include="common\FreeModbus\port\FreeModbus.cpp" />
+    <ClCompile Include="common\FreeModbus\port\portevent.c" />
+    <ClCompile Include="common\FreeModbus\port\portserial.cpp" />
+    <ClCompile Include="common\FreeModbus\port\porttimer.cpp" />
+    <ClCompile Include="common\gui\Font16_ASCII.cpp" />
+    <ClCompile Include="common\gui\Font16_HZ.cpp" />
+    <ClCompile Include="common\gui\Font32_ASCII.cpp" />
+    <ClCompile Include="common\gui\Font8_ASCII.cpp" />
+    <ClCompile Include="common\gui\gui.cpp" />
+    <ClCompile Include="common\gui\lcd_port.cpp" />
+    <ClCompile Include="common\network\dhcp.cpp" />
+    <ClCompile Include="common\network\dns.cpp" />
+    <ClCompile Include="common\network\socket.cpp" />
+    <ClCompile Include="common\network\tcp.cpp" />
+    <ClCompile Include="common\network\udp.cpp" />
+    <ClCompile Include="common\util\calendar.cpp" />
+    <ClCompile Include="common\util\color_convert.cpp" />
+    <ClCompile Include="common\util\crc.c" />
+    <ClCompile Include="common\util\dtostrf.c" />
+    <ClCompile Include="common\util\ebox_mem.c" />
+    <ClCompile Include="common\util\heap.c" />
+    <ClCompile Include="common\util\itoa.c" />
+    <ClCompile Include="common\util\my_math.cpp" />
+    <ClCompile Include="common\util\print.cpp" />
+    <ClCompile Include="common\util\ringbuf.cpp" />
+    <ClCompile Include="common\util\util.cpp" />
+    <ClCompile Include="common\util\WString.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\ebox_can.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\object.cpp" />
+    <ClCompile Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\misc.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c" />
+    <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c" />
+    <ClCompile Include="os\FreeRTOS\Source\croutine.c" />
+    <ClCompile Include="os\FreeRTOS\Source\event_groups.c" />
+    <ClCompile Include="os\FreeRTOS\Source\list.c" />
+    <ClCompile Include="os\FreeRTOS\Source\queue.c" />
+    <ClCompile Include="os\FreeRTOS\Source\tasks.c" />
+    <ClCompile Include="os\FreeRTOS\Source\timers.c" />
+    <ClCompile Include="os\FreeRTOS\Source\portable\MemMang\heap_4.c" />
+    <ClCompile Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM3\port.c" />
+    <ClCompile Include="user\bsp.cpp" />
+    <ClCompile Include="user\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\bigiot\bigiot.h" />
+    <ClInclude Include="common\bigiot\bigiot_port.h" />
+    <ClInclude Include="common\cJSON\cJSON.h" />
+    <ClInclude Include="common\edriver\74HC595.h" />
+    <ClInclude Include="common\edriver\accurate_pwm.h" />
+    <ClInclude Include="common\edriver\at24c02.h" />
+    <ClInclude Include="common\edriver\at45db.h" />
+    <ClInclude Include="common\edriver\Button.h" />
+    <ClInclude Include="common\edriver\colorled.h" />
+    <ClInclude Include="common\edriver\dht11.h" />
+    <ClInclude Include="common\edriver\drv8825.h" />
+    <ClInclude Include="common\edriver\ds18b20.h" />
+    <ClInclude Include="common\edriver\DS3231.h" />
+    <ClInclude Include="common\edriver\encoder.h" />
+    <ClInclude Include="common\edriver\encoder_exti.h" />
+    <ClInclude Include="common\edriver\encoder_motor.h" />
+    <ClInclude Include="common\edriver\encoder_timer.h" />
+    <ClInclude Include="common\edriver\fm25v.h" />
+    <ClInclude Include="common\edriver\font.h" />
+    <ClInclude Include="common\edriver\FT800.h" />
+    <ClInclude Include="common\edriver\GP2Y1051.h" />
+    <ClInclude Include="common\edriver\ir_decoder.h" />
+    <ClInclude Include="common\edriver\ir_encoder.h" />
+    <ClInclude Include="common\edriver\key_dm.h" />
+    <ClInclude Include="common\edriver\L3G4200D.h" />
+    <ClInclude Include="common\edriver\LCD1602.h" />
+    <ClInclude Include="common\edriver\lcd_1.8.h" />
+    <ClInclude Include="common\edriver\led.h" />
+    <ClInclude Include="common\edriver\led_segment.h" />
+    <ClInclude Include="common\edriver\lsm303dhlc.h" />
+    <ClInclude Include="common\edriver\LTC1446.h" />
+    <ClInclude Include="common\edriver\Max7456.h" />
+    <ClInclude Include="common\edriver\mmc_sd.h" />
+    <ClInclude Include="common\edriver\MPU6050.h" />
+    <ClInclude Include="common\edriver\Nokia5110.h" />
+    <ClInclude Include="common\edriver\NRF24L01.h" />
+    <ClInclude Include="common\edriver\OLED.h" />
+    <ClInclude Include="common\edriver\OLED_ssd1306.h" />
+    <ClInclude Include="common\edriver\parallel_gpio.h" />
+    <ClInclude Include="common\edriver\PID.hpp" />
+    <ClInclude Include="common\edriver\servo.h" />
+    <ClInclude Include="common\edriver\si4432.h" />
+    <ClInclude Include="common\edriver\tb6612fng.h" />
+    <ClInclude Include="common\edriver\TM1638.h" />
+    <ClInclude Include="common\edriver\uart_num.h" />
+    <ClInclude Include="common\edriver\uart_string.h" />
+    <ClInclude Include="common\edriver\uart_vcan.h" />
+    <ClInclude Include="common\edriver\ultrasonic_wave.h" />
+    <ClInclude Include="common\edriver\ultrasonic_wave_uart.h" />
+    <ClInclude Include="common\edriver\w25x16.h" />
+    <ClInclude Include="common\edriver\w5500.h" />
+    <ClInclude Include="common\edriver\ws2812.h" />
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud.h" />
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud_cfg.h" />
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud_def.h" />
+    <ClInclude Include="common\edriver\SFUD\sfud\inc\sfud_flash_def.h" />
+    <ClInclude Include="common\edriver\WiFi\ESP8266.h" />
+    <ClInclude Include="common\edriver\WiFi\esp8266_tcp.h" />
+    <ClInclude Include="common\edriver\WiFi\esp8266_udp.h" />
+    <ClInclude Include="common\fat\diskio.h" />
+    <ClInclude Include="common\fat\ff.h" />
+    <ClInclude Include="common\fat\ffconf.h" />
+    <ClInclude Include="common\fat\integer.h" />
+    <ClInclude Include="common\fat\wrapperdiskio.h" />
+    <ClInclude Include="common\FreeModbus\modbus\ascii\mbascii.h" />
+    <ClInclude Include="common\FreeModbus\modbus\include\mb.h" />
+    <ClInclude Include="common\FreeModbus\modbus\include\mbconfig.h" />
+    <ClInclude Include="common\FreeModbus\modbus\include\mbframe.h" />
+    <ClInclude Include="common\FreeModbus\modbus\include\mbfunc.h" />
+    <ClInclude Include="common\FreeModbus\modbus\include\mbport.h" />
+    <ClInclude Include="common\FreeModbus\modbus\include\mbproto.h" />
+    <ClInclude Include="common\FreeModbus\modbus\include\mbutils.h" />
+    <ClInclude Include="common\FreeModbus\modbus\rtu\mbcrc.h" />
+    <ClInclude Include="common\FreeModbus\modbus\rtu\mbrtu.h" />
+    <ClInclude Include="common\FreeModbus\modbus\tcp\mbtcp.h" />
+    <ClInclude Include="common\FreeModbus\port\FreeModbus.h" />
+    <ClInclude Include="common\FreeModbus\port\port.h" />
+    <ClInclude Include="common\gui\gui.h" />
+    <ClInclude Include="common\gui\guiconfig.h" />
+    <ClInclude Include="common\gui\lcd_port.h" />
+    <ClInclude Include="common\network\dhcp.h" />
+    <ClInclude Include="common\network\dns.h" />
+    <ClInclude Include="common\network\netconfig.h" />
+    <ClInclude Include="common\network\socket.h" />
+    <ClInclude Include="common\network\tcp.h" />
+    <ClInclude Include="common\network\udp.h" />
+    <ClInclude Include="common\network\MQTTPacket\interface\mqtt_api.h" />
+    <ClInclude Include="common\network\MQTTPacket\interface\transport.h" />
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTConnect.h" />
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTFormat.h" />
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTPacket.h" />
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTPublish.h" />
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTSubscribe.h" />
+    <ClInclude Include="common\network\MQTTPacket\src\MQTTUnsubscribe.h" />
+    <ClInclude Include="common\network\MQTTPacket\src\StackTrace.h" />
+    <ClInclude Include="common\usb_device_stack\USBAudio\USBAudio.h" />
+    <ClInclude Include="common\usb_device_stack\USBAudio\USBAudio_Types.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBDescriptor.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBDevice.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBDevice_Types.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBEndpoints.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBEndpoints_STM32F.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBHAL.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\USBRegs_STM32.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\usb_regs.h" />
+    <ClInclude Include="common\usb_device_stack\USBDevice\usb_type.h" />
+    <ClInclude Include="common\usb_device_stack\USBHID\USBHID.h" />
+    <ClInclude Include="common\usb_device_stack\USBHID\USBHID_Types.h" />
+    <ClInclude Include="common\usb_device_stack\USBHID\USBKeyboard.h" />
+    <ClInclude Include="common\usb_device_stack\USBHID\USBMouse.h" />
+    <ClInclude Include="common\usb_device_stack\USBHID\USBMouseKeyboard.h" />
+    <ClInclude Include="common\usb_device_stack\USBMIDI\MIDIMessage.h" />
+    <ClInclude Include="common\usb_device_stack\USBMIDI\USBMIDI.h" />
+    <ClInclude Include="common\usb_device_stack\USBMSD\USBMSD.h" />
+    <ClInclude Include="common\usb_device_stack\USBSerial\CircBuffer.h" />
+    <ClInclude Include="common\usb_device_stack\USBSerial\USBCDC.h" />
+    <ClInclude Include="common\usb_device_stack\USBSerial\USBSerial.h" />
+    <ClInclude Include="common\util\calendar.h" />
+    <ClInclude Include="common\util\color_convert.h" />
+    <ClInclude Include="common\util\crc.h" />
+    <ClInclude Include="common\util\dtostrf.h" />
+    <ClInclude Include="common\util\ebox_mem.h" />
+    <ClInclude Include="common\util\heap.h" />
+    <ClInclude Include="common\util\itoa.h" />
+    <ClInclude Include="common\util\my_math.h" />
+    <ClInclude Include="common\util\print.h" />
+    <ClInclude Include="common\util\printable.h" />
+    <ClInclude Include="common\util\ringbuf.h" />
+    <ClInclude Include="common\util\signal_stream.h" />
+    <ClInclude Include="common\util\util.h" />
+    <ClInclude Include="common\util\WString.h" />
+    <ClInclude Include="example\23.usb_device\USB_msd_sd\usb_msd_sd.h" />
+    <ClInclude Include="example\综合\includes.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_analog.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_can.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_common.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_core.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_dac.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_exti.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_gpio.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_i2c.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_iflash.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_in_capture.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_pwm.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_rtc.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_spi.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer_it.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_uart.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox_wdg.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\FunctionPointer.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\stm32f10x_conf.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\misc.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h" />
+    <ClInclude Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h" />
+    <ClInclude Include="os\ebox_os\cpu.h" />
+    <ClInclude Include="os\ebox_os\os.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\croutine.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\deprecated_definitions.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\event_groups.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\FreeRTOS.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\list.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\mpu_wrappers.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\portable.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\projdefs.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\queue.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\semphr.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\StackMacros.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\task.h" />
+    <ClInclude Include="os\FreeRTOS\Source\include\timers.h" />
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h" />
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CA9\portmacro.h" />
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM0\portmacro.h" />
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM3\portmacro.h" />
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h" />
+    <ClInclude Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\portmacro.h" />
+    <ClInclude Include="os\uCOS-II\Ports\os_cpu.h" />
+    <ClInclude Include="os\uCOS-II\Source\ucos_ii.h" />
+    <ClInclude Include="user\app_cfg.h" />
+    <ClInclude Include="user\bsp.h" />
+    <ClInclude Include="user\FreeRTOSConfig.h" />
+    <ClInclude Include="user\os_cfg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="MCU.xml" />
+  </ItemGroup>
+</Project>

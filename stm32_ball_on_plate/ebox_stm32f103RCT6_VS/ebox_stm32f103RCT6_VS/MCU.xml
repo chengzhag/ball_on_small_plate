@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<EmbeddedProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
+  <BspID>com.visualgdb.bsp.in-place</BspID>
+  <BspVersion>1.0</BspVersion>
+  <MCUProperties>
+    <Entries />
+  </MCUProperties>
+  <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
+  <InPlaceMCU>
+    <CompilationFlags>
+      <PreprocessorMacros>
+        <string>__UVISION_VERSION="514"</string>
+        <string>STM32F10X_MD</string>
+      </PreprocessorMacros>
+      <IncludeDirectories>
+        <string>mcu/stm32f10x/libraries/CMSIS/CM3/CoreSupport</string>
+        <string>mcu/stm32f10x/libraries/STM32F10x_StdPeriph_Driver/inc</string>
+        <string>mcu/stm32f10x/libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x</string>
+        <string>mcu/stm32f10x/ebox</string>
+        <string>mcu/stm32f10x/ebox/core</string>
+        <string>mcu/stm32f10x/ebox/Peripherals</string>
+        <string>common/util</string>
+        <string>common/edriver</string>
+        <string>common/network</string>
+        <string>common/fat</string>
+        <string>common/edriver/WiFi</string>
+        <string>user</string>
+        <string>common/cJSON</string>
+        <string>common/edriver/SFUD/sfud/inc</string>
+        <string>common/edriver/SFUD/ebox</string>
+        <string>common/bigiot</string>
+        <string>common/usb_device_stack/USBDevice</string>
+        <string>common/usb_device_stack/USBHID</string>
+        <string>common/gui</string>
+        <string>common/FreeModbus/modbus/ascii</string>
+        <string>common/FreeModbus/modbus/include</string>
+        <string>common/FreeModbus/modbus/rtu</string>
+        <string>common/FreeModbus/modbus/tcp</string>
+        <string>common/FreeModbus/port</string>
+        <string>Project/stm32f10x/mdk/RTE</string>
+        <string>C:/Keil_v5/ARM/PACK/Keil/STM32F1xx_DFP/1.0.5/Device/Include</string>
+        <string>C:/Keil_v5/ARM/CMSIS/Include</string>
+        <string>os/FreeRTOS/Source/include</string>
+        <string>os/FreeRTOS/Source/portable/RVDS/ARM_CM3</string>
+      </IncludeDirectories>
+      <CFLAGS />
+      <CXXFLAGS />
+      <LDFLAGS />
+      <ASFLAGS />
+      <LinkerScript />
+      <COMMONFLAGS />
+      <EnableLinkerGroups>true</EnableLinkerGroups>
+    </CompilationFlags>
+    <AdditionalSourceFiles />
+    <FLASHSize>0</FLASHSize>
+    <RAMSize>0</RAMSize>
+    <FLASHBase>4294967295</FLASHBase>
+    <RAMBase>4294967295</RAMBase>
+    <AdditionalSourcesRequiredForTesting>false</AdditionalSourcesRequiredForTesting>
+  </InPlaceMCU>
+  <MCUMakFile>mcu.mak</MCUMakFile>
+  <FrameworkProperties>
+    <Entries />
+  </FrameworkProperties>
+</EmbeddedProfile>
