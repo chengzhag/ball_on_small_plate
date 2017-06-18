@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../src/raspicam.h
+cstdio
+-
+string
+-
+raspicamtypes.h
+../../src/raspicamtypes.h
+
+../../src/raspicamtypes.h
+
+C:/Users/Sky/Desktop/OpenCV_raspberry_remote_camera/raspicam-0.1.6/utils/raspicam_test.cpp
+iostream
+-
+ctime
+-
+cstdlib
+-
+fstream
+-
+sstream
+-
+sys/timeb.h
+-
+raspicam.h
+C:/Users/Sky/Desktop/OpenCV_raspberry_remote_camera/raspicam-0.1.6/utils/raspicam.h
+sys/time.h
+-
+unistd.h
+-
+
