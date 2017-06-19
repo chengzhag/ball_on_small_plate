@@ -1,27 +1,5 @@
-﻿  Removing C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\OpenCV_raspberry_remote_camera_client/Debug...
-  VisualGDB: Run "C:\Program Files\CMake\bin\cmake.exe -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_COLOR_MAKEFILE=OFF .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=toolchain-Debug.cmake -DCMAKE_MAKE_PROGRAM="C:/SysGCC/Raspberry/bin/make.exe"" in directory "C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\OpenCV_raspberry_remote_camera_client/Debug" on local machine
-  -- The C compiler identification is GNU 4.9.2
-  -- The CXX compiler identification is GNU 4.9.2
-  -- Check for working C compiler: C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe
-  -- Check for working C compiler: C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe -- works
-  -- Detecting C compiler ABI info
-  -- Detecting C compiler ABI info - done
-  -- Detecting C compile features
-  -- Detecting C compile features - done
-  -- Check for working CXX compiler: C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe
-  -- Check for working CXX compiler: C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe -- works
-  -- Detecting CXX compiler ABI info
-  -- Detecting CXX compiler ABI info - done
-  -- Detecting CXX compile features
-  -- Detecting CXX compile features - done
-  -- Found OpenCV: D:/OpenCV_3_2_0_source/build/Debug (found version "3.2.0") 
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug
-  VisualGDB: Run "cmd.exe /c "C:\SysGCC\Raspberry\bin\make.exe"" in directory "C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\OpenCV_raspberry_remote_camera_client/Debug" on local machine
+﻿  VisualGDB: Run "cmd.exe /c "C:\SysGCC\Raspberry\bin\make.exe"" in directory "C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\OpenCV_raspberry_remote_camera_client/Debug" on local machine
   Scanning dependencies of target OpenCVCameraDemo
   [ 25%] Building CXX object CMakeFiles/OpenCVCameraDemo.dir/raspberry_client.cpp.o
-  [ 50%] Building CXX object CMakeFiles/OpenCVCameraDemo.dir/SocketMatTransmissionClient.cpp.o
-  [ 75%] Building CXX object CMakeFiles/OpenCVCameraDemo.dir/util/my_opencv.cpp.o
-  [100%] Linking CXX executable OpenCVCameraDemo
+  [ 50%] Linking CXX executable OpenCVCameraDemo
   [100%] Built target OpenCVCameraDemo

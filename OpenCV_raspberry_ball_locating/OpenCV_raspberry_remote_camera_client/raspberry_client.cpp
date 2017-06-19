@@ -16,7 +16,7 @@ using namespace cv;
 using namespace std;
 
 //#define STDIO_DEBUG
-//#define SOCKET_SEND_IMAGE
+#define SOCKET_SEND_IMAGE
 
 int main(int argc, char **argv)
 {
@@ -30,23 +30,23 @@ int main(int argc, char **argv)
 	const int rawImHeight = cam.get(CV_CAP_PROP_FRAME_HEIGHT),
 		rawImWitdh = cam.get(CV_CAP_PROP_FRAME_WIDTH);
 	
-	//算法相关
-	//剪切导轨位置图像
-	float railRegionHeight = 0.005, railRegionShift = -0.06;
-	Rect railRegion(0,
-		int(rawImHeight*(0.5 - railRegionHeight / 2 + railRegionShift)),
-		rawImWitdh,
-		rawImHeight*railRegionHeight);
-	//预处理
-	const int structElementSize = 3;
-	Mat element = getStructuringElement(MORPH_ELLIPSE,  
-		Size(2*structElementSize + 1, 2*structElementSize + 1),  
-		Point(structElementSize, structElementSize));
-	//将灰度投影到水平方向
-	vector<unsigned long> verticalVector;
-	//小球位置计算，单位mm
-	const float railLength=300;
-	const float camCenterShift = 0;
+//	//算法相关
+//	//剪切导轨位置图像
+//	float railRegionHeight = 0.005, railRegionShift = -0.06;
+//	Rect railRegion(0,
+//		int(rawImHeight*(0.5 - railRegionHeight / 2 + railRegionShift)),
+//		rawImWitdh,
+//		rawImHeight*railRegionHeight);
+//	//预处理
+//	const int structElementSize = 3;
+//	Mat element = getStructuringElement(MORPH_ELLIPSE,  
+//		Size(2*structElementSize + 1, 2*structElementSize + 1),  
+//		Point(structElementSize, structElementSize));
+//	//将灰度投影到水平方向
+//	vector<unsigned long> verticalVector;
+//	//小球位置计算，单位mm
+//	const float railLength=300;
+//	const float camCenterShift = 0;
 	
 	//初始化连接
 	if (!cam.open())
@@ -59,9 +59,9 @@ int main(int argc, char **argv)
 #endif // SOCKET_SEND_IMAGE
 	
 	
-	//初始化串口
-	UartNum<float> uart;
-	uart.begin();
+//	//初始化串口
+//	UartNum<float> uart;
+//	uart.begin();
 
 	double timeStart = 0, timeEnd = 0;
 	while (1)
@@ -74,31 +74,31 @@ int main(int argc, char **argv)
 
 		/// 小球定位算法开始
 
-		//剪切导轨位置图像
-		railIm = rawIm(railRegion);
-		
-		//预处理
-		morphologyEx(railIm, railIm, CV_MOP_ERODE, element);
-		GaussianBlur(railIm, railIm, Size(int(0.03*rawImWitdh) * 2 + 1, 1), int(0.02*rawImWitdh) * 2 + 1, 0);//以小球半径的两倍为窗口长度
-//		medianBlur(railIm, railIm, 9);
-//		morphologyEx(railIm, railIm, CV_MOP_DILATE, element);
-//		medianBlur(railIm, railIm, 3);
-//		equalizeHist(railIm, railIm);
-//		threshold(railIm, railIm, 0, 255, CV_THRESH_OTSU);
-
-		//将灰度投影到水平方向
-		verticalProject(railIm, verticalVector);
-
-		//绘制亮度曲线图
-//		Mat plotBrightness;
-//		plotSimple(verticalVector, plotBrightness);
-		
-		//通过亮度曲线找到小球
-		vector<unsigned long>::iterator minBrightnessIt = min_element(verticalVector.begin(), verticalVector.end());
-		int minBrightnessPos = distance(verticalVector.begin(), minBrightnessIt);
-		
-		//直接以极小值为中心
-		float pos = (float(minBrightnessPos) - verticalVector.size() / 2)*railLength / verticalVector.size() - camCenterShift;
+//		//剪切导轨位置图像
+//		railIm = rawIm(railRegion);
+//		
+//		//预处理
+//		morphologyEx(railIm, railIm, CV_MOP_ERODE, element);
+//		GaussianBlur(railIm, railIm, Size(int(0.03*rawImWitdh) * 2 + 1, 1), int(0.02*rawImWitdh) * 2 + 1, 0);//以小球半径的两倍为窗口长度
+////		medianBlur(railIm, railIm, 9);
+////		morphologyEx(railIm, railIm, CV_MOP_DILATE, element);
+////		medianBlur(railIm, railIm, 3);
+////		equalizeHist(railIm, railIm);
+////		threshold(railIm, railIm, 0, 255, CV_THRESH_OTSU);
+//
+//		//将灰度投影到水平方向
+//		verticalProject(railIm, verticalVector);
+//
+//		//绘制亮度曲线图
+////		Mat plotBrightness;
+////		plotSimple(verticalVector, plotBrightness);
+//		
+//		//通过亮度曲线找到小球
+//		vector<unsigned long>::iterator minBrightnessIt = min_element(verticalVector.begin(), verticalVector.end());
+//		int minBrightnessPos = distance(verticalVector.begin(), minBrightnessIt);
+//		
+//		//直接以极小值为中心
+//		float pos = (float(minBrightnessPos) - verticalVector.size() / 2)*railLength / verticalVector.size() - camCenterShift;
 		
 //		//以峰周围+-0.1*rawImWitdh的面积中心。弃用，波动更大
 //		int peakStart = minBrightnessPos - 0.1*rawImWitdh, peakEnd;
@@ -121,13 +121,13 @@ int main(int argc, char **argv)
 		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
 		
-		uart.sendNum(&pos, 1);
+//		uart.sendNum(&pos, 1);
 
 		///小球定位算法结束
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-		socketMat.transmit(railIm, 90);
+		socketMat.transmit(rawIm, 90);
 #endif // SOCKET_SEND_IMAGE
 		
 		
