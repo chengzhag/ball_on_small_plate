@@ -17,7 +17,7 @@ using namespace cv;
 using namespace std;
 
 #define STDIO_DEBUG
-#define SOCKET_SEND_IMAGE
+//#define SOCKET_SEND_IMAGE
 
 
 
@@ -91,9 +91,9 @@ int main(int argc, char **argv)
 #endif // SOCKET_SEND_IMAGE
 	
 	
-//	//初始化串口
-//	UartNum<float> uart;
-//	uart.begin();
+	//初始化串口
+	UartNum<int> uart;
+	uart.begin();
 
 	double timeStart = 0, timeEnd = 0;
 	while (1)
@@ -105,7 +105,7 @@ int main(int argc, char **argv)
 			return 1;
 		
 		/// 小球定位算法开始
-		Point pos;
+		int pos[2];
 		Mat imThresh;
 //		threshold(imRaw, imThresh, 0, 255, CV_THRESH_OTSU);
 //		threshold(imRaw, imThresh, 60, 255, CV_THRESH_BINARY_INV);
@@ -168,7 +168,7 @@ int main(int argc, char **argv)
 			}
 			
 			sortCorners(corners,
-				Point(imRawW / 2 , imRawH / 2));
+				Point(imRawW / 2, imRawH / 2));
 			
 //			for (int i = 0; i < 4; i++)
 //			{
@@ -192,7 +192,25 @@ int main(int argc, char **argv)
 			
 //			morphologyEx(imTrans, imTrans, CV_MOP_OPEN, element);
 			//定位小球
-			minMaxLoc(imTrans, NULL, NULL, &pos, NULL);
+			Point ballPoint;
+			double minBrightness;
+			minMaxLoc(imTrans, &minBrightness, NULL, &ballPoint, NULL);
+			if (minBrightness < 50)
+			{
+				pos[0] = ballPoint.x;
+				pos[1] = ballPoint.y;
+			}
+			else
+			{
+				pos[0] = -1;
+				pos[1] = -1;
+			}
+			
+		}
+		else
+		{
+			pos[0] = -1;
+			pos[1] = -1;
 		}
 		
 		
@@ -301,12 +319,12 @@ int main(int argc, char **argv)
 #ifdef STDIO_DEBUG
 		//计算算法帧率
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
-				<< " " << pos.x << " " << pos.y << endl;
+				<< " " << pos[0] << " " << pos[1] << endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
 		
-//		uart.sendNum(&pos, 1);
+		uart.sendNum(pos, 2);
 
 		///小球定位算法结束
 		

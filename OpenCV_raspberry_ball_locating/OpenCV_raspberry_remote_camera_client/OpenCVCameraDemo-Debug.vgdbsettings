@@ -223,7 +223,7 @@
   <UserDefinedVariables />
   <ImportedPropertySheets />
   <CodeSense>
-    <Enabled>Unknown</Enabled>
+    <Enabled>True</Enabled>
     <CFLAGS />
     <CXXFLAGS />
     <ExternalSourceFileList />
