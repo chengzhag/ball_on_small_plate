@@ -153,8 +153,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-strip.exe
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/toolchain-Release.cmake
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=toolchain-Release.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console

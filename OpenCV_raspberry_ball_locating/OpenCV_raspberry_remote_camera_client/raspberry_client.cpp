@@ -20,12 +20,6 @@ using namespace std;
 #define SOCKET_SEND_IMAGE
 
 
-//void kmeans(const vector<Vec2f>& points, int K, vector<int>& labels, TermCriteria criteria, int attempts, int flags, vector<Vec2f>& centers)
-//{
-//
-//}
-
-
 
 void sortCorners(std::vector<cv::Point2f>& corners, cv::Point2f center)
 {
@@ -76,7 +70,7 @@ int main(int argc, char **argv)
 //		rawImWitdh,
 //		rawImHeight*railRegionHeight);
 //	//预处理
-	const int structElementSize = 5;
+	const int structElementSize = 2;
 	Mat element = getStructuringElement(MORPH_ELLIPSE,  
 		Size(2*structElementSize + 1, 2*structElementSize + 1),  
 		Point(structElementSize, structElementSize));
@@ -111,7 +105,7 @@ int main(int argc, char **argv)
 			return 1;
 		
 		/// 小球定位算法开始
-		
+		Point pos;
 		Mat imThresh;
 //		threshold(imRaw, imThresh, 0, 255, CV_THRESH_OTSU);
 //		threshold(imRaw, imThresh, 60, 255, CV_THRESH_BINARY_INV);
@@ -146,7 +140,7 @@ int main(int argc, char **argv)
       
 //		多边形逼近 
 		approxPolyDP(contours[index], contours[index], imThreshH * 0.3, true);
-		cout << contours[index].size() << endl;
+//		cout << contours[index].size() << endl;
 		
 //		最外围轮廓的显示  
 		drawContours(imThresh,
@@ -157,8 +151,8 @@ int main(int argc, char **argv)
 			8);  
 		
 		//矩形透视投影
-		int imTransH = imRawH,
-			imTransW = imRawW;
+		int imTransH = imRawH*0.5,
+			imTransW = imRawW*0.5;
 		Mat imTrans(imRawH,
 			imRawW,CV_8UC1);
 		const int cropPixels = imTransH * 0.05;
@@ -176,10 +170,10 @@ int main(int argc, char **argv)
 			sortCorners(corners,
 				Point(imRawW / 2 , imRawH / 2));
 			
-			for (int i = 0; i < 4; i++)
-			{
-				cout << corners[i].x << " " << corners[i].y << endl;
-			}
+//			for (int i = 0; i < 4; i++)
+//			{
+//				cout << corners[i].x << " " << corners[i].y << endl;
+//			}
 			
 			vector<Point2f> PerspectiveTransform;//透视变换后的顶点  
 			PerspectiveTransform.push_back(Point(-cropPixels, -cropPixels));  
@@ -191,7 +185,14 @@ int main(int argc, char **argv)
 			warpPerspective(imRaw,
 				imTrans,
 				M,
-				Size(imTransW, imTransH));  
+				Size(imTransW, imTransH),
+				INTER_NEAREST,
+				BORDER_CONSTANT,
+				Scalar(255));  
+			
+//			morphologyEx(imTrans, imTrans, CV_MOP_OPEN, element);
+			//定位小球
+			minMaxLoc(imTrans, NULL, NULL, &pos, NULL);
 		}
 		
 		
@@ -299,7 +300,8 @@ int main(int argc, char **argv)
 		
 #ifdef STDIO_DEBUG
 		//计算算法帧率
-		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency() << endl;
+		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
+				<< " " << pos.x << " " << pos.y << endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
