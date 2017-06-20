@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	//数据采集
 	raspicam::RaspiCam_Cv cam;
 	Mat rawIm, railIm;
-	cam.set(CV_CAP_PROP_FORMAT, CV_8UC1);
+	cam.set(CV_CAP_PROP_FORMAT, CV_8UC3);
 	cam.set(CV_CAP_PROP_FRAME_WIDTH, cam.get(CV_CAP_PROP_FRAME_WIDTH) * 0.5);
 	cam.set(CV_CAP_PROP_FRAME_HEIGHT, cam.get(CV_CAP_PROP_FRAME_HEIGHT) * 0.5);
 	const int rawImHeight = cam.get(CV_CAP_PROP_FRAME_HEIGHT),
@@ -70,8 +70,8 @@ int main(int argc, char **argv)
 		cam.retrieve(rawIm);
 
 		if (rawIm.empty())
-			return 0;
-
+			return 1;
+		
 		/// 小球定位算法开始
 
 //		//剪切导轨位置图像
@@ -136,6 +136,7 @@ int main(int argc, char **argv)
 	socketMat.disconnect();
 #endif // SOCKET_SEND_IMAGE
 	cam.release();
+	return 0;
 }
 
 

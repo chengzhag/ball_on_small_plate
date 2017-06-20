@@ -24,7 +24,7 @@ int main()
 	cv::Mat image;
 	while (1)
 	{
-		if (socketMat.receive(image) > 0)
+		if (socketMat.receive(image, IMREAD_COLOR) > 0)
 		{
 			cv::imshow("", image);
 			cv::waitKey(1);
