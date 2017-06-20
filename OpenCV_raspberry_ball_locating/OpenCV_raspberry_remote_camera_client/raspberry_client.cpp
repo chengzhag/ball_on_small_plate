@@ -26,6 +26,32 @@ using namespace std;
 //}
 
 
+
+void sortCorners(std::vector<cv::Point2f>& corners, cv::Point2f center)
+{
+	std::vector<cv::Point2f> top, bot;
+ 
+	for (int i = 0; i < corners.size(); i++)
+	{
+		if (corners[i].y < center.y)
+			top.push_back(corners[i]);
+		else
+			bot.push_back(corners[i]);
+	}
+ 
+	cv::Point2f tl = top[0].x > top[1].x ? top[1] : top[0];
+	cv::Point2f tr = top[0].x > top[1].x ? top[0] : top[1];
+	cv::Point2f bl = bot[0].x > bot[1].x ? bot[1] : bot[0];
+	cv::Point2f br = bot[0].x > bot[1].x ? bot[0] : bot[1];
+ 
+	corners.clear();
+	corners.push_back(tl);
+	corners.push_back(tr);
+	corners.push_back(br);
+	corners.push_back(bl);
+}
+
+
 int main(int argc, char **argv)
 {
 	///声明变量
@@ -50,10 +76,10 @@ int main(int argc, char **argv)
 //		rawImWitdh,
 //		rawImHeight*railRegionHeight);
 //	//预处理
-//	const int structElementSize = 3;
-//	Mat element = getStructuringElement(MORPH_ELLIPSE,  
-//		Size(2*structElementSize + 1, 2*structElementSize + 1),  
-//		Point(structElementSize, structElementSize));
+	const int structElementSize = 5;
+	Mat element = getStructuringElement(MORPH_ELLIPSE,  
+		Size(2*structElementSize + 1, 2*structElementSize + 1),  
+		Point(structElementSize, structElementSize));
 //	//将灰度投影到水平方向
 //	vector<unsigned long> verticalVector;
 //	//小球位置计算，单位mm
@@ -89,44 +115,133 @@ int main(int argc, char **argv)
 		Mat imThresh;
 //		threshold(imRaw, imThresh, 0, 255, CV_THRESH_OTSU);
 //		threshold(imRaw, imThresh, 60, 255, CV_THRESH_BINARY_INV);
-		Mat imEdge;
+		//Mat imEdge;
 		const float resizeFactor = 0.3;
-		resize(imRaw, imEdge, Size(0, 0), resizeFactor, resizeFactor, INTER_NEAREST);
-		adaptiveThreshold(imEdge, imEdge, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY_INV, 3, resizeFactor * 60);
-//		Canny(imThresh, imEdge, 100, 200, 3);
+		resize(imRaw, imThresh, Size(0, 0), resizeFactor, resizeFactor, INTER_NEAREST);
+//		threshold(imThresh, imThresh, 60, 255, CV_THRESH_BINARY);
+		threshold(imThresh, imThresh, 0, 255, CV_THRESH_OTSU);
+//		morphologyEx(imThresh, imThresh, CV_MOP_OPEN, element);
+//		adaptiveThreshold(imEdge, imEdge, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY_INV, 3, resizeFactor * 60);
+		//Canny(imEdge, imEdge, 100, 200, 3);
+		
+		int imThreshH = imThresh.rows,
+			imThreshW = imThresh.cols;
+
+//		轮廓提取
+		vector<vector<Point> > contours;
+		findContours(imThresh, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+		
+  
+//	    选出最大面积的多边形  
+		double area = 0;  
+		int index = 0;  
+		for (int i = 0; i < contours.size(); i++)  
+		{  
+			if (contourArea(contours[i]) > area)  
+			{  
+				area = contourArea(contours[i]);  
+				index = i;  
+			}  
+		}  
+      
+//		多边形逼近 
+		approxPolyDP(contours[index], contours[index], imThreshH * 0.3, true);
+		cout << contours[index].size() << endl;
+		
+//		最外围轮廓的显示  
+		drawContours(imThresh,
+			contours,
+			index,
+			Scalar(128),
+			4,
+			8);  
 		
 		//矩形透视投影
-		vector<Vec2f> lines;
-
-		HoughLines(imEdge, lines, 1, CV_PI / 360 * 2, imRawH*resizeFactor * 0.3);
-//		HoughLinesP(imEdge, lines, 1, CV_PI / 360 * 2, imRawH*resizeFactor * 0.3, imRawH*resizeFactor * 0.3, 3);
-		for (size_t i = 0; i < lines.size(); i++) {
-			float rho = lines[i][0]; 
-			float theta = lines[i][1];
-			Point pt1, pt2;
-			double a = cos(theta);
-			double b = sin(theta);
-			double x0 = rho*a;
-			double y0 = rho*b;
-			pt1.x = cvRound(x0 + 1000*(-b));
-			pt1.y = cvRound(y0 + 1000*a);
-			pt2.x = cvRound(x0 - 1000*(-b));
-			pt2.y = cvRound(y0 - 1000*a);
-			line(imEdge, pt1, pt2, Scalar(125), 1, CV_AA);
-		}
+		int imTransH = imRawH,
+			imTransW = imRawW;
+		Mat imTrans(imRawH,
+			imRawW,CV_8UC1);
+		const int cropPixels = imTransH * 0.05;
 		
-		int numPoints = lines.size();
-		Mat points(numPoints, 2, CV_32F);
-		Mat clusters(numPoints, 1, CV_32SC1);
-		
-		for (int k = 0; k < numPoints; k++)
+		if (contours[index].size() == 4)
 		{
-//			points.at(k, 0) = lines[k][0];
-//			points.at(k, 1) = lines[k][1];
+//			vector<Point2f> corners(contours[index]);
+			vector<Point2f> corners;
+			
+			for (int i = 0; i < 4; i++)
+			{
+				corners.push_back(Point2f(contours[index][i].x / resizeFactor, contours[index][i].y / resizeFactor));// resizeFactor
+			}
+			
+			sortCorners(corners,
+				Point(imRawW / 2 , imRawH / 2));
+			
+			for (int i = 0; i < 4; i++)
+			{
+				cout << corners[i].x << " " << corners[i].y << endl;
+			}
+			
+			vector<Point2f> PerspectiveTransform;//透视变换后的顶点  
+			PerspectiveTransform.push_back(Point(-cropPixels, -cropPixels));  
+			PerspectiveTransform.push_back(Point(imTransW - 1 + cropPixels, -cropPixels));  
+			PerspectiveTransform.push_back(Point(imTransW - 1 + cropPixels, imTransH - 1 + cropPixels));  
+			PerspectiveTransform.push_back(Point(-cropPixels, imTransH - 1 + cropPixels));  
+			
+			Mat M = getPerspectiveTransform(corners, PerspectiveTransform);
+			warpPerspective(imRaw,
+				imTrans,
+				M,
+				Size(imTransW, imTransH));  
 		}
-//		kmeans(points, 4,)
-
 		
+		
+
+
+		////矩形透视投影
+		//vector<Vec2f> lines;
+
+		//HoughLines(imEdge, lines, 1, CV_PI / 360 * 4, imRawH*resizeFactor * 0.3);
+		//for (size_t i = 0; i < lines.size(); i++) {
+		//	float rho = lines[i][0]; 
+		//	float theta = lines[i][1];
+		//	Point pt1, pt2;
+		//	double a = cos(theta);
+		//	double b = sin(theta);
+		//	double x0 = rho*a;
+		//	double y0 = rho*b;
+		//	pt1.x = cvRound(x0 + 1000*(-b));
+		//	pt1.y = cvRound(y0 + 1000*a);
+		//	pt2.x = cvRound(x0 - 1000*(-b));
+		//	pt2.y = cvRound(y0 - 1000*a);
+		//	line(imEdge, pt1, pt2, Scalar(125), 1, CV_AA);
+		//}
+		
+		////计算角点坐标
+		//int numLines = lines.size();
+		//int imEdgeH = imEdge.rows,
+		//	imEdgeW=imEdge.cols;
+		
+		//Mat imTrans=getPerspectiveTransform(corners,)
+//		int numPoints = lines.size();
+//		Mat clusters(numPoints, 1, CV_32SC1);
+//		Mat centers;
+		
+//		kmeans(lines, 4, clusters, TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 10, 2.0), 5, KMEANS_PP_CENTERS, centers);
+//		cout << centers.cols << " " << centers.rows << endl;
+//		for (size_t i = 0; i < 4; i++) {
+//			float rho = centers.ptr<float>(i)[0]; 
+//			float theta =  centers.ptr<float>(i)[1];
+//			Point pt1, pt2;
+//			double a = cos(theta);
+//			double b = sin(theta);
+//			double x0 = rho*a;
+//			double y0 = rho*b;
+//			pt1.x = cvRound(x0 + 1000*(-b));
+//			pt1.y = cvRound(y0 + 1000*a);
+//			pt2.x = cvRound(x0 - 1000*(-b));
+//			pt2.y = cvRound(y0 - 1000*a);
+//			line(imEdge, pt1, pt2, Scalar(125), 1, CV_AA);
+//		}
 		
 		
 		
@@ -195,7 +310,7 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-		resize(imEdge, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
+		resize(imTrans, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
 		socketMat.transmit(imSend, 90);
 #endif // SOCKET_SEND_IMAGE
 		
