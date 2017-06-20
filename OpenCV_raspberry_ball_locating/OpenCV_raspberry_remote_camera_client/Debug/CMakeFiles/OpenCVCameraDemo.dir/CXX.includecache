@@ -69,6 +69,8 @@ opencv2/highgui/highgui.hpp
 C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/opencv2/highgui/highgui.hpp
 opencv2/imgproc/imgproc.hpp
 C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/opencv2/imgproc/imgproc.hpp
+vector
+-
 SocketMatTransmissionClient.h
 C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/SocketMatTransmissionClient.h
 my_opencv.h

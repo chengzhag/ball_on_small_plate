@@ -3,6 +3,7 @@
 #include <raspicam_cv.h>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include <vector>
 
 #include "SocketMatTransmissionClient.h"  
 
@@ -15,20 +16,31 @@
 using namespace cv;
 using namespace std;
 
-//#define STDIO_DEBUG
+#define STDIO_DEBUG
 #define SOCKET_SEND_IMAGE
+
+
+//void kmeans(const vector<Vec2f>& points, int K, vector<int>& labels, TermCriteria criteria, int attempts, int flags, vector<Vec2f>& centers)
+//{
+//
+//}
+
 
 int main(int argc, char **argv)
 {
 	///声明变量
 	//数据采集
 	raspicam::RaspiCam_Cv cam;
-	Mat rawIm, railIm;
-	cam.set(CV_CAP_PROP_FORMAT, CV_8UC3);
-	cam.set(CV_CAP_PROP_FRAME_WIDTH, cam.get(CV_CAP_PROP_FRAME_WIDTH) * 0.5);
-	cam.set(CV_CAP_PROP_FRAME_HEIGHT, cam.get(CV_CAP_PROP_FRAME_HEIGHT) * 0.5);
-	const int rawImHeight = cam.get(CV_CAP_PROP_FRAME_HEIGHT),
-		rawImWitdh = cam.get(CV_CAP_PROP_FRAME_WIDTH);
+	Mat imRaw;
+#ifdef SOCKET_SEND_IMAGE
+	//发送图像，用于测试
+	Mat imSend;
+#endif // SOCKET_SEND_IMAGE
+	cam.set(CV_CAP_PROP_FORMAT, CV_8UC1);
+	cam.set(CV_CAP_PROP_FRAME_WIDTH, cam.get(CV_CAP_PROP_FRAME_WIDTH) * 0.2);
+	cam.set(CV_CAP_PROP_FRAME_HEIGHT, cam.get(CV_CAP_PROP_FRAME_HEIGHT) * 0.2);
+	const int imRawH = cam.get(CV_CAP_PROP_FRAME_HEIGHT),
+		imRawW = cam.get(CV_CAP_PROP_FRAME_WIDTH);
 	
 //	//算法相关
 //	//剪切导轨位置图像
@@ -67,13 +79,69 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		cam.grab();
-		cam.retrieve(rawIm);
+		cam.retrieve(imRaw);
 
-		if (rawIm.empty())
+		if (imRaw.empty())
 			return 1;
 		
 		/// 小球定位算法开始
+		
+		Mat imThresh;
+//		threshold(imRaw, imThresh, 0, 255, CV_THRESH_OTSU);
+//		threshold(imRaw, imThresh, 60, 255, CV_THRESH_BINARY_INV);
+		Mat imEdge;
+		const float resizeFactor = 0.3;
+		resize(imRaw, imEdge, Size(0, 0), resizeFactor, resizeFactor, INTER_NEAREST);
+		adaptiveThreshold(imEdge, imEdge, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY_INV, 3, resizeFactor * 60);
+//		Canny(imThresh, imEdge, 100, 200, 3);
+		
+		//矩形透视投影
+		vector<Vec2f> lines;
 
+		HoughLines(imEdge, lines, 1, CV_PI / 360 * 2, imRawH*resizeFactor * 0.3);
+//		HoughLinesP(imEdge, lines, 1, CV_PI / 360 * 2, imRawH*resizeFactor * 0.3, imRawH*resizeFactor * 0.3, 3);
+		for (size_t i = 0; i < lines.size(); i++) {
+			float rho = lines[i][0]; 
+			float theta = lines[i][1];
+			Point pt1, pt2;
+			double a = cos(theta);
+			double b = sin(theta);
+			double x0 = rho*a;
+			double y0 = rho*b;
+			pt1.x = cvRound(x0 + 1000*(-b));
+			pt1.y = cvRound(y0 + 1000*a);
+			pt2.x = cvRound(x0 - 1000*(-b));
+			pt2.y = cvRound(y0 - 1000*a);
+			line(imEdge, pt1, pt2, Scalar(125), 1, CV_AA);
+		}
+		
+		int numPoints = lines.size();
+		Mat points(numPoints, 2, CV_32F);
+		Mat clusters(numPoints, 1, CV_32SC1);
+		
+		for (int k = 0; k < numPoints; k++)
+		{
+//			points.at(k, 0) = lines[k][0];
+//			points.at(k, 1) = lines[k][1];
+		}
+//		kmeans(points, 4,)
+
+		
+		
+		
+		
+//		cvtColor(rawIm, hsvIm, COLOR_BGR2HSV);
+//		split(hsvIm, hsvSplit);  
+//		equalizeHist(hsvSplit[2], hsvSplit[2]);  
+//		merge(hsvSplit, hsvIm);
+
+//		inRange(hsvIm,
+//			Scalar(130, 0, 0),
+//			Scalar(160, 255, 255),rawIm);
+		
+//		cvtColor(rawIm, rawIm, COLOR_HSV2BGR);
+		
+		
 //		//剪切导轨位置图像
 //		railIm = rawIm(railRegion);
 //		
@@ -115,8 +183,8 @@ int main(int argc, char **argv)
 		
 		
 #ifdef STDIO_DEBUG
-		//计算帧率
-		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency() << '\t' << pos << endl;
+		//计算算法帧率
+		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency() << endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
@@ -127,7 +195,8 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-		socketMat.transmit(rawIm, 90);
+		resize(imEdge, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
+		socketMat.transmit(imSend, 90);
 #endif // SOCKET_SEND_IMAGE
 		
 		
