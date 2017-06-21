@@ -3,7 +3,7 @@
 
 #include "ebox.h"
 
-#define __UART_NUM_DEBUG
+//#define __UART_NUM_DEBUG
 
 template<typename NumType = float, int numBufSize = 3>
 class UartNum
@@ -14,11 +14,11 @@ class UartNum
 	//用于存储接收数据位，转换为数字
 	union Char2num
 	{
-		NumType f;
+		NumType num;
 		unsigned char c[sizeof(NumType)];
 	}char2num;
 
-	float numBuf[numBufSize];//用于存储接收的数据
+	NumType numBuf[numBufSize];//用于存储接收的数据
 
 	int recievedLength;
 
@@ -93,7 +93,7 @@ class UartNum
 		{
 			if (numBufIndex < numBufSize)
 			{
-				numBuf[numBufIndex] = char2num.f;
+				numBuf[numBufIndex] = char2num.num;
 			}
 			numBufIndex++;
 			charBufIndex = 0;
@@ -136,7 +136,7 @@ public:
 	void sendNum(NumType* num, int length)
 	{
 		union Num2Char {
-			float num;
+			NumType num;
 			unsigned char c[sizeof(NumType)];
 		}num2char;
 		int i = 0, j = 0, k = 0;

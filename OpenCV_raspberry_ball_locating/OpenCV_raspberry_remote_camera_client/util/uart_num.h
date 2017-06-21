@@ -39,7 +39,7 @@ template<typename NumType = float>
 		void sendNum(NumType* num, int length)
 		{
 			union Num2Char {
-				float num;
+				NumType num;
 				unsigned char c[sizeof(NumType)];
 			}num2char;
 			int i = 0, j = 0, k = 0;

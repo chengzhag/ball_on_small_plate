@@ -63,6 +63,8 @@ ctime
 -
 iostream
 -
+stdio.h
+-
 raspicam_cv.h
 -
 opencv2/highgui/highgui.hpp

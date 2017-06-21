@@ -1,5 +1,6 @@
 #include <ctime>
 #include <iostream>
+#include <stdio.h>
 #include <raspicam_cv.h>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -232,7 +233,13 @@ int main(int argc, char **argv)
 #ifdef STDIO_DEBUG
 		//º∆À„À„∑®÷°¬ 
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
-				<< " " << pos[0] << " " << pos[1] << endl;
+				<< "\t" << pos[0] << "\t" << pos[1] << endl;
+		unsigned char* posChar = (unsigned char*)pos;
+		for (int i = 0; i < 8; i++)
+		{
+			printf("%u ", posChar[i]);
+		}
+		cout << endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
