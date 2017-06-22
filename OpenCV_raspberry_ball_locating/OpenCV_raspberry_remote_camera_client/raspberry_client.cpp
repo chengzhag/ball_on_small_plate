@@ -17,8 +17,8 @@
 using namespace cv;
 using namespace std;
 
-#define STDIO_DEBUG
-//#define SOCKET_SEND_IMAGE
+//#define STDIO_DEBUG
+#define SOCKET_SEND_IMAGE
 
 
 
@@ -119,6 +119,8 @@ int main(int argc, char **argv)
 	}
 	threshBinary /= 30;
 	threshBinary /= 0.8;
+	
+	
 	while (1)
 	{
 		cam.grab();
@@ -165,13 +167,13 @@ int main(int argc, char **argv)
 			approxPolyDP(contours[index], contours[index], imThreshH * 0.2, true);
 		
 #ifdef SOCKET_SEND_IMAGE
-			//最外围轮廓的显示  
-			drawContours(imThresh,
-				contours,
-				index,
-				Scalar(128),
-				4,
-				8);  
+//			//最外围轮廓的显示  
+//			drawContours(imThresh,
+//				contours,
+//				index,
+//				Scalar(128),
+//				4,
+//				8);  
 #endif // SOCKET_SEND_IMAGE
 
 		
@@ -252,8 +254,9 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-		resize(imThresh, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
-		socketMat.transmit(imSend, 90);
+//		resize(imTrans, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
+//		threshold(imTrans, imSend, threshBinary, 255, CV_THRESH_BINARY);
+		socketMat.transmit(imTrans, 80);
 #endif // SOCKET_SEND_IMAGE
 		
 		
