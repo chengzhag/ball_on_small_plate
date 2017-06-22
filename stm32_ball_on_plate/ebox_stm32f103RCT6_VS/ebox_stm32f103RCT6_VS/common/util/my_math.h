@@ -3,6 +3,8 @@
 
 #include "ebox.h"
 
+#define INF_FLOAT 3.402823466e+38F
+
 //限制某个数的下界
 template<typename T>
 void limitLow(T &num, T limL)

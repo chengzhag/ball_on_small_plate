@@ -1,6 +1,6 @@
 ﻿  VisualGDB: Run "cmd.exe /c "C:\SysGCC\arm-eabi\bin\make.exe" CONFIG=Debug -j8" in directory "C:\Users\Sky\Desktop\ball_on_plate\stm32_ball_on_plate\ebox_stm32f103RCT6_VS\ebox_stm32f103RCT6_VS" on local computer
   C:/Keil_v5/ARM/ARMCC/bin/armcc.exe -g -O0    --cpu Cortex-M3 --apcs=interwork -Imcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport -Imcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc -Imcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x -Imcu\stm32f10x\ebox -Imcu\stm32f10x\ebox\core -Imcu\stm32f10x\ebox\Peripherals -Icommon\util -Icommon\edriver -Icommon\network -Icommon\fat -Icommon\edriver\WiFi -Iuser -Icommon\cJSON -Icommon\edriver\SFUD\sfud\inc -Icommon\edriver\SFUD\ebox -Icommon\bigiot -Icommon\usb_device_stack\USBDevice -Icommon\usb_device_stack\USBHID -Icommon\gui -Icommon\FreeModbus\modbus\ascii -Icommon\FreeModbus\modbus\include -Icommon\FreeModbus\modbus\rtu -Icommon\FreeModbus\modbus\tcp -Icommon\FreeModbus\port -IProject\stm32f10x\mdk\RTE -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include -IC:\Keil_v5\ARM\CMSIS\Include -Ios\FreeRTOS\Source\include -Ios\FreeRTOS\Source\portable\RVDS\ARM_CM3 -Imcu/stm32f10x/libraries/CMSIS/CM3/CoreSupport -Imcu/stm32f10x/libraries/STM32F10x_StdPeriph_Driver/inc -Imcu/stm32f10x/libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x -Imcu/stm32f10x/ebox -Imcu/stm32f10x/ebox/core -Imcu/stm32f10x/ebox/Peripherals -Icommon/util -Icommon/edriver -Icommon/network -Icommon/fat -Icommon/edriver/WiFi -Iuser -Icommon/cJSON -Icommon/edriver/SFUD/sfud/inc -Icommon/edriver/SFUD/ebox -Icommon/bigiot -Icommon/usb_device_stack/USBDevice -Icommon/usb_device_stack/USBHID -Icommon/gui -Icommon/FreeModbus/modbus/ascii -Icommon/FreeModbus/modbus/include -Icommon/FreeModbus/modbus/rtu -Icommon/FreeModbus/modbus/tcp -Icommon/FreeModbus/port -IProject/stm32f10x/mdk/RTE -IC:/Keil_v5/ARM/PACK/Keil/STM32F1xx_DFP/1.0.5/Device/Include -IC:/Keil_v5/ARM/CMSIS/Include -Ios/FreeRTOS/Source/include -Ios/FreeRTOS/Source/portable/RVDS/ARM_CM3 -DDEBUG=1 -D__UVISION_VERSION="514" -DSTM32F10X_MD  -c user/main.cpp -o Debug/main.o --depend Debug/main.dep
-"common\util\my_math.h", line 68 : warning : #1-D: last line of file ends without a newline
+"common\util\my_math.h", line 70 : warning : #1-D: last line of file ends without a newline
     #endif
           ^
 "common\edriver\servo.h", line 43 : warning : #1-D: last line of file ends without a newline
@@ -18,11 +18,12 @@
 "common\edriver\uart_num.h", line 198 : warning : #1-D: last line of file ends without a newline
     #endif
           ^
-  user/main.cpp: 6 warnings, 0 errors
-  Program Size: Code=37114 RO-data=906 RW-data=264 ZI-data=13440  
-  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.axf: warning: Empty loadable segment detected, is this intentional ?
-  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RW' not in segment
-  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RO' not in segment
+"common\edriver\uart_vcan.h", line 65 : warning : #940-D: missing return statement at end of non-void function "UartVscan::sendOscilloscope(T *, int) [with T=float]"
+    	}
+    	^
+            detected during instantiation of "T UartVscan::sendOscilloscope(T *, int) [with T=float]" at line 57 of "user/main.cpp"
+  user/main.cpp: 7 warnings, 0 errors
+  Program Size: Code=39138 RO-data=906 RW-data=280 ZI-data=13584  
   C:/Keil_v5/ARM/ARMCC/bin/armlink.exe -o Debug/ebox_stm32f103RCT6_VS.axf   --cpu Cortex-M3 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols --info sizes --info totals --info unused --info veneers --list "Debug/ebox.map"   --cpu Cortex-M3 --apcs=interwork    Debug/startup_stm32f10x_md.o Debug/74HC595.o Debug/accurate_pwm.o Debug/at24c02.o Debug/at45db.o Debug/Button.o Debug/colorled.o Debug/dht11.o Debug/drv8825.o Debug/ds18b20.o Debug/DS3231.o Debug/encoder.o Debug/encoder_exti.o Debug/encoder_motor.o Debug/encoder_timer.o Debug/fm25v.o Debug/FT800.o Debug/GP2Y1051.o Debug/ir_decoder.o Debug/ir_encoder.o Debug/key_dm.o Debug/L3G4200D.o Debug/LCD1602.o Debug/lcd_1.8.o Debug/LED.o Debug/led_segment.o Debug/lsm303dhlc.o Debug/LTC1446.o Debug/Max7456.o Debug/mmc_sd.o Debug/MPU6050.o Debug/Nokia5110.o Debug/NRF24L01.o Debug/OLED.o Debug/OLED_ssd1306.o Debug/parallel_gpio.o Debug/PID.o Debug/servo.o Debug/si4432.o Debug/tb6612fng.o Debug/TM1638.o Debug/uart_string.o Debug/uart_vcan.o Debug/ultrasonic_wave.o Debug/ultrasonic_wave_uart.o Debug/w25x16.o Debug/w5500.o Debug/ws2812.o Debug/mb.o Debug/mbascii.o Debug/mbfunccoils.o Debug/mbfuncdiag.o Debug/mbfuncdisc.o Debug/mbfuncholding.o Debug/mbfuncinput.o Debug/mbfuncother.o Debug/mbutils.o Debug/mbcrc.o Debug/mbrtu.o Debug/mbtcp.o Debug/FreeModbus.o Debug/portevent.o Debug/portserial.o Debug/porttimer.o Debug/Font16_ASCII.o Debug/Font16_HZ.o Debug/Font32_ASCII.o Debug/Font8_ASCII.o Debug/gui.o Debug/lcd_port.o Debug/dhcp.o Debug/dns.o Debug/socket.o Debug/tcp.o Debug/udp.o Debug/calendar.o Debug/color_convert.o Debug/crc.o Debug/dtostrf.o Debug/ebox_mem.o Debug/heap.o Debug/itoa.o Debug/my_math.o Debug/print.o Debug/ringbuf.o Debug/util.o Debug/WString.o Debug/ebox_can.o Debug/object.o Debug/core_cm3.o Debug/system_stm32f10x.o Debug/misc.o Debug/stm32f10x_adc.o Debug/stm32f10x_bkp.o Debug/stm32f10x_can.o Debug/stm32f10x_cec.o Debug/stm32f10x_crc.o Debug/stm32f10x_dac.o Debug/stm32f10x_dbgmcu.o Debug/stm32f10x_dma.o Debug/stm32f10x_exti.o Debug/stm32f10x_flash.o Debug/stm32f10x_fsmc.o Debug/stm32f10x_gpio.o Debug/stm32f10x_i2c.o Debug/stm32f10x_iwdg.o Debug/stm32f10x_pwr.o Debug/stm32f10x_rcc.o Debug/stm32f10x_rtc.o Debug/stm32f10x_sdio.o Debug/stm32f10x_spi.o Debug/stm32f10x_tim.o Debug/stm32f10x_usart.o Debug/stm32f10x_wwdg.o Debug/croutine.o Debug/event_groups.o Debug/list.o Debug/queue.o Debug/tasks.o Debug/timers.o Debug/heap_4.o Debug/port.o Debug/bsp.o Debug/main.o \
           mcu\stm32f10x\ebox\ebox.lib  
   C:/Keil_v5/ARM/ARMCC/bin/fromelf.exe --bin --output Debug/ebox_stm32f103RCT6_VS.bin Debug/ebox_stm32f103RCT6_VS.axf
@@ -32,6 +33,9 @@
           ER_RO=CONTENTS,ALLOC,LOAD,READONLY,CODE \
           --change-section-address ER_RO=0x08000000 \
           Debug/ebox_stm32f103RCT6_VS.axf Debug/ebox_stm32f103RCT6_VS.elf
+  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.axf: warning: Empty loadable segment detected, is this intentional ?
+  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RW' not in segment
+  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RO' not in segment
   ------------------- Memory utilization report -------------------
-  Used FLASH: 37KB [-48]
-  Used RAM: 13KB
+  Used FLASH: 39KB
+  Used RAM: 13KB [-16]

@@ -2,25 +2,68 @@
 #include "led.h"
 #include "servo.h"
 #include "uart_num.h"
+#include "PID.hpp"
+#include "my_math.h"
+#include "signal_stream.h"
+#include "uart_vcan.h"
 
-Servo servo1(&PB0, 100, 0.8, 2.2);
-Servo servo2(&PB1, 100, 0.8, 2.2);
+
+const int filterWindow = 3;
+class AverageFilter :public SignalStream<float, filterWindow>
+{
+public:
+	float getFilterOut(float newNum)
+	{
+		push(newNum);
+		float temp = 0;
+		for (int i = 0; i < filterWindow; i++)
+		{
+			temp += operator[](i);
+		}
+		temp /= filterWindow;
+		return temp;
+	}
+}filterX, filterY/*, filterOutX, filterOutY*/;
+
+Servo servoY(&PB0, 100, 0.8, 2.22);
+Servo servoX(&PB1, 100, 0.75, 2.2);
 UartNum<int, 2> uartNum(&uart2);
+sky::PID pidX, pidY;
+UartVscan uartVscan(&uart1);
+FpsCounter fps;
+const int maxX = 128;
+const int maxY = 98;
 
 void posReceiveEvent(UartNum<int, 2>* uartNum)
 {
 	if (uartNum->getLength() == 2)
 	{
-		int posX = uartNum->getNum()[0];
-		int posY = uartNum->getNum()[1];
-		uart1.printf("%d\t%d\r\n", posX, posY);
+		float posX = uartNum->getNum()[0];
+		float posY = uartNum->getNum()[1];
+		posX = filterX.getFilterOut(posX);
+		posY = filterY.getFilterOut(posY);
+		//uart1.printf("%f\t%f\r\n", posX, posY);
 
-		//unsigned char* posChar = (unsigned char*)uartNum->getNum();
-		//for (int i = 0; i < 8; i++)
-		//{
-		//	uart1.printf("%u ", posChar[i]);
-		//}
-		//uart1.printf("\r\n");
+		if (posX != -1 && posY != -1)
+		{
+			float outX = 50, outY = 50;
+			outX -= pidX.refresh(posX);
+			outY -= pidY.refresh(posY);
+
+			//outX = filterOutX.getFilterOut(outX);
+			//outY = filterOutY.getFilterOut(outY);
+
+			float vscan[] = { posX,posY,outX,outY,fps.getFps() };
+			uartVscan.sendOscilloscope(vscan, 5);
+
+			servoX.setPct(outX);
+			servoY.setPct(outY);
+		}
+		else
+		{
+			servoX.setPct(50);
+			servoY.setPct(50);
+		}
 	}
 }
 
@@ -28,10 +71,24 @@ void setup()
 {
 	ebox_init();
 	uart1.begin(115200);
-	servo1.begin();
-	servo2.begin();
+	servoY.begin();
+	servoX.begin();
 	uartNum.begin(115200);
 	uartNum.attach(posReceiveEvent);
+
+	pidX.setRefreshRate(30);
+	pidX.setWeights(0.2, 0.01, 0.08);
+	pidX.setOutputLowerLimit(-INF_FLOAT);
+	pidX.setOutputUpperLimit(INF_FLOAT);
+	pidX.setDesiredPoint(maxX/2);
+	pidX.setISeperateThres(50);
+
+	pidY.setRefreshRate(30);
+	pidY.setWeights(0.2, 0.01, 0.08);
+	pidY.setOutputLowerLimit(-INF_FLOAT);
+	pidY.setOutputUpperLimit(INF_FLOAT);
+	pidY.setDesiredPoint(maxY / 2);
+	pidY.setISeperateThres(50);
 }
 int main(void)
 {
@@ -44,11 +101,9 @@ int main(void)
 		//{
 		//	increase = -increase;
 		//}
-		//uart1.begin(115200);
-		//servo1.setPct(pct);
-		//servo2.setPct(pct);
-		////servo1.setPct(50);
-		////servo2.setPct(50);
+
+		//servoY.setPct(pct);
+		//servoX.setPct(pct);
 
 		//uart1.printf("%f\r\n", servo1.getPct());
 		//delay_ms(10);

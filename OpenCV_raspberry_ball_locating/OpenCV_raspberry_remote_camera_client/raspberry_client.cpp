@@ -17,7 +17,7 @@
 using namespace cv;
 using namespace std;
 
-//#define STDIO_DEBUG
+#define STDIO_DEBUG
 //#define SOCKET_SEND_IMAGE
 
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 		threshBinary += threshold(imRaw, imRaw, 0, 255, CV_THRESH_OTSU); 
 	}
 	threshBinary /= 30;
-	
+	threshBinary /= 0.8;
 	while (1)
 	{
 		cam.grab();
@@ -162,7 +162,7 @@ int main(int argc, char **argv)
 			}  
       
 			//多边形逼近 
-			approxPolyDP(contours[index], contours[index], imThreshH * 0.3, true);
+			approxPolyDP(contours[index], contours[index], imThreshH * 0.2, true);
 		
 #ifdef SOCKET_SEND_IMAGE
 			//最外围轮廓的显示  
@@ -234,12 +234,12 @@ int main(int argc, char **argv)
 		//计算算法帧率
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
 				<< "\t" << pos[0] << "\t" << pos[1] << endl;
-		unsigned char* posChar = (unsigned char*)pos;
-		for (int i = 0; i < 8; i++)
-		{
-			printf("%u ", posChar[i]);
-		}
-		cout << endl;
+//		unsigned char* posChar = (unsigned char*)pos;
+//		for (int i = 0; i < 8; i++)
+//		{
+//			printf("%u ", posChar[i]);
+//		}
+//		cout << endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
@@ -252,7 +252,7 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-		resize(imTrans, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
+		resize(imThresh, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
 		socketMat.transmit(imSend, 90);
 #endif // SOCKET_SEND_IMAGE
 		
