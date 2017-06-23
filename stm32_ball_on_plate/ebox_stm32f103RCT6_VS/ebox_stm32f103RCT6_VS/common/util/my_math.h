@@ -2,8 +2,10 @@
 #define __MY_MATH_H
 
 #include "ebox.h"
-
-#define INF_FLOAT 3.402823466e+38F
+#include <limits>
+//#include <limits.h>
+//#include <float.h>
+ 
 
 //限制某个数的下界
 template<typename T>

@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include;C:\Keil_v5\ARM\CMSIS\Include;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include\c++\6.2.0;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include\c++\6.2.0\arm-eabi;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include\c++\6.2.0\backward;..\..\..\..\..\..\..\SysGCC\arm-eabi\lib\gcc\arm-eabi\6.2.0\include;..\..\..\..\..\..\..\SysGCC\arm-eabi\lib\gcc\arm-eabi\6.2.0\include-fixed;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\sys-include;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include;mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport;mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc;mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x;mcu\stm32f10x\ebox;common\util;common\edriver;common\network;common\fat;common\edriver\WiFi;user;common\cJSON;common\edriver\SFUD\sfud\inc;common\edriver\SFUD\ebox;common\bigiot;common\usb_device_stack\USBDevice;common\usb_device_stack\USBHID;common\gui;common\FreeModbus\modbus\ascii;common\FreeModbus\modbus\include;common\FreeModbus\modbus\rtu;common\FreeModbus\modbus\tcp;common\FreeModbus\port;os\FreeRTOS\Source\include;os\FreeRTOS\Source\portable\RVDS\ARM_CM3;mcu/stm32f10x/libraries/CMSIS/CM3/CoreSupport;mcu/stm32f10x/libraries/STM32F10x_StdPeriph_Driver/inc;mcu/stm32f10x/libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x;mcu/stm32f10x/ebox;common/util;common/edriver;common/network;common/fat;common/edriver/WiFi;common/cJSON;common/edriver/SFUD/sfud/inc;common/edriver/SFUD/ebox;common/bigiot;common/usb_device_stack/USBDevice;common/usb_device_stack/USBHID;common/gui;common/FreeModbus/modbus/ascii;common/FreeModbus/modbus/include;common/FreeModbus/modbus/rtu;common/FreeModbus/modbus/tcp;common/FreeModbus/port;os/FreeRTOS/Source/include;os/FreeRTOS/Source/portable/RVDS/ARM_CM3;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include;C:\Keil_v5\ARM\CMSIS\Include;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include\c++\6.2.0;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include\c++\6.2.0\arm-eabi;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include\c++\6.2.0\backward;..\..\..\..\..\..\..\SysGCC\arm-eabi\lib\gcc\arm-eabi\6.2.0\include;..\..\..\..\..\..\..\SysGCC\arm-eabi\lib\gcc\arm-eabi\6.2.0\include-fixed;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\sys-include;..\..\..\..\..\..\..\SysGCC\arm-eabi\arm-eabi\include;mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport;mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc;mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x;mcu\stm32f10x\ebox;mcu\stm32f10x\ebox\core;mcu\stm32f10x\ebox\Peripherals;common\util;common\edriver;common\network;common\fat;common\edriver\WiFi;user;common\cJSON;common\edriver\SFUD\sfud\inc;common\edriver\SFUD\ebox;common\bigiot;common\usb_device_stack\USBDevice;common\usb_device_stack\USBHID;common\gui;common\FreeModbus\modbus\ascii;common\FreeModbus\modbus\include;common\FreeModbus\modbus\rtu;common\FreeModbus\modbus\tcp;common\FreeModbus\port;os\FreeRTOS\Source\include;os\FreeRTOS\Source\portable\RVDS\ARM_CM3;mcu/stm32f10x/libraries/CMSIS/CM3/CoreSupport;mcu/stm32f10x/libraries/STM32F10x_StdPeriph_Driver/inc;mcu/stm32f10x/libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x;mcu/stm32f10x/ebox;mcu/stm32f10x/ebox/core;mcu/stm32f10x/ebox/Peripherals;common/util;common/edriver;common/network;common/fat;common/edriver/WiFi;common/cJSON;common/edriver/SFUD/sfud/inc;common/edriver/SFUD/ebox;common/bigiot;common/usb_device_stack/USBDevice;common/usb_device_stack/USBHID;common/gui;common/FreeModbus/modbus/ascii;common/FreeModbus/modbus/include;common/FreeModbus/modbus/rtu;common/FreeModbus/modbus/tcp;common/FreeModbus/port;os/FreeRTOS/Source/include;os/FreeRTOS/Source/portable/RVDS/ARM_CM3;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
     <NMakeForcedIncludes>$(ProjectDir)\gcc_Debug.h;$(VISUALGDB_DIR)\gcc_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
     <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
@@ -109,6 +109,7 @@
     <ClCompile Include="common\edriver\Nokia5110.cpp" />
     <ClCompile Include="common\edriver\NRF24L01.cpp" />
     <ClCompile Include="common\edriver\OLED.cpp" />
+    <ClCompile Include="common\edriver\oled_i2c.cpp" />
     <ClCompile Include="common\edriver\OLED_ssd1306.cpp" />
     <ClCompile Include="common\edriver\parallel_gpio.cpp" />
     <ClCompile Include="common\edriver\PID.cpp" />
@@ -162,8 +163,26 @@
     <ClCompile Include="common\util\ringbuf.cpp" />
     <ClCompile Include="common\util\util.cpp" />
     <ClCompile Include="common\util\WString.cpp" />
-    <ClCompile Include="mcu\stm32f10x\ebox\ebox_can.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\core\ebox_common.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\core\ebox_core.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\core\ebox_it.cpp" />
     <ClCompile Include="mcu\stm32f10x\ebox\object.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_analog.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_can.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_dac.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_exti.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_gpio.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_i2c.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_iflash.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_in_capture.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_pwm.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_rtc.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_softi2c.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_softspi.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_spi.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_timer.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_uart.cpp" />
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_wdg.cpp" />
     <ClCompile Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.c" />
     <ClCompile Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.c" />
     <ClCompile Include="mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\src\misc.c" />
@@ -238,6 +257,7 @@
     <ClInclude Include="common\edriver\Nokia5110.h" />
     <ClInclude Include="common\edriver\NRF24L01.h" />
     <ClInclude Include="common\edriver\OLED.h" />
+    <ClInclude Include="common\edriver\oled_i2c.h" />
     <ClInclude Include="common\edriver\OLED_ssd1306.h" />
     <ClInclude Include="common\edriver\parallel_gpio.h" />
     <ClInclude Include="common\edriver\PID.hpp" />
@@ -334,25 +354,26 @@
     <ClInclude Include="common\util\WString.h" />
     <ClInclude Include="example\23.usb_device\USB_msd_sd\usb_msd_sd.h" />
     <ClInclude Include="example\综合\includes.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\binary.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\core\ebox_common.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\core\ebox_core.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\core\FunctionPointer.h" />
     <ClInclude Include="mcu\stm32f10x\ebox\ebox.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_analog.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_can.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_common.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_core.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_dac.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_exti.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_gpio.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_i2c.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_iflash.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_in_capture.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_pwm.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_rtc.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_spi.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer_it.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_uart.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_wdg.h" />
-    <ClInclude Include="mcu\stm32f10x\ebox\FunctionPointer.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_analog.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_can.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_dac.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_exti.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_gpio.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_i2c.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_iflash.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_in_capture.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_pwm.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_rtc.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_spi.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_timer.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_timer_it.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_uart.h" />
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_wdg.h" />
     <ClInclude Include="mcu\stm32f10x\ebox\stm32f10x_conf.h" />
     <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.h" />
     <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h" />

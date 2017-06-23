@@ -82,7 +82,7 @@
 class Mpu6050
 {
 public:
-    Mpu6050(I2c *i2c)
+    Mpu6050(HardI2c *i2c)
     {
         this->i2c = i2c;
     };
@@ -92,7 +92,7 @@ public:
     void        get_id(uint8_t *id);
 
 private:
-    I2c         *i2c;
+    HardI2c         *i2c;
     uint32_t    speed;
 };
 

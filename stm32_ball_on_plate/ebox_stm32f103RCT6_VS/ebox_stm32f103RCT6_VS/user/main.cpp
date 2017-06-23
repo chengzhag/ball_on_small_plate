@@ -7,6 +7,8 @@
 #include "signal_stream.h"
 #include "uart_vcan.h"
 
+using namespace std;
+
 
 const int filterWindow = 3;
 class AverageFilter :public SignalStream<float, filterWindow>
@@ -78,15 +80,15 @@ void setup()
 
 	pidX.setRefreshRate(30);
 	pidX.setWeights(0.2, 0.01, 0.08);
-	pidX.setOutputLowerLimit(-INF_FLOAT);
-	pidX.setOutputUpperLimit(INF_FLOAT);
+	pidX.setOutputLowerLimit(-numeric_limits<float>::max());
+	pidX.setOutputUpperLimit(numeric_limits<float>::max());
 	pidX.setDesiredPoint(maxX/2);
 	pidX.setISeperateThres(50);
 
 	pidY.setRefreshRate(30);
 	pidY.setWeights(0.2, 0.01, 0.08);
-	pidY.setOutputLowerLimit(-INF_FLOAT);
-	pidY.setOutputUpperLimit(INF_FLOAT);
+	pidY.setOutputLowerLimit(-numeric_limits<float>::max());
+	pidY.setOutputUpperLimit(numeric_limits<float>::max());
 	pidY.setDesiredPoint(maxY / 2);
 	pidY.setISeperateThres(50);
 }

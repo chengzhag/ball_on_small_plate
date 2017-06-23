@@ -9,7 +9,7 @@ PREPROCESSOR_MACROS := DEBUG=1
 INCLUDE_DIRS := mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport mcu\stm32f10x\libraries\STM32F10x_StdPeriph_Driver\inc mcu\stm32f10x\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x mcu\stm32f10x\ebox mcu\stm32f10x\ebox\core mcu\stm32f10x\ebox\Peripherals common\util common\edriver common\network common\fat common\edriver\WiFi user common\cJSON common\edriver\SFUD\sfud\inc common\edriver\SFUD\ebox common\bigiot common\usb_device_stack\USBDevice common\usb_device_stack\USBHID common\gui common\FreeModbus\modbus\ascii common\FreeModbus\modbus\include common\FreeModbus\modbus\rtu common\FreeModbus\modbus\tcp common\FreeModbus\port Project\stm32f10x\mdk\RTE C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include C:\Keil_v5\ARM\CMSIS\Include os\FreeRTOS\Source\include os\FreeRTOS\Source\portable\RVDS\ARM_CM3
 LIBRARY_DIRS := 
 LIBRARY_NAMES := 
-ADDITIONAL_LINKER_INPUTS := mcu\stm32f10x\ebox\ebox.lib
+ADDITIONAL_LINKER_INPUTS := 
 MACOS_FRAMEWORKS := 
 LINUX_PACKAGES := 
 

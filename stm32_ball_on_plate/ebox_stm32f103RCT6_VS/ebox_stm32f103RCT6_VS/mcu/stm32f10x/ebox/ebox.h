@@ -66,8 +66,8 @@ extern Spi spi1;
 extern Spi spi2;
 extern SoftSpi sspi1;
 
-extern I2c i2c1;
-extern I2c i2c2;
+extern HardI2c i2c1;
+extern HardI2c i2c2;
 extern SoftI2c si2c;
 extern SoftI2c si2c1;
 extern SoftI2c si2c2;

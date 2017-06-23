@@ -36,7 +36,7 @@
 class At24c02
 {
 public:
-    At24c02(I2c *i2c)
+    At24c02(HardI2c *i2c)
     {
         this->i2c = i2c;
     }
@@ -50,7 +50,7 @@ public:
 
     int8_t write_page(uint8_t *buf, uint32_t addr, uint8_t num_to_write);
 private:
-    I2c *i2c;
+    HardI2c *i2c;
     uint32_t speed;
 
 

@@ -154,17 +154,11 @@
     <Filter Include="Source files\mcu\stm32f10x">
       <UniqueIdentifier>{e28f4488-e61d-467b-a546-111004a9a5ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\mcu\stm32f10x\ebox">
-      <UniqueIdentifier>{adbf6ba0-5ab2-49c6-af83-f0bc8e60e744}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header files\mcu">
       <UniqueIdentifier>{84e5e853-95be-429e-8091-85b9a7afd40f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\mcu\stm32f10x">
       <UniqueIdentifier>{2c3398ee-5560-4f26-9164-9699dc54fbbf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\mcu\stm32f10x\ebox">
-      <UniqueIdentifier>{ed7aee01-8ac9-4973-8cbb-8d915cc470cd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source files\mcu\stm32f10x\libraries">
       <UniqueIdentifier>{412b5818-ade9-4e88-94a8-72c44751e44c}</UniqueIdentifier>
@@ -311,6 +305,24 @@
     </Filter>
     <Filter Include="Header files\Device-specific files">
       <UniqueIdentifier>{7c9dce9d-f0c7-4255-96f9-6031ec1dae08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\ebox">
+      <UniqueIdentifier>{18f8e292-03f7-4913-ab97-885a36338afa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\ebox">
+      <UniqueIdentifier>{6e0c082d-17df-4d5d-bb55-c33a6bffa006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\ebox\core">
+      <UniqueIdentifier>{9856a38e-32aa-4daa-9734-00668a5bd81e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\ebox\core">
+      <UniqueIdentifier>{d432225f-9c1d-463e-9cce-2b049abfe2f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\mcu\stm32f10x\ebox\Peripherals">
+      <UniqueIdentifier>{9afb36db-e128-4725-84b8-f061ea0ca6e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\mcu\stm32f10x\ebox\Peripherals">
+      <UniqueIdentifier>{545c4377-d964-435d-8c0e-bd7c4abc4220}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -533,12 +545,6 @@
     <ClCompile Include="common\util\WString.cpp">
       <Filter>Source files\common\util</Filter>
     </ClCompile>
-    <ClCompile Include="mcu\stm32f10x\ebox\ebox_can.cpp">
-      <Filter>Source files\mcu\stm32f10x\ebox</Filter>
-    </ClCompile>
-    <ClCompile Include="mcu\stm32f10x\ebox\object.cpp">
-      <Filter>Source files\mcu\stm32f10x\ebox</Filter>
-    </ClCompile>
     <ClCompile Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.c">
       <Filter>Source files\mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport</Filter>
     </ClCompile>
@@ -681,6 +687,69 @@
       <Filter>Source files\common\edriver</Filter>
     </ClCompile>
     <ClCompile Include="common\edriver\drv8825.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\object.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\core\ebox_common.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\core</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\core\ebox_core.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\core</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\core\ebox_it.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\core</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_analog.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_can.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_dac.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_exti.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_gpio.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_i2c.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_iflash.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_in_capture.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_pwm.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_rtc.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_softi2c.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_softspi.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_spi.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_timer.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_uart.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="mcu\stm32f10x\ebox\Peripherals\ebox_wdg.cpp">
+      <Filter>Source files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\oled_i2c.cpp">
       <Filter>Source files\common\edriver</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1039,66 +1108,6 @@
     <ClInclude Include="example\综合\includes.h">
       <Filter>Header files\example\综合</Filter>
     </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_analog.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_can.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_common.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_core.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_dac.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_exti.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_gpio.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_i2c.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_iflash.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_in_capture.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_pwm.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_rtc.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_spi.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_timer_it.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_uart.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\ebox_wdg.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\FunctionPointer.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="mcu\stm32f10x\ebox\stm32f10x_conf.h">
-      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
-    </ClInclude>
     <ClInclude Include="mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport\core_cm3.h">
       <Filter>Header files\mcu\stm32f10x\libraries\CMSIS\CM3\CoreSupport</Filter>
     </ClInclude>
@@ -1301,6 +1310,72 @@
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
     <ClInclude Include="common\edriver\drv8825.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\binary.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\ebox.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\stm32f10x_conf.h">
+      <Filter>Header files\mcu\stm32f10x\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\core\ebox_common.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\core</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\core\ebox_core.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\core</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\core\FunctionPointer.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\core</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_analog.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_can.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_dac.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_exti.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_gpio.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_i2c.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_iflash.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_in_capture.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_pwm.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_rtc.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_spi.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_timer.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_timer_it.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_uart.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="mcu\stm32f10x\ebox\Peripherals\ebox_wdg.h">
+      <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\oled_i2c.h">
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
   </ItemGroup>
