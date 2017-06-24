@@ -9,6 +9,7 @@
 #include "Button.h"
 #include "led.h"
 #include "oled_i2c.h"
+#include <math.h>
 
 using namespace std;
 
@@ -94,15 +95,17 @@ void setup()
 
 	pidX.setRefreshRate(30);
 	//pidX.setWeights(0.2, 0.2, 0.12);
-	pidX.setWeights(0.18, 0.15, 0.15);
+	//pidX.setWeights(0.18, 0.15, 0.15);
+	pidX.setWeights(0.18, 0, 0.15);
 	pidX.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidX.setOutputUpperLimit(numeric_limits<float>::max());
-	pidX.setDesiredPoint(maxX/2);
+	pidX.setDesiredPoint(maxX / 2);
 	pidX.setISeperateThres(numeric_limits<float>::max());
 
 	pidY.setRefreshRate(30);
 	//pidY.setWeights(0.2, 0.2, 0.12);
-	pidY.setWeights(0.18, 0.15, 0.15);
+	//pidY.setWeights(0.18, 0.15, 0.15);
+	pidY.setWeights(0.18, 0, 0.15);
 	pidY.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidY.setOutputUpperLimit(numeric_limits<float>::max());
 	pidY.setDesiredPoint(maxY / 2);
@@ -119,8 +122,10 @@ int main(void)
 {
 	setup();
 	//float pct = 0, increase = 1;
-	char index = 0;
-	unsigned char targetX = maxX / 2, targetY = maxY / 2;
+	int index = 0;
+	int targetX = maxX / 2, targetY = maxY / 2;
+	int circleR = 0;
+	float theta = 0;
 	while (1)
 	{
 		keyL.loop();
@@ -136,9 +141,9 @@ int main(void)
 		{
 			index--;
 		}
-		limit<char>(index, 0, 1);
+		limit<int>(index, 0, 2);
 
-		char increase = 0;
+		int increase = 0;
 		if (keyU.click())
 		{
 			increase++;
@@ -160,13 +165,21 @@ int main(void)
 		{
 		case 0:
 			targetX += increase;
-			limit<uint8_t>(targetX, 30, maxX-30);
-			oled.printf(0, 0, 2, "*%u %u       ", targetX, targetY);
+			limit<int>(targetX, 30, maxX-30);
+			oled.printf(0, 0, 2, "*%d %d %d      ", targetX, targetY, circleR);
 			break;
 		case 1:
 			targetY += increase;
-			limit<uint8_t>(targetY, 30, maxY - 30);
-			oled.printf(0, 0, 2, "%u *%u       ", targetX, targetY);
+			limit<int>(targetY, 30, maxY - 30);
+			oled.printf(0, 0, 2, "%d *%d %d       ", targetX, targetY, circleR);
+			break;
+		case 2:
+			circleR = circleR + increase;
+			limit<int>(circleR, 0, (maxY - 40) / 2);
+			theta += 2 * PI / 50 * 0.5;//0.5»¶“ª√Î
+			targetX = maxX / 2 + circleR*sin(theta);
+			targetY = maxY / 2 + circleR*cos(theta);
+			oled.printf(0, 0, 2, "%d %d *%d       ", targetX, targetY, circleR);
 			break;
 		default:
 			break;
