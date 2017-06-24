@@ -83,19 +83,19 @@
     	^
             detected during instantiation of "T UartVscan::sendOscilloscope(T *, int) [with T=float]" at line 64 of "user/main.cpp"
   user/main.cpp: 27 warnings, 0 errors
-  Program Size: Code=54054 RO-data=3158 RW-data=392 ZI-data=14936  
+  Program Size: Code=54122 RO-data=3158 RW-data=392 ZI-data=14944  
   C:/Keil_v5/ARM/ARMCC/bin/armlink.exe -o Debug/ebox_stm32f103RCT6_VS.axf   --cpu Cortex-M3 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols --info sizes --info totals --info unused --info veneers --list "Debug/ebox.map"   --cpu Cortex-M3 --apcs=interwork    Debug/startup_stm32f10x_md.o Debug/74HC595.o Debug/accurate_pwm.o Debug/at24c02.o Debug/at45db.o Debug/Button.o Debug/colorled.o Debug/dht11.o Debug/drv8825.o Debug/ds18b20.o Debug/DS3231.o Debug/encoder.o Debug/encoder_exti.o Debug/encoder_motor.o Debug/encoder_timer.o Debug/fm25v.o Debug/FT800.o Debug/GP2Y1051.o Debug/ir_decoder.o Debug/ir_encoder.o Debug/key_dm.o Debug/L3G4200D.o Debug/LCD1602.o Debug/lcd_1.8.o Debug/LED.o Debug/led_segment.o Debug/lsm303dhlc.o Debug/LTC1446.o Debug/Max7456.o Debug/mmc_sd.o Debug/MPU6050.o Debug/Nokia5110.o Debug/NRF24L01.o Debug/OLED.o Debug/oled_i2c.o Debug/OLED_ssd1306.o Debug/parallel_gpio.o Debug/PID.o Debug/servo.o Debug/si4432.o Debug/tb6612fng.o Debug/TM1638.o Debug/uart_string.o Debug/uart_vcan.o Debug/ultrasonic_wave.o Debug/ultrasonic_wave_uart.o Debug/w25x16.o Debug/w5500.o Debug/ws2812.o Debug/mb.o Debug/mbascii.o Debug/mbfunccoils.o Debug/mbfuncdiag.o Debug/mbfuncdisc.o Debug/mbfuncholding.o Debug/mbfuncinput.o Debug/mbfuncother.o Debug/mbutils.o Debug/mbcrc.o Debug/mbrtu.o Debug/mbtcp.o Debug/FreeModbus.o Debug/portevent.o Debug/portserial.o Debug/porttimer.o Debug/Font16_ASCII.o Debug/Font16_HZ.o Debug/Font32_ASCII.o Debug/Font8_ASCII.o Debug/gui.o Debug/lcd_port.o Debug/dhcp.o Debug/dns.o Debug/socket.o Debug/tcp.o Debug/udp.o Debug/calendar.o Debug/color_convert.o Debug/crc.o Debug/dtostrf.o Debug/ebox_mem.o Debug/heap.o Debug/itoa.o Debug/my_math.o Debug/print.o Debug/ringbuf.o Debug/util.o Debug/WString.o Debug/ebox_common.o Debug/ebox_core.o Debug/ebox_it.o Debug/object.o Debug/ebox_analog.o Debug/ebox_can.o Debug/ebox_dac.o Debug/ebox_exti.o Debug/ebox_gpio.o Debug/ebox_i2c.o Debug/ebox_iflash.o Debug/ebox_in_capture.o Debug/ebox_pwm.o Debug/ebox_rtc.o Debug/ebox_softi2c.o Debug/ebox_softspi.o Debug/ebox_spi.o Debug/ebox_timer.o Debug/ebox_uart.o Debug/ebox_wdg.o Debug/core_cm3.o Debug/system_stm32f10x.o Debug/misc.o Debug/stm32f10x_adc.o Debug/stm32f10x_bkp.o Debug/stm32f10x_can.o Debug/stm32f10x_cec.o Debug/stm32f10x_crc.o Debug/stm32f10x_dac.o Debug/stm32f10x_dbgmcu.o Debug/stm32f10x_dma.o Debug/stm32f10x_exti.o Debug/stm32f10x_flash.o Debug/stm32f10x_fsmc.o Debug/stm32f10x_gpio.o Debug/stm32f10x_i2c.o Debug/stm32f10x_iwdg.o Debug/stm32f10x_pwr.o Debug/stm32f10x_rcc.o Debug/stm32f10x_rtc.o Debug/stm32f10x_sdio.o Debug/stm32f10x_spi.o Debug/stm32f10x_tim.o Debug/stm32f10x_usart.o Debug/stm32f10x_wwdg.o Debug/croutine.o Debug/event_groups.o Debug/list.o Debug/queue.o Debug/tasks.o Debug/timers.o Debug/heap_4.o Debug/port.o Debug/bsp.o Debug/main.o \
             
-  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.axf: warning: Empty loadable segment detected, is this intentional ?
   C:/Keil_v5/ARM/ARMCC/bin/fromelf.exe --bin --output Debug/ebox_stm32f103RCT6_VS.bin Debug/ebox_stm32f103RCT6_VS.axf
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe --remove-section ER_RO \
           --add-section ER_RO=Debug/ebox_stm32f103RCT6_VS.bin \
           --set-section-flags \
-  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RW' not in segment
           ER_RO=CONTENTS,ALLOC,LOAD,READONLY,CODE \
           --change-section-address ER_RO=0x08000000 \
-  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RO' not in segment
           Debug/ebox_stm32f103RCT6_VS.axf Debug/ebox_stm32f103RCT6_VS.elf
+  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.axf: warning: Empty loadable segment detected, is this intentional ?
+  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RW' not in segment
+  C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RO' not in segment
   ------------------- Memory utilization report -------------------
-  Used FLASH: 56KB [+8]
-  Used RAM: 14KB [+4]
+  Used FLASH: 56KB
+  Used RAM: 14KB

@@ -13,7 +13,7 @@
 using namespace std;
 
 
-const int filterWindow = 3;
+const int filterWindow = 4;
 class AverageFilter :public SignalStream<float, filterWindow>
 {
 public:
@@ -54,8 +54,8 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 		if (posX != -1 && posY != -1)
 		{
 			float outX = 50, outY = 50;
-			outX -= pidX.refresh(posX);
-			outY -= pidY.refresh(posY);
+			outX += pidX.refresh(posX);
+			outY += pidY.refresh(posY);
 
 			//outX = filterOutX.getFilterOut(outX);
 			//outY = filterOutY.getFilterOut(outY);
@@ -68,6 +68,8 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 		}
 		else
 		{
+			pidX.reset();
+			pidY.reset();
 			servoX.setPct(50);
 			servoY.setPct(50);
 		}
@@ -91,18 +93,20 @@ void setup()
 	uartNum.attach(posReceiveEvent);
 
 	pidX.setRefreshRate(30);
-	pidX.setWeights(0.2, 0.01, 0.08);
+	//pidX.setWeights(0.2, 0.2, 0.12);
+	pidX.setWeights(0.18, 0.15, 0.15);
 	pidX.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidX.setOutputUpperLimit(numeric_limits<float>::max());
 	pidX.setDesiredPoint(maxX/2);
-	pidX.setISeperateThres(50);
+	pidX.setISeperateThres(numeric_limits<float>::max());
 
 	pidY.setRefreshRate(30);
-	pidY.setWeights(0.2, 0.01, 0.08);
+	//pidY.setWeights(0.2, 0.2, 0.12);
+	pidY.setWeights(0.18, 0.15, 0.15);
 	pidY.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidY.setOutputUpperLimit(numeric_limits<float>::max());
 	pidY.setDesiredPoint(maxY / 2);
-	pidY.setISeperateThres(50);
+	pidY.setISeperateThres(numeric_limits<float>::max());
 
 	keyD.begin();
 	keyL.begin();
@@ -156,19 +160,19 @@ int main(void)
 		{
 		case 0:
 			targetX += increase;
-			limit<uint8_t>(targetX, 10, maxX-10);
+			limit<uint8_t>(targetX, 30, maxX-30);
 			oled.printf(0, 0, 2, "*%u %u       ", targetX, targetY);
 			break;
 		case 1:
 			targetY += increase;
-			limit<uint8_t>(targetY, 10, maxY - 10);
+			limit<uint8_t>(targetY, 30, maxY - 30);
 			oled.printf(0, 0, 2, "%u *%u       ", targetX, targetY);
 			break;
 		default:
 			break;
 		}
 
-		oled.printf(0, 2, 2, "%d %d       ", targetX, targetY);
+		oled.printf(0, 2, 2, "%d %d       ", (int)posX, (int)posY);
 		pidX.setDesiredPoint(targetX);
 		pidY.setDesiredPoint(targetY);
 
