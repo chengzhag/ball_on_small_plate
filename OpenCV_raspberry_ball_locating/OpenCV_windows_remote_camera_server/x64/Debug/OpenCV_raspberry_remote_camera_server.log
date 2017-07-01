@@ -1,8 +1,2 @@
-﻿  windows_server.cpp
-d:\program files\opencv_3_2_0\opencv\build\include\opencv2\core\mat.hpp(2586): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\program files\opencv_3_2_0\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\program files\opencv_3_2_0\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\program files\opencv_3_2_0\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\program files\opencv_3_2_0\opencv\build\include\opencv2\imgproc.hpp(592): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  OpenCV_raspberry_remote_camera_server.vcxproj -> C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\x64\Debug\OpenCV_windows_remote_camera_server.exe
+﻿  OpenCV_raspberry_remote_camera_server.vcxproj -> C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\x64\Debug\OpenCV_windows_remote_camera_server.exe
   OpenCV_raspberry_remote_camera_server.vcxproj -> C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\x64\Debug\OpenCV_windows_remote_camera_server.pdb (Full PDB)

@@ -83,7 +83,7 @@
     	^
             detected during instantiation of "T UartVscan::sendOscilloscope(T *, int) [with T=float]" at line 65 of "user/main.cpp"
   user/main.cpp: 27 warnings, 0 errors
-  Program Size: Code=56670 RO-data=3190 RW-data=392 ZI-data=14944  
+  Program Size: Code=56726 RO-data=3190 RW-data=392 ZI-data=14968  
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.axf: warning: Empty loadable segment detected, is this intentional ?
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RW' not in segment
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RO' not in segment
@@ -97,5 +97,5 @@
           --change-section-address ER_RO=0x08000000 \
           Debug/ebox_stm32f103RCT6_VS.axf Debug/ebox_stm32f103RCT6_VS.elf
   ------------------- Memory utilization report -------------------
-  Used FLASH: 58KB [-4]
+  Used FLASH: 58KB
   Used RAM: 14KB

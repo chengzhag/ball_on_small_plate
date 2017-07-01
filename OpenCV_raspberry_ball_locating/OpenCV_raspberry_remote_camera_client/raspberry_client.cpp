@@ -18,7 +18,7 @@ using namespace cv;
 using namespace std;
 
 //#define STDIO_DEBUG
-#define SOCKET_SEND_IMAGE
+//#define SOCKET_SEND_IMAGE
 
 
 
@@ -54,22 +54,31 @@ int main(int argc, char **argv)
 	raspicam::RaspiCam_Cv cam;
 	//参数设置
 	cam.set(CV_CAP_PROP_FORMAT, CV_8UC1);
-	cam.set(CV_CAP_PROP_FRAME_WIDTH, cam.get(CV_CAP_PROP_FRAME_WIDTH) * 0.2);
-	cam.set(CV_CAP_PROP_FRAME_HEIGHT, cam.get(CV_CAP_PROP_FRAME_HEIGHT) * 0.2);
-	const int imRawH = cam.get(CV_CAP_PROP_FRAME_HEIGHT),
+	cam.set(CV_CAP_PROP_FRAME_WIDTH, cam.get(CV_CAP_PROP_FRAME_WIDTH) * 0.15);
+	cam.set(CV_CAP_PROP_FRAME_HEIGHT, cam.get(CV_CAP_PROP_FRAME_HEIGHT) * 0.15);
+	int imRawH = cam.get(CV_CAP_PROP_FRAME_HEIGHT),
 		imRawW = cam.get(CV_CAP_PROP_FRAME_WIDTH);
 	Mat imRaw;
+	//剪切平板位置图像
+	float plateRegionHeight = 0.92, plateRegionWidth = 0.7;
+	Rect plateRegion(
+		int(imRawW*(0.5 - plateRegionWidth / 2)),
+		int(imRawH*(0.5 - plateRegionHeight / 2)),
+		imRawW*plateRegionWidth,
+		imRawH*plateRegionHeight);
+	imRawW = plateRegion.width;
+	imRawH = plateRegion.height;
 	//二值化，轮廓检测
 	Mat imThresh;
 	const float resizeThresh = 1;
 	//矩形透视投影
-	const float resizeTrans = 0.5;
-	const int imTransH = imRawH * resizeTrans,
+	const float resizeTrans = 1;
+	const int imTransH = imRawW * resizeTrans,
 				imTransW = imRawW * resizeTrans;
-	Mat imTrans(imRawH,
-		imRawW,
+	Mat imTrans(imTransH,
+		imTransW,
 		CV_8UC1);
-	const int cropPixels = imTransH * 0.05;
+	const int cropPixels = imTransH * 0.02;
 	//透视变换后的顶点  
 	vector<Point2f> PerspectiveTransform;
 	PerspectiveTransform.push_back(Point(-cropPixels, -cropPixels));  
@@ -115,6 +124,7 @@ int main(int argc, char **argv)
 	{
 		cam.grab();
 		cam.retrieve(imRaw);
+		imRaw = imRaw(plateRegion);
 		threshBinary += threshold(imRaw, imRaw, 0, 255, CV_THRESH_OTSU); 
 	}
 	threshBinary /= 30;
@@ -131,12 +141,14 @@ int main(int argc, char **argv)
 			cout << "imRaw为空！！！" << endl;
 			return 1;
 		}
+		
+		imRaw = imRaw(plateRegion);
 			
 		
 		/// 小球定位算法开始
 		int pos[2];
-		resize(imRaw, imThresh, Size(0, 0), resizeThresh, resizeThresh, INTER_NEAREST);
-		threshold(imThresh, imThresh, threshBinary, 255, CV_THRESH_BINARY);
+//		resize(imRaw, imThresh, Size(0, 0), resizeThresh, resizeThresh, INTER_NEAREST);
+		threshold(imRaw, imThresh, threshBinary, 255, CV_THRESH_BINARY);
 //		threshold(imThresh, imThresh, 0, 255, CV_THRESH_OTSU);
 //		morphologyEx(imThresh, imThresh, CV_MOP_OPEN, element);
 
@@ -164,7 +176,7 @@ int main(int argc, char **argv)
 			}  
       
 			//多边形逼近 
-			approxPolyDP(contours[index], contours[index], imThreshH * 0.2, true);
+			approxPolyDP(contours[index], contours[index], imThreshH * 0.5, true);
 		
 #ifdef SOCKET_SEND_IMAGE
 //			//最外围轮廓的显示  
@@ -235,7 +247,8 @@ int main(int argc, char **argv)
 #ifdef STDIO_DEBUG
 		//计算算法帧率
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
-				<< "\t" << pos[0] << "\t" << pos[1] << endl;
+				<< "\t" << pos[0] << " of " << imTrans.cols 
+				<< "\t" << pos[1] << " of " << imTrans.rows << endl;
 //		unsigned char* posChar = (unsigned char*)pos;
 //		for (int i = 0; i < 8; i++)
 //		{
@@ -254,9 +267,9 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-//		resize(imTrans, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
+		resize(imThresh, imSend, Size(0, 0), 0.5, 0.5, INTER_NEAREST);
 //		threshold(imTrans, imSend, threshBinary, 255, CV_THRESH_BINARY);
-		socketMat.transmit(imTrans, 80);
+		socketMat.transmit(imSend, 80);
 #endif // SOCKET_SEND_IMAGE
 		
 		

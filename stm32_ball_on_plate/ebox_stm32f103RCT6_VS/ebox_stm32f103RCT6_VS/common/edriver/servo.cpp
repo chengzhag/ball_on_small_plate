@@ -14,14 +14,14 @@ Servo::Servo(Gpio* pin, uint32_t frequency /*= 50*/, float limLowMs /*= 0.6*/, f
 void Servo::begin()
 {
 	pwm.begin(frq, 0);
-	setPct(50);
+	setPct(0);
 }
 
 void Servo::setPct(float percent)
 {
-	limit(percent, 0.f, 100.f);
+	limit(percent, -100.f, 100.f);
 	pct = percent;
-	pwm.set_duty(percent*(limHigh - limLow) / 100 + limLow);
+	pwm.set_duty((percent + 100) / 2 * (limHigh - limLow) / 100 + limLow);
 }
 
 float Servo::getPct()

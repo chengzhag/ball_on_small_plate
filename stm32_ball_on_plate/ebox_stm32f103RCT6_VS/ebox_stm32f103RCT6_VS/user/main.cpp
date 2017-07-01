@@ -14,7 +14,7 @@
 using namespace std;
 
 
-const int filterWindow = 4;
+const int filterWindow = 3;
 class AverageFilter :public SignalStream<float, filterWindow>
 {
 public:
@@ -29,16 +29,16 @@ public:
 		temp /= filterWindow;
 		return temp;
 	}
-}filterX, filterY/*, filterOutX, filterOutY*/;
+}filterX, filterY, filterOutX, filterOutY;
 
-Servo servoY(&PB0, 100, 0.8, 2.22);
-Servo servoX(&PB1, 100, 0.75, 2.2);
+Servo servoY(&PB0, 100, 0.8, 2.16);
+Servo servoX(&PB1, 100, 0.8, 2.24);
 UartNum<int, 2> uartNum(&uart2);
 sky::PID pidX, pidY;
 UartVscan uartVscan(&uart1);
 FpsCounter fps;
-const int maxX = 128;
-const int maxY = 98;
+const int maxX = 134;
+const int maxY = 134;
 float posX = -1;
 float posY = -1;
 
@@ -54,12 +54,12 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 
 		if (posX != -1 && posY != -1)
 		{
-			float outX = 50, outY = 50;
-			outX += pidX.refresh(posX);
+			float outX = 0, outY = 0;
+			outX -= pidX.refresh(posX);
 			outY += pidY.refresh(posY);
 
-			//outX = filterOutX.getFilterOut(outX);
-			//outY = filterOutY.getFilterOut(outY);
+			outX = filterOutX.getFilterOut(outX);
+			outY = filterOutY.getFilterOut(outY);
 
 			float vscan[] = { posX,posY,outX,outY,fps.getFps() };
 			uartVscan.sendOscilloscope(vscan, 5);
@@ -71,8 +71,8 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 		{
 			pidX.reset();
 			pidY.reset();
-			servoX.setPct(50);
-			servoY.setPct(50);
+			servoX.setPct(0);
+			servoY.setPct(0);
 		}
 	}
 }
@@ -83,6 +83,7 @@ Button keyU(&PB3, 1);
 Button keyD(&PB4, 1);
 Led led(&PD2, 1);
 OLEDI2C oled(&i2c2);
+const float factorPID = 1.5;
 
 void setup()
 {
@@ -96,7 +97,7 @@ void setup()
 	pidX.setRefreshRate(30);
 	//pidX.setWeights(0.2, 0.2, 0.12);
 	//pidX.setWeights(0.18, 0.15, 0.15);
-	pidX.setWeights(0.18, 0, 0.15);
+	pidX.setWeights(0.15*factorPID, 0.03*factorPID, 0.15*factorPID);
 	pidX.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidX.setOutputUpperLimit(numeric_limits<float>::max());
 	pidX.setDesiredPoint(maxX / 2);
@@ -105,7 +106,7 @@ void setup()
 	pidY.setRefreshRate(30);
 	//pidY.setWeights(0.2, 0.2, 0.12);
 	//pidY.setWeights(0.18, 0.15, 0.15);
-	pidY.setWeights(0.18, 0, 0.15);
+	pidY.setWeights(0.15*factorPID, 0.03*factorPID, 0.15*factorPID);
 	pidY.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidY.setOutputUpperLimit(numeric_limits<float>::max());
 	pidY.setDesiredPoint(maxY / 2);
@@ -175,8 +176,8 @@ int main(void)
 			break;
 		case 2:
 			circleR = circleR + increase;
-			limit<int>(circleR, 0, (maxY - 40) / 2);
-			theta += 2 * PI / 50 * 0.5;//0.5»¶“ª√Î
+			limit<int>(circleR, 0, (maxY - 60) / 2);
+			theta += 2 * PI / 50 * 1.5;//0.5»¶“ª√Î
 			targetX = maxX / 2 + circleR*sin(theta);
 			targetY = maxY / 2 + circleR*cos(theta);
 			oled.printf(0, 0, 2, "%d %d *%d       ", targetX, targetY, circleR);
