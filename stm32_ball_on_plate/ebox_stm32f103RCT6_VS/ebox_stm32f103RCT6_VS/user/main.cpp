@@ -82,7 +82,7 @@ Button keyR(&PB5, 1);
 Button keyU(&PB3, 1);
 Button keyD(&PB4, 1);
 Led led(&PD2, 1);
-OLEDI2C oled(&i2c2);
+OLEDI2C oled(&i2c1);
 const float factorPID = 1.5;
 
 void setup()
