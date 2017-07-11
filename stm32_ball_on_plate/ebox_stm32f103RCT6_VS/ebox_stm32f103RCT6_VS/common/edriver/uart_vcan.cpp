@@ -18,36 +18,33 @@ void UartVscan::begin(uint32_t baud_rate, uint8_t data_bit, uint8_t parity, floa
 
 void UartVscan::sendGreyImage(uint8_t* imgaddr, uint32_t width, uint32_t height)
 {
-	cmd = 1;
-	uart->write(cmd);
-	uart->write(~cmd);
+	uart->write(1);
+	uart->write(~1);
 	for (uint8_t i = 0; i < width; i++)
 		for (uint8_t j = 0; j < height; j++)
 			uart->write(imgaddr[i*width + j]);
-	uart->write(~cmd);
-	uart->write(cmd);
+	uart->write(~1);
+	uart->write(1);
 }
 
 void UartVscan::sendLinearCCD(uint8_t *ccdaddr, uint8_t *ccdaddr2, int ccdsize)
 {
-	cmd = 2;
-	uart->write(cmd);
-	uart->write(~cmd);
+	uart->write(2);
+	uart->write(~2);
 	for (int i = 0; i < ccdsize; i++)
 		uart->write(ccdaddr[i]);
 	for (int i = 0; i < ccdsize; i++)
 		uart->write(ccdaddr2[i]);
-	uart->write(~cmd);
-	uart->write(cmd);
+	uart->write(~2);
+	uart->write(2);
 }
 
 void UartVscan::sendLinearCCD(uint8_t *ccdaddr, int ccdsize)
 {
-	cmd = 2;
-	uart->write(cmd);
-	uart->write(~cmd);
+	uart->write(2);
+	uart->write(~2);
 	for (int i = 0; i < ccdsize; i++)
 		uart->write(ccdaddr[i]);
-	uart->write(~cmd);
-	uart->write(cmd);
+	uart->write(~2);
+	uart->write(2);
 }

@@ -14,22 +14,7 @@
 using namespace std;
 
 
-const int filterWindow = 3;
-class AverageFilter :public SignalStream<float, filterWindow>
-{
-public:
-	float getFilterOut(float newNum)
-	{
-		push(newNum);
-		float temp = 0;
-		for (int i = 0; i < filterWindow; i++)
-		{
-			temp += operator[](i);
-		}
-		temp /= filterWindow;
-		return temp;
-	}
-}filterX, filterY, filterOutX, filterOutY;
+AverageFilter<3> filterX, filterY, filterOutX, filterOutY;
 
 Servo servoY(&PB0, 100, 0.8, 2.16);
 Servo servoX(&PB1, 100, 0.8, 2.24);

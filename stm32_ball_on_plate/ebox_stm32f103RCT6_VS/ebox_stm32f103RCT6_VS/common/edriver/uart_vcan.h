@@ -7,7 +7,6 @@
 //支持线性CCD、灰度图像、单/多条曲线
 class UartVscan
 {
-	uint8_t cmd;
 	Uart *uart;	
 public:
 	UartVscan(Uart *uartX);
@@ -25,11 +24,10 @@ public:
 
 	//虚拟示波器，单曲线
 	template<typename T>
-	T sendOscilloscope(T x)
+	void sendOscilloscope(T x)
 	{
-		cmd = 3;
-		uart->write(cmd);
-		uart->write(~cmd);
+		uart->write(3);
+		uart->write(~3);
 		union
 		{
 			T f;
@@ -38,17 +36,16 @@ public:
 		dataBuf.f = x;
 		for (int i = 0; i < sizeof(x); i++)
 			uart->write(dataBuf.c[i]);
-		uart->write(~cmd);
-		uart->write(cmd);
+		uart->write(~3);
+		uart->write(3);
 	}
 
 	//虚拟示波器，多曲线
 	template<typename T>
-	T sendOscilloscope(T *y,int n)
+	void sendOscilloscope(T *y,int n)
 	{
-		cmd = 3;
-		uart->write(cmd);
-		uart->write(~cmd);
+		uart->write(3);
+		uart->write(~3);
 		union
 		{
 			T f;
@@ -60,8 +57,8 @@ public:
 			for (int i = 0; i < sizeof(dataBuf.f); i++)
 				uart->write(dataBuf.c[i]);
 		}
-		uart->write(~cmd);
-		uart->write(cmd);
+		uart->write(~3);
+		uart->write(3);
 	}
 };
 

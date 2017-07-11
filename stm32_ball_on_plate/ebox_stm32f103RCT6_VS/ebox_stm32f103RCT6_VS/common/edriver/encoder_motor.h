@@ -50,7 +50,7 @@ public:
 	short getPosDiff();
 
 	//获取输出百分比
-	float getPercent();
+	float getPct();
 
 	//设置目标位置（位置控制模式）
 	void setPos(long pos);
@@ -62,7 +62,7 @@ public:
 	void setSpd(short spd);
 
 	//设置输出百分比（PID失能模式）
-	void setPercent(float p);
+	void setPct(float p);
 };
 
 #endif

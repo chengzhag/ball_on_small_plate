@@ -72,7 +72,7 @@ short EncoderMotor::getPosDiff()
 	return encoder.getDiff();
 }
 
-float EncoderMotor::getPercent()
+float EncoderMotor::getPct()
 {
 	return percent;
 }
@@ -98,7 +98,7 @@ void EncoderMotor::setSpd(short spd)
 	}
 }
 
-void EncoderMotor::setPercent(float p)
+void EncoderMotor::setPct(float p)
 {
 	if (mode == Encoder_Motor_PID_Disabled)
 	{

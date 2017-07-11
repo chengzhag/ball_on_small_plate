@@ -1,6 +1,6 @@
 #include "ebox.h"
 #include "encoder_timer.h"
-EncoderTimer encoder(TIM1);
+EncoderTimer encoder(TIM4);
 void setup()
 {
 	ebox_init();
@@ -16,7 +16,7 @@ int main(void)
 		encoder.refresh();
 		long pos = encoder.getPos();
 		short diff = encoder.getDiff();
-		uart1.printf("%ld\n%d\n\n", pos, diff);
+		uart1.printf("%ld\t%d\t\r\n", pos, diff);
 		delay_ms(50);
 	}
 }
