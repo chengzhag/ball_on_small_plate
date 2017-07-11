@@ -29,26 +29,26 @@ The CXX compiler identification is GNU, found in "C:/Users/Sky/Desktop/ball_on_p
 Determining if the C compiler works passed with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_5bd63/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_5bd63.dir/build.make CMakeFiles/cmTC_5bd63.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_bc51d/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_bc51d.dir/build.make CMakeFiles/cmTC_bc51d.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_5bd63.dir/testCCompiler.c.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -o CMakeFiles/cmTC_5bd63.dir/testCCompiler.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_5bd63
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_5bd63.dir/testCCompiler.c.o"   -o cmTC_5bd63 
+Building C object CMakeFiles/cmTC_bc51d.dir/testCCompiler.c.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -o CMakeFiles/cmTC_bc51d.dir/testCCompiler.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_bc51d
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_bc51d.dir/testCCompiler.c.o"   -o cmTC_bc51d 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_3320a/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_3320a.dir/build.make CMakeFiles/cmTC_3320a.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_96556/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_96556.dir/build.make CMakeFiles/cmTC_96556.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -o CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o   -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCCompilerABI.c"
-Linking C executable cmTC_3320a
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -v -rdynamic "CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o"   -o cmTC_3320a 
+Building C object CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -o CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o   -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCCompilerABI.c"
+Linking C executable cmTC_96556
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -v -rdynamic "CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o"   -o cmTC_96556 
 Using built-in specs.
 COLLECT_GCC=C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe
 COLLECT_LTO_WRAPPER=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe
@@ -58,8 +58,8 @@ Thread model: posix
 gcc version 4.9.2 (GCC) 
 COMPILER_PATH=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/;c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/;c:/sysgcc/raspberry/bin/../libexec/gcc/;c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/bin/
 LIBRARY_PATH=c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/;c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/;c:/sysgcc/raspberry/bin/../lib/gcc/;c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_3320a' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
- c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccBC3lmh.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_3320a C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_96556' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
+ c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccikFFa6.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_96556 C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
@@ -67,13 +67,13 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-linux-gnueabihf-ld\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_3320a/fast"]
-  ignore line: [C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_3320a.dir/build.make CMakeFiles/cmTC_3320a.dir/build]
+  ignore line: [Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_96556/fast"]
+  ignore line: [C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_96556.dir/build.make CMakeFiles/cmTC_96556.dir/build]
   ignore line: [make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o]
-  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -o CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o   -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCCompilerABI.c"]
-  ignore line: [Linking C executable cmTC_3320a]
-  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -v -rdynamic "CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o"   -o cmTC_3320a ]
+  ignore line: [Building C object CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o]
+  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -o CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o   -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCCompilerABI.c"]
+  ignore line: [Linking C executable cmTC_96556]
+  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -v -rdynamic "CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o"   -o cmTC_96556 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe]
   ignore line: [COLLECT_LTO_WRAPPER=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe]
@@ -93,13 +93,13 @@ Parsed C implicit link information from above output:
   ignore line: [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/]
   ignore line: [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/]
   ignore line: [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_3320a' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
-  link line: [ c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccBC3lmh.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_3320a C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_96556' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
+  link line: [ c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccikFFa6.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_96556 C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o]
     arg [c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe] ==> ignore
     arg [-plugin] ==> ignore
     arg [c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll] ==> ignore
     arg [-plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe] ==> ignore
-    arg [-plugin-opt=-fresolution=C:UsersSkyAppDataLocalTempccBC3lmh.res] ==> ignore
+    arg [-plugin-opt=-fresolution=C:UsersSkyAppDataLocalTempccikFFa6.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -116,7 +116,7 @@ Parsed C implicit link information from above output:
     arg [-m] ==> ignore
     arg [armelf_linux_eabi] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_3320a] ==> ignore
+    arg [cmTC_96556] ==> ignore
     arg [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o] ==> ignore
     arg [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o] ==> ignore
     arg [c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o] ==> ignore
@@ -128,7 +128,7 @@ Parsed C implicit link information from above output:
     arg [-LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib] ==> dir [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib]
     arg [-LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf] ==> dir [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf]
     arg [-LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib] ==> dir [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib]
-    arg [CMakeFiles/cmTC_3320a.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_96556.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -162,13 +162,13 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_cb708/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_cb708.dir/build.make CMakeFiles/cmTC_cb708.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_aa64a/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_aa64a.dir/build.make CMakeFiles/cmTC_aa64a.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_cb708.dir/feature_tests.c.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot   -std=c11 -o CMakeFiles/cmTC_cb708.dir/feature_tests.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.c
-Linking C executable cmTC_cb708
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_cb708.dir/feature_tests.c.o"   -o cmTC_cb708 
+Building C object CMakeFiles/cmTC_aa64a.dir/feature_tests.c.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot   -std=c11 -o CMakeFiles/cmTC_aa64a.dir/feature_tests.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.c
+Linking C executable cmTC_aa64a
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_aa64a.dir/feature_tests.c.o"   -o cmTC_aa64a 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
@@ -181,13 +181,13 @@ make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspbe
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_556ec/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_556ec.dir/build.make CMakeFiles/cmTC_556ec.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_34886/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_34886.dir/build.make CMakeFiles/cmTC_34886.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_556ec.dir/feature_tests.c.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot   -std=c99 -o CMakeFiles/cmTC_556ec.dir/feature_tests.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.c
-Linking C executable cmTC_556ec
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_556ec.dir/feature_tests.c.o"   -o cmTC_556ec 
+Building C object CMakeFiles/cmTC_34886.dir/feature_tests.c.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot   -std=c99 -o CMakeFiles/cmTC_34886.dir/feature_tests.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.c
+Linking C executable cmTC_34886
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_34886.dir/feature_tests.c.o"   -o cmTC_34886 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
@@ -200,13 +200,13 @@ make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspbe
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_823ca/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_823ca.dir/build.make CMakeFiles/cmTC_823ca.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_a27de/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_a27de.dir/build.make CMakeFiles/cmTC_a27de.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_823ca.dir/feature_tests.c.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot   -std=c90 -o CMakeFiles/cmTC_823ca.dir/feature_tests.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.c
-Linking C executable cmTC_823ca
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_823ca.dir/feature_tests.c.o"   -o cmTC_823ca 
+Building C object CMakeFiles/cmTC_a27de.dir/feature_tests.c.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot   -std=c90 -o CMakeFiles/cmTC_a27de.dir/feature_tests.c.o   -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.c
+Linking C executable cmTC_a27de
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-gcc.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -rdynamic "CMakeFiles/cmTC_a27de.dir/feature_tests.c.o"   -o cmTC_a27de 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
@@ -217,26 +217,26 @@ make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspbe
 Determining if the CXX compiler works passed with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_5ba06/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_5ba06.dir/build.make CMakeFiles/cmTC_5ba06.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_d3017/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_d3017.dir/build.make CMakeFiles/cmTC_d3017.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_5ba06.dir/testCXXCompiler.cxx.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -o CMakeFiles/cmTC_5ba06.dir/testCXXCompiler.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_5ba06
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_5ba06.dir/testCXXCompiler.cxx.o"   -o cmTC_5ba06 
+Building CXX object CMakeFiles/cmTC_d3017.dir/testCXXCompiler.cxx.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -o CMakeFiles/cmTC_d3017.dir/testCXXCompiler.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_d3017
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_d3017.dir/testCXXCompiler.cxx.o"   -o cmTC_d3017 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_b71e4/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_b71e4.dir/build.make CMakeFiles/cmTC_b71e4.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_271b7/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_271b7.dir/build.make CMakeFiles/cmTC_271b7.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -o CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCXXCompilerABI.cpp"
-Linking CXX executable cmTC_b71e4
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -v -rdynamic "CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o"   -o cmTC_b71e4 
+Building CXX object CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -o CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCXXCompilerABI.cpp"
+Linking CXX executable cmTC_271b7
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -v -rdynamic "CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o"   -o cmTC_271b7 
 Using built-in specs.
 COLLECT_GCC=C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe
 COLLECT_LTO_WRAPPER=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe
@@ -246,8 +246,8 @@ Thread model: posix
 gcc version 4.9.2 (GCC) 
 COMPILER_PATH=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/;c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/;c:/sysgcc/raspberry/bin/../libexec/gcc/;c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/bin/
 LIBRARY_PATH=c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/;c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/;c:/sysgcc/raspberry/bin/../lib/gcc/;c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/;C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b71e4' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
- c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccqzDi3F.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_b71e4 C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_271b7' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu'
+ c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccty3dtm.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_271b7 C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
@@ -255,13 +255,13 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-linux-gnueabihf-ld\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_b71e4/fast"]
-  ignore line: [C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_b71e4.dir/build.make CMakeFiles/cmTC_b71e4.dir/build]
+  ignore line: [Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_271b7/fast"]
+  ignore line: [C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_271b7.dir/build.make CMakeFiles/cmTC_271b7.dir/build]
   ignore line: [make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -o CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCXXCompilerABI.cpp"]
-  ignore line: [Linking CXX executable cmTC_b71e4]
-  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -v -rdynamic "CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o"   -o cmTC_b71e4 ]
+  ignore line: [Building CXX object CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot     -o CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o -c "C:/Program Files/CMake/share/cmake-3.8/Modules/CMakeCXXCompilerABI.cpp"]
+  ignore line: [Linking CXX executable cmTC_271b7]
+  ignore line: [C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot      -v -rdynamic "CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o"   -o cmTC_271b7 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe]
   ignore line: [COLLECT_LTO_WRAPPER=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe]
@@ -281,13 +281,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/]
   ignore line: [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/]
   ignore line: [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b71e4' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
-  link line: [ c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccqzDi3F.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_b71e4 C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_271b7' '-shared-libgcc' '-march=armv6' '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu']
+  link line: [ c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe -plugin c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll -plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Sky\AppData\Local\Temp\ccty3dtm.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_271b7 C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9 -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf -Lc:/sysgcc/raspberry/bin/../lib/gcc -Lc:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf -LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtend.o C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crtn.o]
     arg [c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/collect2.exe] ==> ignore
     arg [-plugin] ==> ignore
     arg [c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/liblto_plugin-0.dll] ==> ignore
     arg [-plugin-opt=c:/sysgcc/raspberry/bin/../libexec/gcc/arm-linux-gnueabihf/4.9/lto-wrapper.exe] ==> ignore
-    arg [-plugin-opt=-fresolution=C:UsersSkyAppDataLocalTempccqzDi3F.res] ==> ignore
+    arg [-plugin-opt=-fresolution=C:UsersSkyAppDataLocalTempccty3dtm.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -304,7 +304,7 @@ Parsed CXX implicit link information from above output:
     arg [-m] ==> ignore
     arg [armelf_linux_eabi] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_b71e4] ==> ignore
+    arg [cmTC_271b7] ==> ignore
     arg [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crt1.o] ==> ignore
     arg [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/crti.o] ==> ignore
     arg [c:/sysgcc/raspberry/bin/../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/lib/crtbegin.o] ==> ignore
@@ -316,7 +316,7 @@ Parsed CXX implicit link information from above output:
     arg [-LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib] ==> dir [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/lib]
     arg [-LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf] ==> dir [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf]
     arg [-LC:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib] ==> dir [C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/lib]
-    arg [CMakeFiles/cmTC_b71e4.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_271b7.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -348,13 +348,13 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_4cbc4/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_4cbc4.dir/build.make CMakeFiles/cmTC_4cbc4.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_5aa84/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_5aa84.dir/build.make CMakeFiles/cmTC_5aa84.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_4cbc4.dir/feature_tests.cxx.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -std=c++14 -o CMakeFiles/cmTC_4cbc4.dir/feature_tests.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_4cbc4
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_4cbc4.dir/feature_tests.cxx.o"   -o cmTC_4cbc4 
+Building CXX object CMakeFiles/cmTC_5aa84.dir/feature_tests.cxx.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -std=c++14 -o CMakeFiles/cmTC_5aa84.dir/feature_tests.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_5aa84
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_5aa84.dir/feature_tests.cxx.o"   -o cmTC_5aa84 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
@@ -420,13 +420,13 @@ make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspbe
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_0f335/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_0f335.dir/build.make CMakeFiles/cmTC_0f335.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_54567/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_54567.dir/build.make CMakeFiles/cmTC_54567.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_0f335.dir/feature_tests.cxx.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -std=c++11 -o CMakeFiles/cmTC_0f335.dir/feature_tests.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_0f335
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_0f335.dir/feature_tests.cxx.o"   -o cmTC_0f335 
+Building CXX object CMakeFiles/cmTC_54567.dir/feature_tests.cxx.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -std=c++11 -o CMakeFiles/cmTC_54567.dir/feature_tests.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_54567
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_54567.dir/feature_tests.cxx.o"   -o cmTC_54567 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
@@ -492,13 +492,13 @@ make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspbe
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_4641a/fast"
-C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_4641a.dir/build.make CMakeFiles/cmTC_4641a.dir/build
+Run Build Command:"C:/SysGCC/Raspberry/bin/make.exe" "cmTC_e2fc8/fast"
+C:/SysGCC/Raspberry/bin/make.exe -f CMakeFiles/cmTC_e2fc8.dir/build.make CMakeFiles/cmTC_e2fc8.dir/build
 make.exe[1]: Entering directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_4641a.dir/feature_tests.cxx.o
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -std=c++98 -o CMakeFiles/cmTC_4641a.dir/feature_tests.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_4641a
-C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_4641a.dir/feature_tests.cxx.o"   -o cmTC_4641a 
+Building CXX object CMakeFiles/cmTC_e2fc8.dir/feature_tests.cxx.o
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot    -std=c++98 -o CMakeFiles/cmTC_e2fc8.dir/feature_tests.cxx.o -c C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_e2fc8
+C:/SysGCC/Raspberry/bin/arm-linux-gnueabihf-g++.exe --sysroot=C:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot       -rdynamic "CMakeFiles/cmTC_e2fc8.dir/feature_tests.cxx.o"   -o cmTC_e2fc8 
 make.exe[1]: Leaving directory `C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/Debug/CMakeFiles/CMakeTmp'
 
 
