@@ -17,8 +17,8 @@
 using namespace cv;
 using namespace std;
 
-//#define STDIO_DEBUG
-//#define SOCKET_SEND_IMAGE
+#define STDIO_DEBUG
+#define SOCKET_SEND_IMAGE
 
 
 int main(int argc, char **argv)
@@ -34,8 +34,8 @@ int main(int argc, char **argv)
 		imRawW = cam.get(CV_CAP_PROP_FRAME_WIDTH);
 	Mat imRaw;
 	//ºÙ«–∆Ω∞ÂŒª÷√ÕºœÒ
-	float plateRegionHeight = 0.73;//, plateRegionWidth = 0.52;
-	float plateRegionOffH = -0.04, plateRegionOffW = 0.052;
+	float plateRegionHeight = 0.9;//, plateRegionWidth = 0.52;
+	float plateRegionOffH = -0.03, plateRegionOffW = 0.02;
 	Rect plateRegion(
 		int(imRawW*(0.5 + plateRegionOffW) - imRawH*plateRegionHeight / 2),
 		int(imRawH*(0.5 + plateRegionOffH - plateRegionHeight / 2)),
@@ -250,7 +250,7 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//∑¢ÀÕÕºœÒ£¨”√”⁄≤‚ ‘
-		resize(imProcess, imSend, Size(0, 0), 0.2, 0.2, INTER_NEAREST);
+		resize(imProcess, imSend, Size(0, 0), 0.5, 0.5, INTER_NEAREST);
 //		threshold(imTrans, imSend, threshBinary, 255, CV_THRESH_BINARY);
 		socketMat.transmit(imSend, 80);
 #endif // SOCKET_SEND_IMAGE

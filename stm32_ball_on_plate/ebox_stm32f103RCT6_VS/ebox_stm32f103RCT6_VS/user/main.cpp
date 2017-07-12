@@ -16,14 +16,14 @@ using namespace std;
 
 AverageFilter<3> filterX, filterY, filterOutX, filterOutY;
 
-Servo servoY(&PB0, 100, 0.8, 2.16);
-Servo servoX(&PB1, 100, 0.8, 2.24);
+Servo servoY(&PB0, 100, 0.83, 2.3);
+Servo servoX(&PB1, 100, 0.82, 2.3);
 UartNum<int, 2> uartNum(&uart2);
 sky::PID pidX, pidY;
 UartVscan uartVscan(&uart1);
 FpsCounter fps;
-const int maxX = 134;
-const int maxY = 134;
+const int maxX = 168;
+const int maxY = 168;
 float posX = -1;
 float posY = -1;
 
@@ -40,7 +40,7 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 		if (posX != -1 && posY != -1)
 		{
 			float outX = 0, outY = 0;
-			outX -= pidX.refresh(posX);
+			outX += pidX.refresh(posX);
 			outY += pidY.refresh(posY);
 
 			outX = filterOutX.getFilterOut(outX);
@@ -67,7 +67,7 @@ Button keyR(&PB5, 1);
 Button keyU(&PB3, 1);
 Button keyD(&PB4, 1);
 Led led(&PD2, 1);
-OLEDI2C oled(&i2c1);
+OLEDI2C oled(&i2c2);
 const float factorPID = 1.5;
 
 void setup()
