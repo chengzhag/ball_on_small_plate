@@ -22,8 +22,8 @@ UartNum<int, 2> uartNum(&uart2);
 sky::PID pidX, pidY;
 UartVscan uartVscan(&uart1);
 FpsCounter fps;
-const int maxX = 168;
-const int maxY = 168;
+const int maxX = 123;
+const int maxY = 123;
 float posX = -1;
 float posY = -1;
 

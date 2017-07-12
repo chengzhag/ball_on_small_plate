@@ -1,0 +1,3 @@
+C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_calibration/Debug/CMakeFiles/OpenCVCameraDemo.dir
+C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_calibration/Debug/CMakeFiles/edit_cache.dir
+C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_calibration/Debug/CMakeFiles/rebuild_cache.dir

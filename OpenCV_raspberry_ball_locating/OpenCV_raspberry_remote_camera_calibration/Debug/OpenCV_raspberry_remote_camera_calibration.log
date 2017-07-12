@@ -1,0 +1,6 @@
+﻿VisualGDB : warning : Cannot parse C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\OpenCV_raspberry_remote_camera_calibration\OpenCV_raspberry_remote_camera_calibration.vcxproj: 未能找到文件“C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\OpenCV_raspberry_remote_camera_calibration\OpenCV_raspberry_remote_camera_calibration.vcxproj.filters”。
+  VisualGDB: Run "cmd.exe /c "C:\SysGCC\Raspberry\bin\make.exe"" in directory "C:\Users\Sky\Desktop\ball_on_plate\OpenCV_raspberry_ball_locating\OpenCV_raspberry_remote_camera_calibration/Debug" on local machine
+  Scanning dependencies of target OpenCVCameraDemo
+  [ 25%] Building CXX object CMakeFiles/OpenCVCameraDemo.dir/raspberry_client.cpp.o
+  [ 50%] Linking CXX executable OpenCVCameraDemo
+  [100%] Built target OpenCVCameraDemo
