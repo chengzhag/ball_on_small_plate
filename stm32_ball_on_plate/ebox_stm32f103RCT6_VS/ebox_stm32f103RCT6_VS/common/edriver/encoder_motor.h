@@ -2,7 +2,7 @@
 #define  __ENCODER_MOTOR
 
 #include "ebox.h"
-#include "PID.hpp"
+#include "PID.h"
 #include "encoder_timer.h"
 #include "tb6612fng.h"
 
@@ -27,7 +27,7 @@ class EncoderMotor
 	float percent;
 	float refreshInt;
 public:
-	greg::PID pid;
+	PIDnorm pid;
 
 	EncoderMotor(TIM_TypeDef *TIMx,
 		Gpio *motorPinA, Gpio *motorPinB, Gpio *motorPinPwm,

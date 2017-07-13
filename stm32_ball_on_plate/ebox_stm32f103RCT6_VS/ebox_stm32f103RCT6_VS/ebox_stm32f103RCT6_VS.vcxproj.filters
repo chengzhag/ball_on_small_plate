@@ -1279,9 +1279,6 @@
     <ClInclude Include="common\edriver\encoder_timer.h">
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
-    <ClInclude Include="common\edriver\PID.hpp">
-      <Filter>Header files\common\edriver</Filter>
-    </ClInclude>
     <ClInclude Include="common\edriver\tb6612fng.h">
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
@@ -1376,6 +1373,9 @@
       <Filter>Header files\mcu\stm32f10x\ebox\Peripherals</Filter>
     </ClInclude>
     <ClInclude Include="common\edriver\oled_i2c.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\PID.h">
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
   </ItemGroup>

@@ -144,7 +144,7 @@ int main(int argc, char **argv)
 		Point ballPoint;
 		double minBrightness;
 		minMaxLoc(imRaw, &minBrightness, NULL, &ballPoint, NULL);
-		if (minBrightness < 90)
+		if (minBrightness < 60)
 		{
 			pos[0] = ballPoint.x;
 			pos[1] = ballPoint.y;

@@ -2,7 +2,7 @@
 #include "led.h"
 #include "servo.h"
 #include "uart_num.h"
-#include "PID.hpp"
+#include "PID.h"
 #include "my_math.h"
 #include "signal_stream.h"
 #include "uart_vcan.h"
@@ -16,10 +16,12 @@ using namespace std;
 
 AverageFilter<2> filterX, filterY, filterOutX, filterOutY;
 
-Servo servoY(&PB0, 100, 0.65, 2.4);
-Servo servoX(&PB1, 100, 0.65, 2.4);
+Servo servoX(&PB1, 200, 0.7, 2.35);
+Servo servoY(&PB0, 200, 0.7, 2.35);
 UartNum<int, 2> uartNum(&uart2);
-sky::PID pidX, pidY;
+const float factorPID = 1.5;
+PIDIntegralSeperate pidX(0.2f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f),
+pidY(0.2f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f);
 UartVscan uartVscan(&uart1);
 FpsCounter fps;
 const int maxX = 123;
@@ -33,8 +35,8 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 	{
 		posX = uartNum->getNum()[0];
 		posY = uartNum->getNum()[1];
-		posX = filterX.getFilterOut(posX);
-		posY = filterY.getFilterOut(posY);
+		//posX = filterX.getFilterOut(posX);
+		//posY = filterY.getFilterOut(posY);
 		//uart1.printf("%f\t%f\r\n", posX, posY);
 
 		if (posX != -1 && posY != -1)
@@ -68,7 +70,6 @@ Button keyU(&PB3, 1);
 Button keyD(&PB4, 1);
 Led led(&PD2, 1);
 OLEDI2C oled(&i2c2);
-const float factorPID = 1.5;
 
 void setup()
 {
@@ -79,23 +80,12 @@ void setup()
 	uartNum.begin(115200);
 	uartNum.attach(posReceiveEvent);
 
-	pidX.setRefreshRate(30);
-	//pidX.setWeights(0.2, 0.2, 0.12);
-	//pidX.setWeights(0.18, 0.15, 0.15);
-	pidX.setWeights(0.25*factorPID, 0.3*factorPID, 0.15*factorPID);
-	pidX.setOutputLowerLimit(-numeric_limits<float>::max());
-	pidX.setOutputUpperLimit(numeric_limits<float>::max());
-	pidX.setDesiredPoint(maxX / 2);
-	pidX.setISeperateThres(numeric_limits<float>::max());
-
-	pidY.setRefreshRate(30);
-	//pidY.setWeights(0.2, 0.2, 0.12);
-	//pidY.setWeights(0.18, 0.15, 0.15);
-	pidY.setWeights(0.25*factorPID, 0.3*factorPID, 0.15*factorPID);
-	pidY.setOutputLowerLimit(-numeric_limits<float>::max());
-	pidY.setOutputUpperLimit(numeric_limits<float>::max());
-	pidY.setDesiredPoint(maxY / 2);
-	pidY.setISeperateThres(numeric_limits<float>::max());
+	pidX.setTarget(maxX / 2);
+	pidX.setOutputLim(-100, 100);
+	pidX.setISepPoint(20);
+	pidY.setTarget(maxY / 2);
+	pidY.setOutputLim(-100, 100);
+	pidX.setISepPoint(20);
 
 	keyD.begin();
 	keyL.begin();
@@ -172,8 +162,8 @@ int main(void)
 		}
 
 		oled.printf(0, 2, 2, "%d %d       ", (int)posX, (int)posY);
-		pidX.setDesiredPoint(targetX);
-		pidY.setDesiredPoint(targetY);
+		pidX.setTarget(targetX);
+		pidY.setTarget(targetY);
 
 		//pct += increase;
 		//if (pct >= 100 || pct <= 0)

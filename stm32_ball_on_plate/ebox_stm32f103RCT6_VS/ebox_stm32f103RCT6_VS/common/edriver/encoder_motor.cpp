@@ -10,18 +10,16 @@ EncoderMotor::EncoderMotor(TIM_TypeDef *TIMx, Gpio *motorPinA, Gpio *motorPinB, 
 	switch (controlTarget)
 	{
 	case Encoder_Motor_Target_Position:
-		pid.setRefreshInterval(refreshInterval);
-		pid.setWeights(1.5, 0.1, 0.02);
-		pid.setOutputLowerLimit(-100);
-		pid.setOutputUpperLimit(100);
-		pid.setDesiredPoint(0);
+		pid.setInterval(refreshInterval);
+		pid.setPID(1.5, 0.1, 0.02);
+		pid.setOutputLim(-100, 100);
+		pid.setTarget(0);
 		break;
 	case Encoder_Motor_Target_Speed:
-		pid.setRefreshInterval(refreshInterval);
-		pid.setWeights(10, 10, 0);
-		pid.setOutputLowerLimit(-100);
-		pid.setOutputUpperLimit(100);
-		pid.setDesiredPoint(0);
+		pid.setInterval(refreshInterval);
+		pid.setPID(10, 10, 0);
+		pid.setOutputLim(-100, 100);
+		pid.setTarget(0);
 		break;
 	case Encoder_Motor_PID_Disabled:
 
@@ -33,7 +31,7 @@ EncoderMotor::EncoderMotor(TIM_TypeDef *TIMx, Gpio *motorPinA, Gpio *motorPinB, 
 
 void EncoderMotor::begin(const float &Kp, const float &Ki, const float &Kd)
 {
-	pid.setWeights(Kp, Ki, Kd);
+	pid.setPID(Kp, Ki, Kd);
 	begin();
 }
 
@@ -81,7 +79,7 @@ void EncoderMotor::setPos(long pos)
 {
 	if (mode == Encoder_Motor_Target_Position)
 	{
-		pid.setDesiredPoint(pos);
+		pid.setTarget(pos);
 	}
 }
 
@@ -94,7 +92,7 @@ void EncoderMotor::setSpd(short spd)
 {
 	if (mode == Encoder_Motor_Target_Speed)
 	{
-		pid.setDesiredPoint(spd);
+		pid.setTarget(spd);
 	}
 }
 
