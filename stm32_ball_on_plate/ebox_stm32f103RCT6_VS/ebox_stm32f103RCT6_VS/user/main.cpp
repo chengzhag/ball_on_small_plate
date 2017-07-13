@@ -14,10 +14,10 @@
 using namespace std;
 
 
-AverageFilter<3> filterX, filterY, filterOutX, filterOutY;
+AverageFilter<2> filterX, filterY, filterOutX, filterOutY;
 
-Servo servoY(&PB0, 100, 0.83, 2.3);
-Servo servoX(&PB1, 100, 0.82, 2.3);
+Servo servoY(&PB0, 100, 0.65, 2.4);
+Servo servoX(&PB1, 100, 0.65, 2.4);
 UartNum<int, 2> uartNum(&uart2);
 sky::PID pidX, pidY;
 UartVscan uartVscan(&uart1);
@@ -82,7 +82,7 @@ void setup()
 	pidX.setRefreshRate(30);
 	//pidX.setWeights(0.2, 0.2, 0.12);
 	//pidX.setWeights(0.18, 0.15, 0.15);
-	pidX.setWeights(0.15*factorPID, 0.03*factorPID, 0.15*factorPID);
+	pidX.setWeights(0.25*factorPID, 0.3*factorPID, 0.15*factorPID);
 	pidX.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidX.setOutputUpperLimit(numeric_limits<float>::max());
 	pidX.setDesiredPoint(maxX / 2);
@@ -91,7 +91,7 @@ void setup()
 	pidY.setRefreshRate(30);
 	//pidY.setWeights(0.2, 0.2, 0.12);
 	//pidY.setWeights(0.18, 0.15, 0.15);
-	pidY.setWeights(0.15*factorPID, 0.03*factorPID, 0.15*factorPID);
+	pidY.setWeights(0.25*factorPID, 0.3*factorPID, 0.15*factorPID);
 	pidY.setOutputLowerLimit(-numeric_limits<float>::max());
 	pidY.setOutputUpperLimit(numeric_limits<float>::max());
 	pidY.setDesiredPoint(maxY / 2);

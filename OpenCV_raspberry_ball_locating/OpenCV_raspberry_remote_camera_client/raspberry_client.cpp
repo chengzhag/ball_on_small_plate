@@ -17,7 +17,7 @@
 using namespace cv;
 using namespace std;
 
-#define STDIO_DEBUG
+//#define STDIO_DEBUG
 //#define SOCKET_SEND_IMAGE
 
 
@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 			return 1;
 		}
 		
-		remap(imRaw, imRaw, map1, map2, INTER_NEAREST);//INTER_NEAREST
+		remap(imRaw, imRaw, map1, map2, INTER_LINEAR);//INTER_NEAREST
 		imRaw = imRaw(plateRegion);
 			
 		
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
 //		threshold(imRaw, imThresh, threshBinary, 255, CV_THRESH_BINARY);
 //		threshold(imThresh, imThresh, 0, 255, CV_THRESH_OTSU);
 //		morphologyEx(imRaw, imProcess, CV_MOP_TOPHAT, element);
-		morphologyEx(imRaw, imProcess, CV_MOP_ERODE, element);
+//		morphologyEx(imRaw, imProcess, CV_MOP_ERODE, element);
 //		medianBlur(imProcess, imProcess, 9);
 //		GaussianBlur(imRaw, imProcess, 
 //			Size(int(0.01*imRawH) * 2 + 1, int(0.01*imRawW) * 2 + 1), 
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 		
 		Point ballPoint;
 		double minBrightness;
-		minMaxLoc(imProcess, &minBrightness, NULL, &ballPoint, NULL);
+		minMaxLoc(imRaw, &minBrightness, NULL, &ballPoint, NULL);
 		if (minBrightness < 90)
 		{
 			pos[0] = ballPoint.x;
@@ -161,8 +161,8 @@ int main(int argc, char **argv)
 #ifdef STDIO_DEBUG
 		//计算算法帧率
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
-				<< "\t" << pos[0] << " of " << imProcess.cols 
-				<< "\t" << pos[1] << " of " << imProcess.rows
+				<< "\t" << pos[0] << " of " << imRaw.cols 
+				<< "\t" << pos[1] << " of " << imRaw.rows
 				<< "\t" << "brightness: " << minBrightness << endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();
@@ -176,7 +176,7 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-		resize(imProcess, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
+		resize(imRaw, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
 //		threshold(imTrans, imSend, threshBinary, 255, CV_THRESH_BINARY);
 		socketMat.transmit(imSend, 80);
 #endif // SOCKET_SEND_IMAGE
