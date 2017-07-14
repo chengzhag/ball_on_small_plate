@@ -20,8 +20,8 @@ Servo servoX(&PB1, 200, 0.7, 2.35);
 Servo servoY(&PB0, 200, 0.7, 2.35);
 UartNum<int, 2> uartNum(&uart2);
 const float factorPID = 1.5;
-PIDIntegralSeperate pidX(0.2f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f),
-pidY(0.2f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f);
+PIDIntegralSeperate pidX(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f),
+pidY(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f);
 UartVscan uartVscan(&uart1);
 FpsCounter fps;
 const int maxX = 123;
@@ -85,7 +85,7 @@ void setup()
 	pidX.setISepPoint(20);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
-	pidX.setISepPoint(20);
+	pidY.setISepPoint(20);
 
 	keyD.begin();
 	keyL.begin();

@@ -139,7 +139,7 @@ public:
 		output = kp*err + kd*(err - errOld);
 
 		//超过输出范围停止积分继续增加
-		if (err > ISepPoint || err < -ISepPoint)
+		if (err < ISepPoint && err > -ISepPoint)
 		{
 			if ((output > outputLimL && output < outputLimH) ||
 				(output == outputLimH && err < 0) ||
