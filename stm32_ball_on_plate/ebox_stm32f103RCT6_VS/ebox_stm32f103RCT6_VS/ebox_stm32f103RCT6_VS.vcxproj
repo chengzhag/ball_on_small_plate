@@ -78,6 +78,8 @@
   <ItemGroup>
     <ClCompile Include="common\edriver\74HC595.cpp" />
     <ClCompile Include="common\edriver\accurate_pwm.cpp" />
+    <ClCompile Include="common\edriver\AHRS.cpp" />
+    <ClCompile Include="common\edriver\AK8963.cpp" />
     <ClCompile Include="common\edriver\at24c02.cpp" />
     <ClCompile Include="common\edriver\at45db.cpp" />
     <ClCompile Include="common\edriver\Button.cpp" />
@@ -106,6 +108,8 @@
     <ClCompile Include="common\edriver\Max7456.cpp" />
     <ClCompile Include="common\edriver\mmc_sd.cpp" />
     <ClCompile Include="common\edriver\MPU6050.cpp" />
+    <ClCompile Include="common\edriver\mpu6500.cpp" />
+    <ClCompile Include="common\edriver\mpu9250.cpp" />
     <ClCompile Include="common\edriver\Nokia5110.cpp" />
     <ClCompile Include="common\edriver\NRF24L01.cpp" />
     <ClCompile Include="common\edriver\OLED.cpp" />
@@ -225,6 +229,8 @@
     <ClInclude Include="common\cJSON\cJSON.h" />
     <ClInclude Include="common\edriver\74HC595.h" />
     <ClInclude Include="common\edriver\accurate_pwm.h" />
+    <ClInclude Include="common\edriver\AHRS.h" />
+    <ClInclude Include="common\edriver\AK8963.h" />
     <ClInclude Include="common\edriver\at24c02.h" />
     <ClInclude Include="common\edriver\at45db.h" />
     <ClInclude Include="common\edriver\Button.h" />
@@ -254,6 +260,8 @@
     <ClInclude Include="common\edriver\Max7456.h" />
     <ClInclude Include="common\edriver\mmc_sd.h" />
     <ClInclude Include="common\edriver\MPU6050.h" />
+    <ClInclude Include="common\edriver\mpu6500.h" />
+    <ClInclude Include="common\edriver\mpu9250.h" />
     <ClInclude Include="common\edriver\Nokia5110.h" />
     <ClInclude Include="common\edriver\NRF24L01.h" />
     <ClInclude Include="common\edriver\OLED.h" />

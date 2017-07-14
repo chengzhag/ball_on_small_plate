@@ -42,6 +42,39 @@ public:
 
 };
 
+class I2cIC
+{
+protected:
+	I2c* i2c;
+	uint32_t speed;
+public:
+	I2cIC(I2c* i2c):
+		i2c(i2c)
+	{
+
+	}
+
+	void begin(uint32_t speed)
+	{
+		this->speed = speed;
+		i2c->take_i2c_right(speed);
+		i2c->begin(speed);
+		i2c->release_i2c_right();
+	}
+
+	//IIC写一个字节 
+	void writeByte(u8 addr, u8 reg, u8 data);
+
+	//IIC读一个字节 
+	u8 readByte(u8 addr, u8 reg);
+
+	//IIC连续读
+	void readBytes(u8 addr, u8 reg, u8 len, u8 *buf);
+
+	//IIC连续写
+	void writeBytes(u8 addr, u8 reg, u8 len, u8 *buf);
+};
+
 /*
 	1.支持I2C1和I2C2
 	2.暂时不支持remap，后续很快会完成

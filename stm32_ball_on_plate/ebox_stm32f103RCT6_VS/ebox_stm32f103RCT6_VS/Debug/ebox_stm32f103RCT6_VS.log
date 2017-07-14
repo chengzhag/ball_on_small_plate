@@ -1,5 +1,5 @@
 ﻿  VisualGDB: Run "cmd.exe /c "C:\SysGCC\arm-eabi\bin\make.exe" CONFIG=Debug -j8" in directory "C:\Users\Sky\Desktop\ball_on_plate\stm32_ball_on_plate\ebox_stm32f103RCT6_VS\ebox_stm32f103RCT6_VS" on local computer
   make: Nothing to be done for `all'.
   ------------------- Memory utilization report -------------------
-  Used FLASH: 59KB
+  Used FLASH: 67KB
   Used RAM: 14KB

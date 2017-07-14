@@ -752,6 +752,18 @@
     <ClCompile Include="common\edriver\oled_i2c.cpp">
       <Filter>Source files\common\edriver</Filter>
     </ClCompile>
+    <ClCompile Include="common\edriver\mpu6500.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\mpu9250.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\AK8963.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
+    <ClCompile Include="common\edriver\AHRS.cpp">
+      <Filter>Source files\common\edriver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\bigiot\bigiot.h">
@@ -1376,6 +1388,18 @@
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
     <ClInclude Include="common\edriver\PID.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\mpu9250.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\mpu6500.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\AK8963.h">
+      <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\edriver\AHRS.h">
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
   </ItemGroup>

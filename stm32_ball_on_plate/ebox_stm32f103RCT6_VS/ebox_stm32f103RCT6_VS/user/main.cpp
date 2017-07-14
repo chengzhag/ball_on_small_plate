@@ -1,34 +1,68 @@
 #include "ebox.h"
+
+//调试
 #include "led.h"
-#include "servo.h"
-#include "uart_num.h"
-#include "PID.h"
 #include "my_math.h"
-#include "signal_stream.h"
 #include "uart_vcan.h"
-#include "Button.h"
-#include "led.h"
-#include "oled_i2c.h"
+//PID
+#include "PID.h"
+#include "signal_stream.h"
 #include <math.h>
+//动力
+#include "servo.h"
+//定位
+#include "uart_num.h"
+//底座
+#include "mpu9250.h"
+//交互
+#include "Button.h"
+#include "oled_i2c.h"
+//操作系统
+#include "freertos.h"
+#include "task.h"
+#include "queue.h"
+
+
+
 
 using namespace std;
 
+//调试
+UartVscan uartVscan(&uart1);
+FpsCounter fpsPID, fpsUI, fpsMPU;
+float fpsPIDtemp, fpsUItemp, fpsMPUtemp;
 
-AverageFilter filterX(30, 10), filterY(30, 10), filterOutX(30, 10), filterOutY(30, 10);
-
-Servo servoX(&PB1, 200, 0.7, 2.35);
-Servo servoY(&PB0, 200, 0.7, 2.35);
-UartNum<int, 2> uartNum(&uart2);
+//PID
 const float factorPID = 2.2;
 PIDIncompleteDiff pidX(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f, 7),
 pidY(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f, 7);
-UartVscan uartVscan(&uart1);
-FpsCounter fps;
+AverageFilter filterX(30, 10), filterY(30, 10), filterOutX(30, 10), filterOutY(30, 10);
+float outX, outY;
+
+//动力
+Servo servoX(&PB1, 200, 0.7, 2.35);
+Servo servoY(&PB0, 200, 0.7, 2.35);
+
+//定位
+UartNum<int, 2> uartNum(&uart2);
 const int maxX = 123;
 const int maxY = 123;
 float posX = -1;
 float posY = -1;
 
+//底座
+MPU9250AHRS mpu(&i2c1, MPU6500_Model_6555);
+
+//交互
+Button keyL(&PC12, 1);
+Button keyR(&PB5, 1);
+Button keyU(&PB3, 1);
+Button keyD(&PB4, 1);
+Led led(&PD2, 1);
+OLEDI2C oled(&i2c2);
+
+//收到定位坐标立即进行PID运算
+//将输出存入outXY到舵机刷新程序输出
 void posReceiveEvent(UartNum<int, 2>* uartNum)
 {
 	if (uartNum->getLength() == 2)
@@ -41,74 +75,60 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 
 		if (posX != -1 && posY != -1)
 		{
-			float outX = 0, outY = 0;
+			outX = 0, outY = 0;
 			outX += pidX.refresh(posX);
 			outY += pidY.refresh(posY);
 
 			outX = filterOutX.getFilterOut(outX);
 			outY = filterOutY.getFilterOut(outY);
 
-			float vscan[] = { posX,posY,outX,outY,fps.getFps() };
+			fpsPIDtemp = fpsPID.getFps();
+			float vscan[] = { posX,posY,outX,outY ,fpsPIDtemp };
 			uartVscan.sendOscilloscope(vscan, 5);
 
-			servoX.setPct(outX);
-			servoY.setPct(outY);
+			//servoX.setPct(outX);
+			//servoY.setPct(outY);
 		}
 		else
 		{
 			pidX.reset();
 			pidY.reset();
-			servoX.setPct(0);
-			servoY.setPct(0);
+			outX = 0; outY = 0;
+			//servoX.setPct(0);
+			//servoY.setPct(0);
 		}
 	}
 }
 
-Button keyL(&PC12, 1);
-Button keyR(&PB5, 1);
-Button keyU(&PB3, 1);
-Button keyD(&PB4, 1);
-Led led(&PD2, 1);
-OLEDI2C oled(&i2c2);
-
-void setup()
+//底座平衡
+float angle[3];
+void mpuRefresh(void *pvParameters)
 {
-	ebox_init();
-	uart1.begin(115200);
-	servoY.begin();
-	servoX.begin();
-	uartNum.begin(115200);
-	uartNum.attach(posReceiveEvent);
+	while (1)
+	{
+		mpu.getAngle(angle, angle + 1, angle + 2);
+		servoX.setPct(outX);
+		servoY.setPct(outY);
+		fpsMPUtemp = fpsMPU.getFps();
+		vTaskDelay(20 / portTICK_RATE_MS);
+	}
 
-	pidX.setTarget(maxX / 2);
-	pidX.setOutputLim(-100, 100);
-	//pidX.setISepPoint(20);
-	pidY.setTarget(maxY / 2);
-	pidY.setOutputLim(-100, 100);
-	//pidY.setISepPoint(20);
-
-	keyD.begin();
-	keyL.begin();
-	keyR.begin();
-	keyU.begin();
-	led.begin();
-	oled.begin();
 }
-int main(void)
+
+//交互
+int index = 0;
+int targetX = maxX / 2, targetY = maxY / 2;
+int circleR = 0;
+float theta = 0;
+void uiRefresh(void *pvParameters)
 {
-	setup();
-	//float pct = 0, increase = 1;
-	int index = 0;
-	int targetX = maxX / 2, targetY = maxY / 2;
-	int circleR = 0;
-	float theta = 0;
 	while (1)
 	{
 		keyL.loop();
 		keyR.loop();
 		keyU.loop();
 		keyD.loop();
-		
+
 		if (keyR.click())
 		{
 			index++;
@@ -119,6 +139,7 @@ int main(void)
 		}
 		limit<int>(index, 0, 2);
 
+		//按键响应
 		int increase = 0;
 		if (keyU.click())
 		{
@@ -137,11 +158,12 @@ int main(void)
 			increase -= 2;
 		}
 
+		//功能
 		switch (index)
 		{
 		case 0:
 			targetX += increase;
-			limit<int>(targetX, 30, maxX-30);
+			limit<int>(targetX, 30, maxX - 30);
 			oled.printf(0, 0, 2, "*%d %d %d      ", targetX, targetY, circleR);
 			break;
 		case 1:
@@ -160,22 +182,82 @@ int main(void)
 		default:
 			break;
 		}
-
 		oled.printf(0, 2, 2, "%d %d       ", (int)posX, (int)posY);
+		oled.printf(0, 4, 2, "%.1f %.1f       ", angle[0], angle[1]);
+		fpsUItemp = fpsUI.getFps();
+		oled.printf(0, 6, 2, "%.1f %.1f %.1f     ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
+
 		pidX.setTarget(targetX);
 		pidY.setTarget(targetY);
 
-		//pct += increase;
-		//if (pct >= 100 || pct <= 0)
-		//{
-		//	increase = -increase;
-		//}
+		vTaskDelay(1000 / portTICK_RATE_MS);
+	}
+	
+}
 
-		//servoY.setPct(pct);
-		//servoX.setPct(pct);
 
-		//uart1.printf("%f\r\n", servo1.getPct());
-		delay_ms(20);
+
+void setup()
+{
+	ebox_init();
+
+	//调试
+	uart1.begin(115200);
+	fpsPID.begin();
+	fpsUI.begin();
+	fpsMPU.begin();
+
+	//PID
+	pidX.setTarget(maxX / 2);
+	pidX.setOutputLim(-100, 100);
+	//pidX.setISepPoint(20);
+	pidY.setTarget(maxY / 2);
+	pidY.setOutputLim(-100, 100);
+	//pidY.setISepPoint(20);
+
+	//动力
+	servoY.begin();
+	servoX.begin();
+
+	//定位
+	uartNum.begin(115200);
+	uartNum.attach(posReceiveEvent);
+
+	//底座
+	mpu.setGyroBias(-0.0151124271, -0.00376615906, 0.0124653624);
+	mpu.setAccelBias(-0.00981201138, -0.00825439487, 0.146179199);
+	mpu.setMagBiasSens(
+		-18.786200, 17.835992, 14.496549,
+		0.986133, 1.038038, 0.975829);
+	mpu.setOrien(1, 2, 3);
+	mpu.begin(200000, 200, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
+
+	//交互
+	keyD.begin();
+	keyL.begin();
+	keyR.begin();
+	keyU.begin();
+	led.begin();
+	oled.begin();
+
+	//操作系统
+	set_systick_user_event_per_sec(configTICK_RATE_HZ);
+	attach_systick_user_event(xPortSysTickHandler);
+
+	xTaskCreate(mpuRefresh, "mpuRefresh", configMINIMAL_STACK_SIZE, NULL, NULL, NULL);
+	xTaskCreate(uiRefresh, "uiRefresh", configMINIMAL_STACK_SIZE, NULL, NULL, NULL);
+	vTaskStartScheduler();
+}
+
+
+int main(void)
+{
+	setup();
+
+
+	while (1)
+	{
+		
 	}
 
 }
