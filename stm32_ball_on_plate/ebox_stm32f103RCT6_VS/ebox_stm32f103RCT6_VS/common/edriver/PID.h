@@ -3,6 +3,7 @@
 
 #include <limits>
 #include "my_math.h"
+#include "signal_stream.h"
 
 class PID
 {
@@ -157,12 +158,14 @@ public:
 	}
 };
 
-template <float cutOffFre>
 class PIDIncompleteDiff :public PID
 {
+protected:
+	AverageFilter filter;
 public:
-	PIDIncompleteDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
-		PID(kp, ki, kd, interval)
+	PIDIncompleteDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50) :
+		PID(kp, ki, kd, interval),
+		filter(1/ interval, stopFrq)
 	{
 
 	}
@@ -187,7 +190,8 @@ public:
 		{
 			integral += ki*err;
 		}
-		output = kp*err + integral + kd*(err - errOld);
+		float diff = filter.getFilterOut(err - errOld);
+		output = kp*err + integral + kd*diff;
 		limit<float>(output, outputLimL, outputLimH);
 
 		errOld = err;

@@ -14,14 +14,14 @@
 using namespace std;
 
 
-AverageFilter filterX(30, 2), filterY(30, 2), filterOutX(30, 2), filterOutY(30, 2);
+AverageFilter filterX(30, 10), filterY(30, 10), filterOutX(30, 10), filterOutY(30, 10);
 
 Servo servoX(&PB1, 200, 0.7, 2.35);
 Servo servoY(&PB0, 200, 0.7, 2.35);
 UartNum<int, 2> uartNum(&uart2);
-const float factorPID = 1.5;
-PIDIntegralSeperate pidX(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f),
-pidY(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f);
+const float factorPID = 2.2;
+PIDIncompleteDiff pidX(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f, 7),
+pidY(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f, 7);
 UartVscan uartVscan(&uart1);
 FpsCounter fps;
 const int maxX = 123;
@@ -82,10 +82,10 @@ void setup()
 
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
-	pidX.setISepPoint(20);
+	//pidX.setISepPoint(20);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
-	pidY.setISepPoint(20);
+	//pidY.setISepPoint(20);
 
 	keyD.begin();
 	keyL.begin();
