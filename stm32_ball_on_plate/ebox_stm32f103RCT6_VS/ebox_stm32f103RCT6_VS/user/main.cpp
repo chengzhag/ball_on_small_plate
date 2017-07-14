@@ -14,7 +14,7 @@
 using namespace std;
 
 
-AverageFilter<2> filterX, filterY, filterOutX, filterOutY;
+AverageFilter filterX(30, 2), filterY(30, 2), filterOutX(30, 2), filterOutY(30, 2);
 
 Servo servoX(&PB1, 200, 0.7, 2.35);
 Servo servoY(&PB0, 200, 0.7, 2.35);
