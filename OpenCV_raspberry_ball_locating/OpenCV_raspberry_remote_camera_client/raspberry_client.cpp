@@ -133,7 +133,7 @@ int main(int argc, char **argv)
 //		threshold(imRaw, imThresh, threshBinary, 255, CV_THRESH_BINARY);
 //		threshold(imThresh, imThresh, 0, 255, CV_THRESH_OTSU);
 //		morphologyEx(imRaw, imProcess, CV_MOP_TOPHAT, element);
-//		morphologyEx(imRaw, imProcess, CV_MOP_ERODE, element);
+		morphologyEx(imRaw, imProcess, CV_MOP_ERODE, element);
 //		medianBlur(imProcess, imProcess, 9);
 //		GaussianBlur(imRaw, imProcess, 
 //			Size(int(0.01*imRawH) * 2 + 1, int(0.01*imRawW) * 2 + 1), 
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 		
 		Point ballPoint;
 		double minBrightness;
-		minMaxLoc(imRaw, &minBrightness, NULL, &ballPoint, NULL);
+		minMaxLoc(imProcess, &minBrightness, NULL, &ballPoint, NULL);
 		if (minBrightness < 80)
 		{
 			pos[0] = ballPoint.x;
@@ -161,8 +161,8 @@ int main(int argc, char **argv)
 #ifdef STDIO_DEBUG
 		//¼ÆËãËã·¨Ö¡ÂÊ
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
-				<< "\t" << pos[0] << " of " << imRaw.cols 
-				<< "\t" << pos[1] << " of " << imRaw.rows
+				<< "\t" << pos[0] << " of " << imProcess.cols 
+				<< "\t" << pos[1] << " of " << imProcess.rows
 				<< "\t" << "brightness: " << minBrightness << endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();

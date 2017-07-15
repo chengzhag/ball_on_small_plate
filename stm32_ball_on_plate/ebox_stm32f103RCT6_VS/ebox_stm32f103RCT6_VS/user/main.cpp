@@ -33,15 +33,16 @@ FpsCounter fpsPID, fpsUI, fpsMPU;
 float fpsPIDtemp, fpsUItemp, fpsMPUtemp;
 
 //PID
-const float factorPID = 2.2;
-PIDIncompleteDiff pidX(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f, 7),
-pidY(0.2f*factorPID, 0.15f*factorPID, 0.15f*factorPID, 1.f / 30.f, 7);
+const float factorPID = 2;
+PIDIntegralSeperate 
+pidX(0.25f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/),
+pidY(0.25f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/);
 AverageFilter filterX(30, 10), filterY(30, 10), filterOutX(30, 10), filterOutY(30, 10);
 float outX, outY;
 
 //动力
-Servo servoX(&PB1, 200, 0.7, 2.35);
-Servo servoY(&PB0, 200, 0.7, 2.35);
+Servo servoX(&PB1, 100, 0.7, 2.35);
+Servo servoY(&PB0, 100, 0.7, 2.35);
 
 //定位
 UartNum<int, 2> uartNum(&uart2);
@@ -51,7 +52,9 @@ float posX = -1;
 float posY = -1;
 
 //底座
-MPU9250AHRS mpu(&i2c1, MPU6500_Model_6555);
+const float factorServo = 6.5;
+float angle[3];
+MPU9250AHRS mpu(&si2c1, MPU6500_Model_6555);
 
 //交互
 Button keyL(&PC12, 1);
@@ -69,8 +72,8 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 	{
 		posX = uartNum->getNum()[0];
 		posY = uartNum->getNum()[1];
-		//posX = filterX.getFilterOut(posX);
-		//posY = filterY.getFilterOut(posY);
+		posX = filterX.getFilterOut(posX);
+		posY = filterY.getFilterOut(posY);
 		//uart1.printf("%f\t%f\r\n", posX, posY);
 
 		if (posX != -1 && posY != -1)
@@ -79,12 +82,12 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 			outX += pidX.refresh(posX);
 			outY += pidY.refresh(posY);
 
-			outX = filterOutX.getFilterOut(outX);
-			outY = filterOutY.getFilterOut(outY);
+			//outX = filterOutX.getFilterOut(outX);
+			//outY = filterOutY.getFilterOut(outY);
 
 			fpsPIDtemp = fpsPID.getFps();
-			float vscan[] = { posX,posY,outX,outY ,fpsPIDtemp };
-			uartVscan.sendOscilloscope(vscan, 5);
+			float vscan[] = { posX,posY,outX,outY ,fpsUItemp,fpsMPUtemp,angle[0],angle[1] };
+			uartVscan.sendOscilloscope(vscan, 8);
 
 			//servoX.setPct(outX);
 			//servoY.setPct(outY);
@@ -101,16 +104,17 @@ void posReceiveEvent(UartNum<int, 2>* uartNum)
 }
 
 //底座平衡
-float angle[3];
 void mpuRefresh(void *pvParameters)
 {
+	portTickType xLastWakeTime;
+	xLastWakeTime = xTaskGetTickCount();
 	while (1)
 	{
 		mpu.getAngle(angle, angle + 1, angle + 2);
-		servoX.setPct(outX);
-		servoY.setPct(outY);
+		servoX.setPct(outX + angle[1] * factorServo);
+		servoY.setPct(outY - angle[0] * factorServo);
 		fpsMPUtemp = fpsMPU.getFps();
-		vTaskDelay(20 / portTICK_RATE_MS);
+		vTaskDelayUntil(&xLastWakeTime, (10 / portTICK_RATE_MS));
 	}
 
 }
@@ -122,6 +126,8 @@ int circleR = 0;
 float theta = 0;
 void uiRefresh(void *pvParameters)
 {
+	portTickType xLastWakeTime;
+	xLastWakeTime = xTaskGetTickCount();
 	while (1)
 	{
 		keyL.loop();
@@ -164,12 +170,12 @@ void uiRefresh(void *pvParameters)
 		case 0:
 			targetX += increase;
 			limit<int>(targetX, 30, maxX - 30);
-			oled.printf(0, 0, 2, "*%d %d %d      ", targetX, targetY, circleR);
+			oled.printf(0, 0, 2, "*%d %d %d   ", targetX, targetY, circleR);
 			break;
 		case 1:
 			targetY += increase;
 			limit<int>(targetY, 30, maxY - 30);
-			oled.printf(0, 0, 2, "%d *%d %d       ", targetX, targetY, circleR);
+			oled.printf(0, 0, 2, "%d *%d %d   ", targetX, targetY, circleR);
 			break;
 		case 2:
 			circleR = circleR + increase;
@@ -177,20 +183,20 @@ void uiRefresh(void *pvParameters)
 			theta += 2 * PI / 50 * 1.5;//0.5圈一秒
 			targetX = maxX / 2 + circleR*sin(theta);
 			targetY = maxY / 2 + circleR*cos(theta);
-			oled.printf(0, 0, 2, "%d %d *%d       ", targetX, targetY, circleR);
+			oled.printf(0, 0, 2, "%d %d *%d   ", targetX, targetY, circleR);
 			break;
 		default:
 			break;
 		}
-		oled.printf(0, 2, 2, "%d %d       ", (int)posX, (int)posY);
-		oled.printf(0, 4, 2, "%.1f %.1f       ", angle[0], angle[1]);
+		oled.printf(0, 2, 2, "%d %d   ", (int)posX, (int)posY);
+		oled.printf(0, 4, 2, "%.1f %.1f   ", angle[0], angle[1]);
 		fpsUItemp = fpsUI.getFps();
-		oled.printf(0, 6, 2, "%.1f %.1f %.1f     ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
+		oled.printf(0, 6, 2, "%.0f %.0f %.0f ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
 
 		pidX.setTarget(targetX);
 		pidY.setTarget(targetY);
 
-		vTaskDelay(1000 / portTICK_RATE_MS);
+		vTaskDelayUntil(&xLastWakeTime, (200 / portTICK_RATE_MS));
 	}
 	
 }
@@ -210,10 +216,10 @@ void setup()
 	//PID
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
-	//pidX.setISepPoint(20);
+	pidX.setISepPoint(20);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
-	//pidY.setISepPoint(20);
+	pidY.setISepPoint(20);
 
 	//动力
 	servoY.begin();
@@ -225,12 +231,13 @@ void setup()
 
 	//底座
 	mpu.setGyroBias(-0.0151124271, -0.00376615906, 0.0124653624);
-	mpu.setAccelBias(-0.00981201138, -0.00825439487, 0.146179199);
+	mpu.setAccelBias(-0.0271704104, -0.00390625, 0.132741705);
 	mpu.setMagBiasSens(
 		-18.786200, 17.835992, 14.496549,
 		0.986133, 1.038038, 0.975829);
 	mpu.setOrien(1, 2, 3);
-	mpu.begin(200000, 200, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
+	mpu.begin(400000, 100, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
+
 
 	//交互
 	keyD.begin();
@@ -244,8 +251,8 @@ void setup()
 	set_systick_user_event_per_sec(configTICK_RATE_HZ);
 	attach_systick_user_event(xPortSysTickHandler);
 
-	xTaskCreate(mpuRefresh, "mpuRefresh", configMINIMAL_STACK_SIZE, NULL, NULL, NULL);
-	xTaskCreate(uiRefresh, "uiRefresh", configMINIMAL_STACK_SIZE, NULL, NULL, NULL);
+	xTaskCreate(mpuRefresh, "mpuRefresh", 512, NULL, 0, NULL);
+	xTaskCreate(uiRefresh, "uiRefresh", 512, NULL, 0, NULL);
 	vTaskStartScheduler();
 }
 
