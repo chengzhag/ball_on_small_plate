@@ -24,6 +24,11 @@ using namespace std;
 int main(int argc, char **argv)
 {
 	///声明变量
+#ifdef SOCKET_SEND_IMAGE
+	cout << "socket connecting..." << endl;
+	SocketMatTransmissionClient socketMat;
+	socketMat.begin("192.168.2.100");
+#endif // SOCKET_SEND_IMAGE
 	//摄像头
 	raspicam::RaspiCam_Cv cam;
 	//参数设置
@@ -62,8 +67,8 @@ int main(int argc, char **argv)
 		map2);
 	
 	//剪切平板位置图像
-	float plateRegionHeight = 0.65;//, plateRegionWidth = 0.52;
-	float plateRegionOffH = -0.035, plateRegionOffW = 0.02;
+	float plateRegionHeight = 0.67;//, plateRegionWidth = 0.52;
+	float plateRegionOffH = -0.035, plateRegionOffW = 0.03;
 	Rect plateRegion(
 		int(imRawW*(0.5 + plateRegionOffW) - imRawH*plateRegionHeight / 2),
 		int(imRawH*(0.5 + plateRegionOffH - plateRegionHeight / 2)),
@@ -72,10 +77,6 @@ int main(int argc, char **argv)
 	imRawW = plateRegion.width;
 	imRawH = plateRegion.height;
 	
-	
-//	//二值化，轮廓检测
-//	Mat imThresh;
-//	const float resizeThresh = 1;
 	
 #ifdef SOCKET_SEND_IMAGE
 	//发送图像，用于测试
@@ -86,27 +87,47 @@ int main(int argc, char **argv)
 	
 	///预处理
 	Mat imProcess;
-	const int structElementSize = 1;
-	Mat element = getStructuringElement(MORPH_ELLIPSE,  
-		Size(2*structElementSize + 1, 2*structElementSize + 1),  
-		Point(structElementSize, structElementSize));
-	
+//	const int structElementSize = 1;
+//	Mat element = getStructuringElement(MORPH_ELLIPSE,  
+//		Size(2*structElementSize + 1, 2*structElementSize + 1),  
+//		Point(structElementSize, structElementSize));
 	
 	
 	///初始化
 	//初始化连接
 	if (!cam.open())
 		return 1;
-
-#ifdef SOCKET_SEND_IMAGE
-	cout << "socket connecting..." << endl;
-	SocketMatTransmissionClient socketMat;
-	socketMat.begin("192.168.2.100");
-#endif // SOCKET_SEND_IMAGE
 	
 	//初始化串口
-	UartNum<int> uart;
+	UartNum<float> uart;
 	uart.begin();
+	
+	//初始化阈值，固定二值化阈值，减轻后面计算负担
+	double threshBinary = 0;
+	for (int i = 0; i < 30; i++)
+	{
+		cam.grab();
+		cam.retrieve(imRaw);
+		if (imRaw.empty())
+		{
+			cout << "imRaw为空！！！" << endl;
+			return 1;
+		}
+		remap(imRaw, imRaw, map1, map2, INTER_LINEAR);//INTER_NEAREST
+		imRaw = imRaw(plateRegion);
+		
+		double minBrightness;
+		minMaxLoc(imRaw, &minBrightness, NULL, NULL, NULL);
+		threshBinary += minBrightness; 
+		
+#ifdef SOCKET_SEND_IMAGE
+		//发送图像，用于测试
+//		threshold(imTrans, imSend, threshBinary, 255, CV_THRESH_BINARY);
+		socketMat.transmit(imRaw, 80);
+#endif // SOCKET_SEND_IMAGE
+	}
+	threshBinary /= 30;
+	threshBinary -= 10;
 
 	double timeStart = 0, timeEnd = 0;
 
@@ -128,32 +149,43 @@ int main(int argc, char **argv)
 			
 		
 		/// 小球定位算法开始
-		int pos[2];
+		float pos[2];
 //		resize(imRaw, imThresh, Size(0, 0), resizeThresh, resizeThresh, INTER_NEAREST);
-//		threshold(imRaw, imThresh, threshBinary, 255, CV_THRESH_BINARY);
+		threshold(imRaw, imProcess, threshBinary, 255, CV_THRESH_BINARY_INV);
 //		threshold(imThresh, imThresh, 0, 255, CV_THRESH_OTSU);
 //		morphologyEx(imRaw, imProcess, CV_MOP_TOPHAT, element);
-		morphologyEx(imRaw, imProcess, CV_MOP_ERODE, element);
+//		morphologyEx(imProcess, imProcess, CV_MOP_DILATE, element);
 //		medianBlur(imProcess, imProcess, 9);
 //		GaussianBlur(imRaw, imProcess, 
 //			Size(int(0.01*imRawH) * 2 + 1, int(0.01*imRawW) * 2 + 1), 
 //			int(0.01*imRawW) * 2 + 1, int(0.01*imRawW) * 2 + 1);
 		//以小球半径的两倍为窗口长度
+		
+		//计算二值图形的矩特征
+		Moments mu=moments(imProcess,true);
+		Point2f ballPoint(mu.m10 / mu.m00, mu.m01 / mu.m00);
+		pos[0] = ballPoint.x;
+		pos[1] = ballPoint.y;
+	
+		
+////		轮廓提取
+//		vector<vector<Point> > contours;
+//		findContours(imProcess, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 
 		
-		Point ballPoint;
-		double minBrightness;
-		minMaxLoc(imProcess, &minBrightness, NULL, &ballPoint, NULL);
-		if (minBrightness < 80)
-		{
-			pos[0] = ballPoint.x;
-			pos[1] = ballPoint.y;
-		}
-		else
-		{
-			pos[0] = -1;
-			pos[1] = -1;
-		}//如果最小亮度过高，认为小球掉落
+//		Point ballPoint;
+//		double minBrightness;
+//		minMaxLoc(imProcess, &minBrightness, NULL, &ballPoint, NULL);
+//		if (minBrightness < 30)
+//		{
+//			pos[0] = ballPoint.x;
+//			pos[1] = ballPoint.y;
+//		}
+//		else
+//		{
+//			pos[0] = -1;
+//			pos[1] = -1;
+//		}//如果最小亮度过高，认为小球掉落
 
 	
 		
@@ -163,7 +195,8 @@ int main(int argc, char **argv)
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
 				<< "\t" << pos[0] << " of " << imProcess.cols 
 				<< "\t" << pos[1] << " of " << imProcess.rows
-				<< "\t" << "brightness: " << minBrightness << endl;
+				<< "\t" << "thres: " << threshBinary 
+				<< endl;
 		timeStart = timeEnd;
 		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
@@ -176,7 +209,7 @@ int main(int argc, char **argv)
 		
 #ifdef SOCKET_SEND_IMAGE
 		//发送图像，用于测试
-		resize(imRaw, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
+		resize(imProcess, imSend, Size(0, 0), 1, 1, INTER_NEAREST);
 //		threshold(imTrans, imSend, threshBinary, 255, CV_THRESH_BINARY);
 		socketMat.transmit(imSend, 80);
 #endif // SOCKET_SEND_IMAGE

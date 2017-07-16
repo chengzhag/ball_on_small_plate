@@ -37,8 +37,8 @@ float fpsPIDtemp, fpsUItemp, fpsMPUtemp;
 //PID
 const float factorPID = 2;
 PIDIntegralSeperate 
-pidX(0.25f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/),
-pidY(0.25f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/);
+pidX(0.35f*factorPID, 0.3f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/),
+pidY(0.35f*factorPID, 0.3f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/);
 AverageFilter filterX(30, 10), filterY(30, 10), filterOutX(30, 10), filterOutY(30, 10);
 float outX, outY;
 
@@ -47,7 +47,7 @@ Servo servoX(&PB8, 100, 0.81, 2.35);
 Servo servoY(&PB9, 100, 0.72, 2.35);
 
 //定位
-UartNum<int, 2> uartNum(&uart2);
+UartNum<float, 2> uartNum(&uart2);
 const int maxX = 123;
 const int maxY = 123;
 float posX = -1;
@@ -72,24 +72,25 @@ WS2812 ws2812(&PB0);
 
 //收到定位坐标立即进行PID运算
 //将输出存入outXY到舵机刷新程序输出
-void posReceiveEvent(UartNum<int, 2>* uartNum)
+void posReceiveEvent(UartNum<float, 2>* uartNum)
 {
 	if (uartNum->getLength() == 2)
 	{
 		posX = uartNum->getNum()[0];
 		posY = uartNum->getNum()[1];
-		posX = filterX.getFilterOut(posX);
-		posY = filterY.getFilterOut(posY);
 		//uart1.printf("%f\t%f\r\n", posX, posY);
 
-		if (posX != -1 && posY != -1)
+		if (!isnan(posX) && !isnan(posY))
 		{
+			//posX = filterX.getFilterOut(posX);
+			//posY = filterY.getFilterOut(posY);
+
 			outX = 0, outY = 0;
 			outX += pidX.refresh(posX);
 			outY += pidY.refresh(posY);
 
-			//outX = filterOutX.getFilterOut(outX);
-			//outY = filterOutY.getFilterOut(outY);
+			outX = filterOutX.getFilterOut(outX);
+			outY = filterOutY.getFilterOut(outY);
 
 			fpsPIDtemp = fpsPID.getFps();
 			float vscan[] = { posX,posY,outX,outY ,fpsUItemp,fpsMPUtemp,angle[0],angle[1] };
@@ -125,7 +126,7 @@ void mpuRefresh(void *pvParameters)
 
 }
 
-//交互
+//UI交互
 int index = 0;
 int targetX = maxX / 2, targetY = maxY / 2;
 int circleR = 0;
@@ -194,7 +195,7 @@ void uiRefresh(void *pvParameters)
 		default:
 			break;
 		}
-		oled.printf(0, 2, 2, "%d %d   ", (int)posX, (int)posY);
+		oled.printf(0, 2, 2, "%.1f %.1f   ", (float)posX, (float)posY);
 		oled.printf(0, 4, 2, "%.1f %.1f   ", angle[0], angle[1]);
 		fpsUItemp = fpsUI.getFps();
 		oled.printf(0, 6, 2, "%.0f %.0f %.0f ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
@@ -202,7 +203,7 @@ void uiRefresh(void *pvParameters)
 		pidX.setTarget(targetX);
 		pidY.setTarget(targetY);
 
-		vTaskDelayUntil(&xLastWakeTime, (200 / portTICK_RATE_MS));
+		vTaskDelayUntil(&xLastWakeTime, (100 / portTICK_RATE_MS));
 	}
 	
 }
@@ -255,7 +256,7 @@ void setup()
 
 	//照明
 	ws2812.begin();
-	ws2812.setAllDataHSV(30, 1, 0.7);
+	ws2812.setAllDataHSV(60, 0, 0.3);
 
 	//操作系统
 	set_systick_user_event_per_sec(configTICK_RATE_HZ);
