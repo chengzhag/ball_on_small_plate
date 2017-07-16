@@ -17,52 +17,23 @@ protected:
 	float errOld;
 	float output;
 public:
-	PID(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
-		isBegin(true),
-		output(0)
-	{
-		setInterval(interval);
-		setPID(kp, ki, kd);
-		setOutputLim(-std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
-		setTarget(0);
-		reset();
-	}
+	PID(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
 
 	//设置采样间隔时间，单位s
 	//调用setPID前必须先设置好interval
-	void setInterval(float interval)
-	{
-		this->interval = interval;
-	}
+	void setInterval(float interval);
 
 	//调用setPID前必须先设置好interval
-	void setPID(float kp, float ki, float kd)
-	{
-		this->kp = kp;
-		this->ki = ki*interval;
-		this->kd = kd / interval;
-	}
+	void setPID(float kp, float ki, float kd);
 	
 	//设置输出范围，超过范围停止积分继续增加
-	void setOutputLim(float limL, float limH)
-	{
-		this->outputLimL = limL;
-		this->outputLimH = limH;
-	}
+	void setOutputLim(float limL, float limH);
 
 	//设置控制目标
-	void setTarget(float target)
-	{
-		this->target = target;
-	}
+	void setTarget(float target);
 
 	//清除积分项、其他暂存项
-	void reset()
-	{
-		integral = 0;
-		errOld = 0;
-		isBegin = true;
-	}
+	void reset();
 
 	//待实现的PID算法
 	virtual float refresh(float feedback) = 0;
@@ -96,7 +67,7 @@ public:
 			(output == outputLimH && err < 0)||
 			(output == outputLimL && err > 0))
 		{
-			integral += ki*err;
+			integral += ki*(err + errOld) / 2;
 		}
 		output = kp*err + integral + kd*(err - errOld);
 		limit<float>(output, outputLimL, outputLimH);
@@ -146,7 +117,7 @@ public:
 				(output == outputLimH && err < 0) ||
 				(output == outputLimL && err > 0))
 			{
-				integral += ki*err;
+				integral += ki*(err + errOld) / 2;
 			}
 			output += integral;
 		}
@@ -188,7 +159,7 @@ public:
 			(output == outputLimH && err < 0) ||
 			(output == outputLimL && err > 0))
 		{
-			integral += ki*err;
+			integral += ki*(err + errOld) / 2;
 		}
 		float diff = filter.getFilterOut(err - errOld);
 		output = kp*err + integral + kd*diff;
