@@ -21,6 +21,8 @@
 #include "freertos.h"
 #include "task.h"
 #include "queue.h"
+//照明
+#include "ws2812.h"
 
 
 
@@ -41,8 +43,8 @@ AverageFilter filterX(30, 10), filterY(30, 10), filterOutX(30, 10), filterOutY(3
 float outX, outY;
 
 //动力
-Servo servoX(&PB1, 100, 0.7, 2.35);
-Servo servoY(&PB0, 100, 0.7, 2.35);
+Servo servoX(&PB8, 100, 0.81, 2.35);
+Servo servoY(&PB9, 100, 0.72, 2.35);
 
 //定位
 UartNum<int, 2> uartNum(&uart2);
@@ -54,15 +56,19 @@ float posY = -1;
 //底座
 const float factorServo = 6.5;
 float angle[3];
-MPU9250AHRS mpu(&si2c1, MPU6500_Model_6555);
+SoftI2c si2c3(&PB3, &PB11);
+MPU9250AHRS mpu(&si2c3, MPU6500_Model_6555);
 
 //交互
-Button keyL(&PC12, 1);
-Button keyR(&PB5, 1);
-Button keyU(&PB3, 1);
-Button keyD(&PB4, 1);
+Button keyL(&PB4, 1);
+Button keyR(&PB1, 1);
+Button keyU(&PC5, 1);
+Button keyD(&PC2, 1);
 Led led(&PD2, 1);
-OLEDI2C oled(&i2c2);
+OLEDI2C oled(&i2c1);
+
+//照明
+WS2812 ws2812(&PB0);
 
 //收到定位坐标立即进行PID运算
 //将输出存入outXY到舵机刷新程序输出
@@ -246,6 +252,10 @@ void setup()
 	keyU.begin();
 	led.begin();
 	oled.begin();
+
+	//照明
+	ws2812.begin();
+	ws2812.setAllDataHSV(30, 1, 0.7);
 
 	//操作系统
 	set_systick_user_event_per_sec(configTICK_RATE_HZ);
