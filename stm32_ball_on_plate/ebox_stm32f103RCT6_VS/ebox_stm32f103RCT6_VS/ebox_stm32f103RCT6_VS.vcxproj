@@ -221,6 +221,7 @@
     <ClCompile Include="os\FreeRTOS\Source\timers.c" />
     <ClCompile Include="os\FreeRTOS\Source\portable\MemMang\heap_4.c" />
     <ClCompile Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM3\port.c" />
+    <ClCompile Include="signal_stream.cpp" />
     <ClCompile Include="user\bsp.cpp" />
     <ClCompile Include="user\main.cpp" />
   </ItemGroup>

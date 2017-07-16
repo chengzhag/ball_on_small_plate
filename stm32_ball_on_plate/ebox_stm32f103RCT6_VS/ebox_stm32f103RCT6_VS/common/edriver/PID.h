@@ -161,7 +161,7 @@ public:
 class PIDIncompleteDiff :public PID
 {
 protected:
-	AverageFilter filter;
+	Butterworth filter;
 public:
 	PIDIncompleteDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50) :
 		PID(kp, ki, kd, interval),

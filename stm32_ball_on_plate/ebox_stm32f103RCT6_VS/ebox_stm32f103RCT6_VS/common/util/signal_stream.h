@@ -1,6 +1,8 @@
 #ifndef __SIGNAL_STREAM
 #define __SIGNAL_STREAM
 
+#include "ebox.h"
+
 
 //用circle buffer实现的试试信号处理类
 //仅做信号存储，通过继承或实例化实现信号处理函数
@@ -84,17 +86,20 @@ class AverageFilter :public SignalStream<float>
 protected:
 	float sumTemp;
 public:
-	AverageFilter(float sampleFrq,float stopFrq) :
-		SignalStream(int(0.443*sampleFrq / stopFrq + 1))
-	{
-
-	}
-	float getFilterOut(float newNum)
-	{
-		sumTemp = sumTemp + newNum
-			- SignalStream<float>::operator[](length - 1);
-		SignalStream<float>::push(newNum);
-		return sumTemp / length;
-	}
+	AverageFilter(float sampleFrq,float stopFrq);
+	float getFilterOut(float newNum);
 };
+
+class Butterworth
+
+{
+public:
+	Butterworth(float sampleFrq, float stopFrq);
+	float getFilterOut(float x);
+private:
+	float stopFrq;
+	float sampleFrq;
+	float tempY;
+};
+
 #endif
