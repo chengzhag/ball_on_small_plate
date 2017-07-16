@@ -35,11 +35,11 @@ FpsCounter fpsPID, fpsUI, fpsMPU;
 float fpsPIDtemp, fpsUItemp, fpsMPUtemp;
 
 //PID
-const float factorPID = 2;
+const float factorPID = 1.24;
 PIDIntegralSeperate 
-pidX(0.35f*factorPID, 0.3f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/),
-pidY(0.35f*factorPID, 0.3f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 7*/);
-AverageFilter filterX(30, 10), filterY(30, 10), filterOutX(30, 10), filterOutY(30, 10);
+pidX(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/),
+pidY(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/);
+Butterworth filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10);
 float outX, outY;
 
 //动力
@@ -48,8 +48,8 @@ Servo servoY(&PB9, 100, 0.72, 2.35);
 
 //定位
 UartNum<float, 2> uartNum(&uart2);
-const int maxX = 123;
-const int maxY = 123;
+const float maxX = 200;
+const float maxY = 200;
 float posX = -1;
 float posY = -1;
 
@@ -82,15 +82,15 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 
 		if (!isnan(posX) && !isnan(posY))
 		{
-			//posX = filterX.getFilterOut(posX);
-			//posY = filterY.getFilterOut(posY);
+			posX = filterX.getFilterOut(posX);
+			posY = filterY.getFilterOut(posY);
 
 			outX = 0, outY = 0;
 			outX += pidX.refresh(posX);
 			outY += pidY.refresh(posY);
 
-			outX = filterOutX.getFilterOut(outX);
-			outY = filterOutY.getFilterOut(outY);
+			//outX = filterOutX.getFilterOut(outX);
+			//outY = filterOutY.getFilterOut(outY);
 
 			fpsPIDtemp = fpsPID.getFps();
 			float vscan[] = { posX,posY,outX,outY ,fpsUItemp,fpsMPUtemp,angle[0],angle[1] };
@@ -128,8 +128,8 @@ void mpuRefresh(void *pvParameters)
 
 //UI交互
 int index = 0;
-int targetX = maxX / 2, targetY = maxY / 2;
-int circleR = 0;
+float targetX = maxX / 2, targetY = maxY / 2;
+float circleR = 0;
 float theta = 0;
 void uiRefresh(void *pvParameters)
 {
@@ -153,7 +153,7 @@ void uiRefresh(void *pvParameters)
 		limit<int>(index, 0, 2);
 
 		//按键响应
-		int increase = 0;
+		float increase = 0;
 		if (keyU.click())
 		{
 			increase++;
@@ -176,21 +176,21 @@ void uiRefresh(void *pvParameters)
 		{
 		case 0:
 			targetX += increase;
-			limit<int>(targetX, 30, maxX - 30);
-			oled.printf(0, 0, 2, "*%d %d %d   ", targetX, targetY, circleR);
+			limit<float>(targetX, 30, maxX - 30);
+			oled.printf(0, 0, 2, "*%.1f %.1f %.0f  ", targetX, targetY, circleR);
 			break;
 		case 1:
 			targetY += increase;
-			limit<int>(targetY, 30, maxY - 30);
-			oled.printf(0, 0, 2, "%d *%d %d   ", targetX, targetY, circleR);
+			limit<float>(targetY, 30, maxY - 30);
+			oled.printf(0, 0, 2, "%.1f *%.1f %.0f  ", targetX, targetY, circleR);
 			break;
 		case 2:
 			circleR = circleR + increase;
-			limit<int>(circleR, 0, (maxY - 60) / 2);
+			limit<float>(circleR, 0, (maxY - 60) / 2);
 			theta += 2 * PI / 50 * 1.5;//0.5圈一秒
 			targetX = maxX / 2 + circleR*sin(theta);
 			targetY = maxY / 2 + circleR*cos(theta);
-			oled.printf(0, 0, 2, "%d %d *%d   ", targetX, targetY, circleR);
+			oled.printf(0, 0, 2, "%.1f %.1f *%.0f  ", targetX, targetY, circleR);
 			break;
 		default:
 			break;

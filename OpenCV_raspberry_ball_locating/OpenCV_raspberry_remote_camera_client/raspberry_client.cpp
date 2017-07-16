@@ -18,7 +18,7 @@ using namespace cv;
 using namespace std;
 
 //#define STDIO_DEBUG
-//#define SOCKET_SEND_IMAGE
+#define SOCKET_SEND_IMAGE
 
 
 int main(int argc, char **argv)
@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 	
 	//剪切平板位置图像
 	float plateRegionHeight = 0.67;//, plateRegionWidth = 0.52;
-	float plateRegionOffH = -0.035, plateRegionOffW = 0.03;
+	float plateRegionOffH = -0.038, plateRegionOffW = 0.03;
 	Rect plateRegion(
 		int(imRawW*(0.5 + plateRegionOffW) - imRawH*plateRegionHeight / 2),
 		int(imRawH*(0.5 + plateRegionOffH - plateRegionHeight / 2)),
@@ -76,6 +76,9 @@ int main(int argc, char **argv)
 		imRawH*plateRegionHeight);
 	imRawW = plateRegion.width;
 	imRawH = plateRegion.height;
+	
+	//平板尺寸信息
+	const float maxX = 200, maxY = 200;
 	
 	
 #ifdef SOCKET_SEND_IMAGE
@@ -188,13 +191,16 @@ int main(int argc, char **argv)
 //		}//如果最小亮度过高，认为小球掉落
 
 	
+		//标准化坐标单位mm
+		pos[0] = pos[0]*maxX / imProcess.rows;
+		pos[1] = pos[1]*maxY / imProcess.cols;
 		
 		
 #ifdef STDIO_DEBUG
 		//计算算法帧率
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
-				<< "\t" << pos[0] << " of " << imProcess.cols 
-				<< "\t" << pos[1] << " of " << imProcess.rows
+				<< "\t" << pos[0] << " of " << maxX 
+				<< "\t" << pos[1] << " of " << maxX
 				<< "\t" << "thres: " << threshBinary 
 				<< endl;
 		timeStart = timeEnd;

@@ -161,8 +161,7 @@ public:
 		{
 			integral += ki*(err + errOld) / 2;
 		}
-		float diff = filter.getFilterOut(err - errOld);
-		output = kp*err + integral + kd*diff;
+		output = kp*err + integral + filter.getFilterOut(kd*(err - errOld));
 		limit<float>(output, outputLimL, outputLimH);
 
 		errOld = err;

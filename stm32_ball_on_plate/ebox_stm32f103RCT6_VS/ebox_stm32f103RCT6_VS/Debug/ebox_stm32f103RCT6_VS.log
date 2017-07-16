@@ -91,7 +91,7 @@
     	void update()
     	     ^
   user/main.cpp: 30 warnings, 0 errors
-  Program Size: Code=68498 RO-data=3270 RW-data=436 ZI-data=15620  
+  Program Size: Code=67926 RO-data=3270 RW-data=436 ZI-data=15604  
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.axf: warning: Empty loadable segment detected, is this intentional ?
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RW' not in segment
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RO' not in segment
@@ -105,5 +105,5 @@
           --change-section-address ER_RO=0x08000000 \
           Debug/ebox_stm32f103RCT6_VS.axf Debug/ebox_stm32f103RCT6_VS.elf
   ------------------- Memory utilization report -------------------
-  Used FLASH: 70KB [-4]
+  Used FLASH: 69KB [+44]
   Used RAM: 15KB
