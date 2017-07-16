@@ -764,6 +764,9 @@
     <ClCompile Include="common\edriver\AHRS.cpp">
       <Filter>Source files\common\edriver</Filter>
     </ClCompile>
+    <ClCompile Include="common\util\interpolation.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\bigiot\bigiot.h">
@@ -1401,6 +1404,9 @@
     </ClInclude>
     <ClInclude Include="common\edriver\AHRS.h">
       <Filter>Header files\common\edriver</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\interpolation.h">
+      <Filter>Header files\common\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

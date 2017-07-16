@@ -161,6 +161,7 @@
     <ClCompile Include="common\util\dtostrf.c" />
     <ClCompile Include="common\util\ebox_mem.c" />
     <ClCompile Include="common\util\heap.c" />
+    <ClCompile Include="common\util\interpolation.cpp" />
     <ClCompile Include="common\util\itoa.c" />
     <ClCompile Include="common\util\my_math.cpp" />
     <ClCompile Include="common\util\print.cpp" />
@@ -352,6 +353,7 @@
     <ClInclude Include="common\util\dtostrf.h" />
     <ClInclude Include="common\util\ebox_mem.h" />
     <ClInclude Include="common\util\heap.h" />
+    <ClInclude Include="common\util\interpolation.h" />
     <ClInclude Include="common\util\itoa.h" />
     <ClInclude Include="common\util\my_math.h" />
     <ClInclude Include="common\util\print.h" />
