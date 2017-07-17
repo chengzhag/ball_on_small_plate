@@ -45,11 +45,11 @@ float posY = -1;
 float targetX = maxX / 2, targetY = maxY / 2,
 targetXraw = targetX, targetYraw = targetY;
 const float factorPID = 1.24;
-PIDIntegralSeperate 
-pidX(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/),
-pidY(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/);
+PIDIntSepIncDiff
+pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15),
+pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15);
 Butterworth filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10),
-	filterTargetX(100, 3), filterTargetY(100, 3);
+filterTargetX(100, 3), filterTargetY(100, 3);
 float outX, outY;
 
 //动力
@@ -85,8 +85,8 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 
 		if (!isnan(posX) && !isnan(posY))
 		{
-			posX = filterX.getFilterOut(posX);
-			posY = filterY.getFilterOut(posY);
+			//posX = filterX.getFilterOut(posX);
+			//posY = filterY.getFilterOut(posY);
 
 			outX = 0, outY = 0;
 			outX += pidX.refresh(posX);
@@ -212,7 +212,7 @@ void uiRefresh(void *pvParameters)
 
 		vTaskDelayUntil(&xLastWakeTime, (100 / portTICK_RATE_MS));
 	}
-	
+
 }
 
 
@@ -230,10 +230,10 @@ void setup()
 	//PID
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
-	pidX.setISepPoint(20);
+	pidX.setISepPoint(15);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
-	pidY.setISepPoint(20);
+	pidY.setISepPoint(15);
 
 	//动力
 	servoY.begin();
@@ -282,7 +282,7 @@ int main(void)
 
 	while (1)
 	{
-		
+
 	}
 
 }

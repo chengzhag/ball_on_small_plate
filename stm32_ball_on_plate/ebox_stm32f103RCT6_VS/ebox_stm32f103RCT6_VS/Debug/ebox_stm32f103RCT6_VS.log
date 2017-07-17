@@ -63,13 +63,16 @@
 "common\util\my_math.h", line 90 : warning : #1-D: last line of file ends without a newline
     #endif
           ^
-"common\edriver\PID.h", line 53 : warning : #1300-D: refresh inherits implicit virtual
-    	float refresh(float feedback)
+"common\edriver\PID.h", line 50 : warning : #1300-D: refresh inherits implicit virtual
+    	float refresh(float feedback);
     	      ^
-"common\edriver\PID.h", line 99 : warning : #1300-D: refresh inherits implicit virtual
-    	float refresh(float feedback)
+"common\edriver\PID.h", line 65 : warning : #1300-D: refresh inherits implicit virtual
+    	float refresh(float feedback);
     	      ^
-"common\edriver\PID.h", line 145 : warning : #1300-D: refresh inherits implicit virtual
+"common\edriver\PID.h", line 77 : warning : #1300-D: refresh inherits implicit virtual
+    	float refresh(float feedback);
+    	      ^
+"common\edriver\PID.h", line 94 : warning : #1300-D: refresh inherits implicit virtual
     	float refresh(float feedback)
     	      ^
 "common\edriver\servo.h", line 43 : warning : #1-D: last line of file ends without a newline
@@ -90,8 +93,8 @@
 "common\edriver\mpu9250.h", line 37 : warning : #997-D: function "MahonyAHRS9::update(float, float, float, float, float, float, float, float, float)" is hidden by "MPU9250AHRS::update" -- virtual function override intended?
     	void update()
     	     ^
-  user/main.cpp: 30 warnings, 0 errors
-  Program Size: Code=68046 RO-data=3270 RW-data=444 ZI-data=15628  
+  user/main.cpp: 31 warnings, 0 errors
+  Program Size: Code=68818 RO-data=3306 RW-data=444 ZI-data=15652  
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.axf: warning: Empty loadable segment detected, is this intentional ?
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RW' not in segment
   C:\SysGCC\arm-eabi/bin/arm-eabi-objcopy.exe: Debug/ebox_stm32f103RCT6_VS.elf: warning: allocated section `ER_RO' not in segment
@@ -105,5 +108,5 @@
           --change-section-address ER_RO=0x08000000 \
           Debug/ebox_stm32f103RCT6_VS.axf Debug/ebox_stm32f103RCT6_VS.elf
   ------------------- Memory utilization report -------------------
-  Used FLASH: 69KB
+  Used FLASH: 70KB
   Used RAM: 15KB
