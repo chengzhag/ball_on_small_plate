@@ -94,44 +94,37 @@ class PIDGearshiftIntegral :public PID
 {
 protected:
 	float gearshiftPointL, gearshiftPointH;
-	float fek(float ek)
-	{
-		if (ek <= gearshiftPointL)
-		{
-			return 1;
-		}
-		else if (ek > gearshiftPointL + gearshiftPointH)
-		{
-			return 0;
-		}
-		else
-		{
-			return (gearshiftPointH - abs(ek) + gearshiftPointL)
-				/ gearshiftPointH;
-		}
-	}
+	float fek(float ek);
 public:
 	//变速积分PID算法
 	//ui(k)=ki*{sum 0,k-1 e(i)+f[e(k)]e(k)}*T
 	//f[e(k)]= 	{	1						,|e(k)|<=B
 	//					[A-|e(k)|+B]/A	,B<|e(k)|<=A+B
 	//					0						,|e(k)|>A+B
-	PIDGearshiftIntegral(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
-		PID(kp, ki, kd, interval),
-		gearshiftPointL(std::numeric_limits<float>::max()),
-		gearshiftPointH(std::numeric_limits<float>::max())////初始化使I默认全程有效
-	{
-
-	}
+	PIDGearshiftIntegral(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
 
 	//设置变速积分加权曲线参数
-	void setGearshiftPoint(float pointL, float pointH)
-	{
-		gearshiftPointL = pointL;
-		gearshiftPointH = pointH;
-	}
+	void setGearshiftPoint(float pointL, float pointH);
 
 	//变速积分PID算法
+	float refresh(float feedback);
+
+};
+
+class PIDGshifIntIncDiff:public PIDGearshiftIntegral
+{
+protected:
+	Butterworth filter;
+public:
+	//变速积分不完全微分PID算法
+	PIDGshifIntIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50) :
+		PIDGearshiftIntegral(kp, ki, kd, interval),
+		filter(1 / interval, stopFrq)
+	{
+
+	}
+
+	//变速积分不完全微分PID算法
 	float refresh(float feedback)
 	{
 		float err;
@@ -152,13 +145,12 @@ public:
 			float ek = (err + errOld) / 2;
 			integral += ki*fek(ek)*ek;
 		}
-		output = kp*err + integral + kd*(err - errOld);
+		output = kp*err + integral + filter.getFilterOut(kd*(err - errOld));
 		limit<float>(output, outputLimL, outputLimH);
 
 		errOld = err;
 		return output;
 	}
-
 };
 
 

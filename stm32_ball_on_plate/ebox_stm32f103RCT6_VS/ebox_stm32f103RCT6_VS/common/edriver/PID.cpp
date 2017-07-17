@@ -187,3 +187,61 @@ float PIDIntSepIncDiff::refresh(float feedback)
 	errOld = err;
 	return output;
 }
+
+float PIDGearshiftIntegral::fek(float ek)
+{
+	if (ek <= gearshiftPointL)
+	{
+		return 1;
+	}
+	else if (ek > gearshiftPointL + gearshiftPointH)
+	{
+		return 0;
+	}
+	else
+	{
+		return (gearshiftPointH - abs(ek) + gearshiftPointL)
+			/ gearshiftPointH;
+	}
+}
+
+PIDGearshiftIntegral::PIDGearshiftIntegral(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
+	PID(kp, ki, kd, interval),
+	gearshiftPointL(std::numeric_limits<float>::max()),
+	gearshiftPointH(std::numeric_limits<float>::max())////初始化使I默认全程有效
+{
+
+}
+
+void PIDGearshiftIntegral::setGearshiftPoint(float pointL, float pointH)
+{
+	gearshiftPointL = pointL;
+	gearshiftPointH = pointH;
+}
+
+float PIDGearshiftIntegral::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+
+	//超过输出范围停止积分继续增加
+	if ((output > outputLimL && output < outputLimH) ||
+		(output == outputLimH && err < 0) ||
+		(output == outputLimL && err > 0))
+	{
+		float ek = (err + errOld) / 2;
+		integral += ki*fek(ek)*ek;
+	}
+	output = kp*err + integral + kd*(err - errOld);
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	return output;
+}

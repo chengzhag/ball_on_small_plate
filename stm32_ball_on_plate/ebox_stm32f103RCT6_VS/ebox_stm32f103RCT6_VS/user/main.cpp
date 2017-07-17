@@ -48,9 +48,9 @@ const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15);
-PIDGearshiftIntegral
-pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f),
-pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f);
+PIDGshifIntIncDiff
+pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 13),
+pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 13);
 Butterworth filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10),
 filterTargetX(100, 3), filterTargetY(100, 3);
 float outX, outY;
@@ -234,11 +234,11 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
 	//pidX.setISepPoint(15);
-	pidX.setGearshiftPoint(10, 20);
+	pidX.setGearshiftPoint(10, 50);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
 	//pidY.setISepPoint(15);
-	pidX.setGearshiftPoint(10, 20);
+	pidX.setGearshiftPoint(10, 50);
 
 	//¶¯Á¦
 	servoY.begin();
