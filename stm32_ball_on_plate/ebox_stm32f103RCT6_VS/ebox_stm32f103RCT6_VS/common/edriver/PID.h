@@ -4,6 +4,7 @@
 #include <limits>
 #include "my_math.h"
 #include "signal_stream.h"
+#include <math.h>
 
 class PID
 {
@@ -56,7 +57,7 @@ protected:
 	float ISepPoint;
 public:
 	//积分分离PID算法
-	PIDIntegralSeperate(float kp, float ki, float kd, float interval);
+	PIDIntegralSeperate(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
 
 	//设置积分分离点
 	void setISepPoint(float ISepPoint);
@@ -83,14 +84,54 @@ protected:
 	Butterworth filter;
 public:
 	//积分分离不完全微分PID算法
-	PIDIntSepIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50) :
-		PIDIntegralSeperate(kp, ki, kd, interval),
-		filter(1 / interval, stopFrq)
+	PIDIntSepIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50);
+
+	//积分分离不完全微分PID算法
+	float refresh(float feedback);
+};
+
+class PIDGearshiftIntegral :public PID
+{
+protected:
+	float gearshiftPointL, gearshiftPointH;
+	float fek(float ek)
+	{
+		if (ek <= gearshiftPointL)
+		{
+			return 1;
+		}
+		else if (ek > gearshiftPointL + gearshiftPointH)
+		{
+			return 0;
+		}
+		else
+		{
+			return (gearshiftPointH - abs(ek) + gearshiftPointL)
+				/ gearshiftPointH;
+		}
+	}
+public:
+	//变速积分PID算法
+	//ui(k)=ki*{sum 0,k-1 e(i)+f[e(k)]e(k)}*T
+	//f[e(k)]= 	{	1						,|e(k)|<=B
+	//					[A-|e(k)|+B]/A	,B<|e(k)|<=A+B
+	//					0						,|e(k)|>A+B
+	PIDGearshiftIntegral(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
+		PID(kp, ki, kd, interval),
+		gearshiftPointL(std::numeric_limits<float>::max()),
+		gearshiftPointH(std::numeric_limits<float>::max())////初始化使I默认全程有效
 	{
 
 	}
 
-	//积分分离不完全微分PID算法
+	//设置变速积分加权曲线参数
+	void setGearshiftPoint(float pointL, float pointH)
+	{
+		gearshiftPointL = pointL;
+		gearshiftPointH = pointH;
+	}
+
+	//变速积分PID算法
 	float refresh(float feedback)
 	{
 		float err;
@@ -103,24 +144,21 @@ public:
 			isBegin = false;
 		}
 
-		output = kp*err + filter.getFilterOut(kd*(err - errOld));
-
 		//超过输出范围停止积分继续增加
-		if (err < ISepPoint && err > -ISepPoint)
+		if ((output > outputLimL && output < outputLimH) ||
+			(output == outputLimH && err < 0) ||
+			(output == outputLimL && err > 0))
 		{
-			if ((output > outputLimL && output < outputLimH) ||
-				(output == outputLimH && err < 0) ||
-				(output == outputLimL && err > 0))
-			{
-				integral += ki*(err + errOld) / 2;
-			}
-			output += integral;
+			float ek = (err + errOld) / 2;
+			integral += ki*fek(ek)*ek;
 		}
+		output = kp*err + integral + kd*(err - errOld);
 		limit<float>(output, outputLimL, outputLimH);
 
 		errOld = err;
 		return output;
 	}
+
 };
 
 

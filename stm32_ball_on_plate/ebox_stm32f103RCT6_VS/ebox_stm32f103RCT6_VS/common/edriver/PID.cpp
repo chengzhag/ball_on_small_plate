@@ -75,7 +75,7 @@ float PIDnorm::refresh(float feedback)
 
 PIDIntegralSeperate::PIDIntegralSeperate(float kp, float ki, float kd, float interval) :
 	PID(kp, ki, kd, interval),
-	ISepPoint(std::numeric_limits<float>::max())
+	ISepPoint(std::numeric_limits<float>::max())//初始化使I默认全程有效
 {
 
 }
@@ -144,6 +144,44 @@ float PIDIncompleteDiff::refresh(float feedback)
 		integral += ki*(err + errOld) / 2;
 	}
 	output = kp*err + integral + filter.getFilterOut(kd*(err - errOld));
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	return output;
+}
+
+PIDIntSepIncDiff::PIDIntSepIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
+	PIDIntegralSeperate(kp, ki, kd, interval),
+	filter(1 / interval, stopFrq)
+{
+
+}
+
+float PIDIntSepIncDiff::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+
+	output = kp*err + filter.getFilterOut(kd*(err - errOld));
+
+	//超过输出范围停止积分继续增加
+	if (err < ISepPoint && err > -ISepPoint)
+	{
+		if ((output > outputLimL && output < outputLimH) ||
+			(output == outputLimH && err < 0) ||
+			(output == outputLimL && err > 0))
+		{
+			integral += ki*(err + errOld) / 2;
+		}
+		output += integral;
+	}
 	limit<float>(output, outputLimL, outputLimH);
 
 	errOld = err;
