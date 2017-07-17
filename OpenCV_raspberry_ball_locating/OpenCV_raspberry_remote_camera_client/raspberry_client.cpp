@@ -18,7 +18,7 @@ using namespace cv;
 using namespace std;
 
 //#define STDIO_DEBUG
-#define SOCKET_SEND_IMAGE
+//#define SOCKET_SEND_IMAGE
 
 
 int main(int argc, char **argv)
@@ -90,10 +90,10 @@ int main(int argc, char **argv)
 	
 	///预处理
 	Mat imProcess;
-//	const int structElementSize = 1;
-//	Mat element = getStructuringElement(MORPH_ELLIPSE,  
-//		Size(2*structElementSize + 1, 2*structElementSize + 1),  
-//		Point(structElementSize, structElementSize));
+	const int structElementSize = 1;
+	Mat element = getStructuringElement(MORPH_ELLIPSE,  
+		Size(2*structElementSize + 1, 2*structElementSize + 1),  
+		Point(structElementSize, structElementSize));
 	
 	
 	///初始化

@@ -34,24 +34,27 @@ UartVscan uartVscan(&uart1);
 FpsCounter fpsPID, fpsUI, fpsMPU;
 float fpsPIDtemp, fpsUItemp, fpsMPUtemp;
 
-//PID
-const float factorPID = 1.24;
-PIDIntegralSeperate 
-pidX(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/),
-pidY(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/);
-Butterworth filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10);
-float outX, outY;
-
-//动力
-Servo servoX(&PB8, 100, 0.81, 2.35);
-Servo servoY(&PB9, 100, 0.72, 2.35);
-
 //定位
 UartNum<float, 2> uartNum(&uart2);
 const float maxX = 200;
 const float maxY = 200;
 float posX = -1;
 float posY = -1;
+
+//PID
+float targetX = maxX / 2, targetY = maxY / 2,
+targetXraw = targetX, targetYraw = targetY;
+const float factorPID = 1.24;
+PIDIntegralSeperate 
+pidX(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/),
+pidY(0.28f*factorPID, 0.2f*factorPID, 0.15f*factorPID, 1.f / 30.f/*, 6*/);
+Butterworth filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10),
+	filterTargetX(100, 3), filterTargetY(100, 3);
+float outX, outY;
+
+//动力
+Servo servoX(&PB8, 100, 0.81, 2.35);
+Servo servoY(&PB9, 100, 0.72, 2.35);
 
 //底座
 const float factorServo = 6.5;
@@ -93,7 +96,7 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 			//outY = filterOutY.getFilterOut(outY);
 
 			fpsPIDtemp = fpsPID.getFps();
-			float vscan[] = { posX,posY,outX,outY ,fpsUItemp,fpsMPUtemp,angle[0],angle[1] };
+			float vscan[] = { posX,posY,outX,outY ,fpsUItemp,fpsMPUtemp,targetX,targetY };
 			uartVscan.sendOscilloscope(vscan, 8);
 
 			//servoX.setPct(outX);
@@ -117,6 +120,13 @@ void mpuRefresh(void *pvParameters)
 	xLastWakeTime = xTaskGetTickCount();
 	while (1)
 	{
+		//对定位PID的目标坐标进行滤波
+		targetX = filterTargetX.getFilterOut(targetXraw);
+		targetY = filterTargetY.getFilterOut(targetYraw);
+		pidX.setTarget(targetX);
+		pidY.setTarget(targetY);
+
+		//对mpu角度进行反馈
 		mpu.getAngle(angle, angle + 1, angle + 2);
 		servoX.setPct(outX + angle[1] * factorServo);
 		servoY.setPct(outY - angle[0] * factorServo);
@@ -128,7 +138,6 @@ void mpuRefresh(void *pvParameters)
 
 //UI交互
 int index = 0;
-float targetX = maxX / 2, targetY = maxY / 2;
 float circleR = 0;
 float theta = 0;
 void uiRefresh(void *pvParameters)
@@ -164,32 +173,32 @@ void uiRefresh(void *pvParameters)
 		}
 		if (keyU.pressed_for(200, 0))
 		{
-			increase += 2;
+			increase += 5;
 		}
 		if (keyD.pressed_for(200, 0))
 		{
-			increase -= 2;
+			increase -= 5;
 		}
 
 		//功能
 		switch (index)
 		{
 		case 0:
-			targetX += increase;
-			limit<float>(targetX, 30, maxX - 30);
+			targetXraw += increase;
+			limit<float>(targetXraw, 30, maxX - 30);
 			oled.printf(0, 0, 2, "*%.1f %.1f %.0f  ", targetX, targetY, circleR);
 			break;
 		case 1:
-			targetY += increase;
-			limit<float>(targetY, 30, maxY - 30);
+			targetYraw += increase;
+			limit<float>(targetYraw, 30, maxY - 30);
 			oled.printf(0, 0, 2, "%.1f *%.1f %.0f  ", targetX, targetY, circleR);
 			break;
 		case 2:
 			circleR = circleR + increase;
-			limit<float>(circleR, 0, (maxY - 60) / 2);
+			limit<float>(circleR, 0, (maxY - 100) / 2);
 			theta += 2 * PI / 50 * 1.5;//0.5圈一秒
-			targetX = maxX / 2 + circleR*sin(theta);
-			targetY = maxY / 2 + circleR*cos(theta);
+			targetXraw = maxX / 2 + circleR*sin(theta);
+			targetYraw = maxY / 2 + circleR*cos(theta);
 			oled.printf(0, 0, 2, "%.1f %.1f *%.0f  ", targetX, targetY, circleR);
 			break;
 		default:
@@ -200,8 +209,6 @@ void uiRefresh(void *pvParameters)
 		fpsUItemp = fpsUI.getFps();
 		oled.printf(0, 6, 2, "%.0f %.0f %.0f ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
 
-		pidX.setTarget(targetX);
-		pidY.setTarget(targetY);
 
 		vTaskDelayUntil(&xLastWakeTime, (100 / portTICK_RATE_MS));
 	}
@@ -256,7 +263,7 @@ void setup()
 
 	//照明
 	ws2812.begin();
-	ws2812.setAllDataHSV(60, 0, 0.3);
+	ws2812.setAllDataHSV(90, 0, 0.3);
 
 	//操作系统
 	set_systick_user_event_per_sec(configTICK_RATE_HZ);
