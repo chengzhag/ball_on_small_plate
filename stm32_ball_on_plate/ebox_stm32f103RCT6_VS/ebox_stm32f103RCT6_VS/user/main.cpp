@@ -49,10 +49,10 @@ const float factorPID = 1.24;
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15);
 PIDGshifIntIncDiff
-pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 13),
-pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 13);
-Butterworth filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10),
-filterTargetX(100, 3), filterTargetY(100, 3);
+pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8),
+pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8);
+RcFilter filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10),
+filterTargetX(100, 1), filterTargetY(100, 1);
 float outX, outY;
 
 //¶¯Á¦

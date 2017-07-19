@@ -1,4 +1,6 @@
 #include "signal_stream.h"
+#include "my_math.h"
+
 
 AverageFilter::AverageFilter(float sampleFrq, float stopFrq) :
 	SignalStream(int(0.443*sampleFrq / stopFrq + 1))
@@ -15,18 +17,18 @@ float AverageFilter::getFilterOut(float newNum)
 }
 
 
-Butterworth::Butterworth(float sampleFrq, float stopFrq)
+RcFilter::RcFilter(float sampleFrq, float stopFrq):
+	sampleFrq(sampleFrq),
+	k(1 / (1 + (2 * M_PI *stopFrq / sampleFrq))),
+		yOld(0)
 {
-	this->sampleFrq = sampleFrq;
-	this->stopFrq = (2 * stopFrq / sampleFrq);
-	this->tempY = 0;
 
 }
 
-float Butterworth::getFilterOut(float x)
+float RcFilter::getFilterOut(float x)
 {
-	float y = tempY*(1 - stopFrq) + stopFrq*x;
-	tempY = y;
+	float y = yOld*k + (1 - k)*x;
+	yOld = y;
 	return y;
 }
 

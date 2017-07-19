@@ -767,7 +767,7 @@
     <ClCompile Include="common\util\interpolation.cpp">
       <Filter>Source files\common\util</Filter>
     </ClCompile>
-    <ClCompile Include="signal_stream.cpp">
+    <ClCompile Include="common\util\signal_stream.cpp">
       <Filter>Source files\common\util</Filter>
     </ClCompile>
   </ItemGroup>

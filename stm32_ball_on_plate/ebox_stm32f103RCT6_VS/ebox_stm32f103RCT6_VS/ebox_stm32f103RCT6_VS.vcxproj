@@ -166,6 +166,7 @@
     <ClCompile Include="common\util\my_math.cpp" />
     <ClCompile Include="common\util\print.cpp" />
     <ClCompile Include="common\util\ringbuf.cpp" />
+    <ClCompile Include="common\util\signal_stream.cpp" />
     <ClCompile Include="common\util\util.cpp" />
     <ClCompile Include="common\util\WString.cpp" />
     <ClCompile Include="mcu\stm32f10x\ebox\core\ebox_common.cpp" />
@@ -221,7 +222,6 @@
     <ClCompile Include="os\FreeRTOS\Source\timers.c" />
     <ClCompile Include="os\FreeRTOS\Source\portable\MemMang\heap_4.c" />
     <ClCompile Include="os\FreeRTOS\Source\portable\RVDS\ARM_CM3\port.c" />
-    <ClCompile Include="signal_stream.cpp" />
     <ClCompile Include="user\bsp.cpp" />
     <ClCompile Include="user\main.cpp" />
   </ItemGroup>

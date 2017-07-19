@@ -90,16 +90,16 @@ public:
 	float getFilterOut(float newNum);
 };
 
-class Butterworth
+class RcFilter
 
 {
 public:
-	Butterworth(float sampleFrq, float stopFrq);
+	RcFilter(float sampleFrq, float stopFrq);
 	float getFilterOut(float x);
 private:
-	float stopFrq;
+	float k;
 	float sampleFrq;
-	float tempY;
+	float yOld;
 };
 
 #endif

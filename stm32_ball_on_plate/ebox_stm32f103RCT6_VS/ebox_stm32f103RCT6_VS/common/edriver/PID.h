@@ -69,7 +69,7 @@ public:
 class PIDIncompleteDiff :public PID
 {
 protected:
-	Butterworth filter;
+	RcFilter filter;
 public:
 	//不完全微分PID算法
 	PIDIncompleteDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50);
@@ -81,7 +81,7 @@ public:
 class PIDIntSepIncDiff :public PIDIntegralSeperate
 {
 protected:
-	Butterworth filter;
+	RcFilter filter;
 public:
 	//积分分离不完全微分PID算法
 	PIDIntSepIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50);
@@ -114,7 +114,7 @@ public:
 class PIDGshifIntIncDiff:public PIDGearshiftIntegral
 {
 protected:
-	Butterworth filter;
+	RcFilter filter;
 public:
 	//变速积分不完全微分PID算法
 	PIDGshifIntIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50) :

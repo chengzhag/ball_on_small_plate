@@ -3,6 +3,8 @@
 
 #include "ebox.h"
 #include <limits>
+#include <math.h>
+#define M_PI		3.14159265358979323846
 //#include <limits.h>
 //#include <float.h>
  
