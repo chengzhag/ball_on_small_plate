@@ -49,8 +49,11 @@ const float factorPID = 1.24;
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15);
 PIDGshifIntIncDiff
-pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8),
-pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8);
+pidX(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8),
+pidY(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8);
+//PIDDifferentialAhead
+//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f),
+//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f);
 RcFilter filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10),
 filterTargetX(100, 1), filterTargetY(100, 1);
 float outX, outY;
@@ -80,6 +83,12 @@ WS2812 ws2812(&PB0);
 //将输出存入outXY到舵机刷新程序输出
 void posReceiveEvent(UartNum<float, 2>* uartNum)
 {
+	//对定位PID的目标坐标进行滤波
+	targetX = filterTargetX.getFilterOut(targetXraw);
+	targetY = filterTargetY.getFilterOut(targetYraw);
+	pidX.setTarget(targetX);
+	pidY.setTarget(targetY);
+
 	if (uartNum->getLength() == 2)
 	{
 		posX = uartNum->getNum()[0];
@@ -123,12 +132,6 @@ void mpuRefresh(void *pvParameters)
 	xLastWakeTime = xTaskGetTickCount();
 	while (1)
 	{
-		//对定位PID的目标坐标进行滤波
-		targetX = filterTargetX.getFilterOut(targetXraw);
-		targetY = filterTargetY.getFilterOut(targetYraw);
-		pidX.setTarget(targetX);
-		pidY.setTarget(targetY);
-
 		//对mpu角度进行反馈
 		mpu.getAngle(angle, angle + 1, angle + 2);
 		servoX.setPct(outX + angle[1] * factorServo);
@@ -189,12 +192,12 @@ void uiRefresh(void *pvParameters)
 		case 0:
 			targetXraw += increase;
 			limit<float>(targetXraw, 30, maxX - 30);
-			oled.printf(0, 0, 2, "*%.1f %.1f %.0f  ", targetX, targetY, circleR);
+			oled.printf(0, 0, 2, "*%.1f %.1f %.0f  ", targetXraw, targetYraw, circleR);
 			break;
 		case 1:
 			targetYraw += increase;
 			limit<float>(targetYraw, 30, maxY - 30);
-			oled.printf(0, 0, 2, "%.1f *%.1f %.0f  ", targetX, targetY, circleR);
+			oled.printf(0, 0, 2, "%.1f *%.1f %.0f  ", targetXraw, targetYraw, circleR);
 			break;
 		case 2:
 			circleR = circleR + increase;
@@ -202,7 +205,7 @@ void uiRefresh(void *pvParameters)
 			theta += 2 * PI / 50 * 1.5;//0.5圈一秒
 			targetXraw = maxX / 2 + circleR*sin(theta);
 			targetYraw = maxY / 2 + circleR*cos(theta);
-			oled.printf(0, 0, 2, "%.1f %.1f *%.0f  ", targetX, targetY, circleR);
+			oled.printf(0, 0, 2, "%.1f %.1f *%.0f  ", targetXraw, targetYraw, circleR);
 			break;
 		default:
 			break;
@@ -234,11 +237,11 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
 	//pidX.setISepPoint(15);
-	pidX.setGearshiftPoint(10, 50);
+	//pidX.setGearshiftPoint(10, 50);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
 	//pidY.setISepPoint(15);
-	pidX.setGearshiftPoint(10, 50);
+	//pidX.setGearshiftPoint(10, 50);
 
 	//动力
 	servoY.begin();

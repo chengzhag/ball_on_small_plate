@@ -245,3 +245,37 @@ float PIDGearshiftIntegral::refresh(float feedback)
 	errOld = err;
 	return output;
 }
+
+PIDGshifIntIncDiff::PIDGshifIntIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
+	PIDGearshiftIntegral(kp, ki, kd, interval),
+	filter(1 / interval, stopFrq)
+{
+
+}
+
+float PIDGshifIntIncDiff::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+
+	//超过输出范围停止积分继续增加
+	if ((output > outputLimL && output < outputLimH) ||
+		(output == outputLimH && err < 0) ||
+		(output == outputLimL && err > 0))
+	{
+		float ek = (err + errOld) / 2;
+		integral += ki*fek(ek)*ek;
+	}
+	output = kp*err + integral + filter.getFilterOut(kd*(err - errOld));
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	return output;
+}

@@ -6,6 +6,7 @@
 #include "signal_stream.h"
 #include <math.h>
 
+//PID基类
 class PID
 {
 protected:
@@ -41,6 +42,7 @@ public:
 
 };
 
+//普通梯形积分PID
 class PIDnorm:public PID
 {
 public:
@@ -51,6 +53,7 @@ public:
 	float refresh(float feedback);
 };
 
+//积分分离PID
 class PIDIntegralSeperate :public PID
 {
 protected:
@@ -66,6 +69,7 @@ public:
 	float refresh(float feedback);
 };
 
+//不完全微分PID
 class PIDIncompleteDiff :public PID
 {
 protected:
@@ -78,6 +82,7 @@ public:
 	float refresh(float feedback);
 };
 
+//积分分离不完全微分PID
 class PIDIntSepIncDiff :public PIDIntegralSeperate
 {
 protected:
@@ -90,6 +95,7 @@ public:
 	float refresh(float feedback);
 };
 
+//变速积分PID
 class PIDGearshiftIntegral :public PID
 {
 protected:
@@ -111,20 +117,33 @@ public:
 
 };
 
+//变速积分不完全微分PID
 class PIDGshifIntIncDiff:public PIDGearshiftIntegral
 {
 protected:
 	RcFilter filter;
 public:
 	//变速积分不完全微分PID算法
-	PIDGshifIntIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50) :
-		PIDGearshiftIntegral(kp, ki, kd, interval),
-		filter(1 / interval, stopFrq)
+	PIDGshifIntIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50);
+
+	//变速积分不完全微分PID算法
+	float refresh(float feedback);
+};
+
+//微分先行PID
+class PIDDifferentialAhead :public PID
+{
+	float feedbackOld;
+public:
+	//微分先行PID算法
+	PIDDifferentialAhead(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01):
+		PID(kp, ki, kd, interval),
+		feedbackOld(0)
 	{
 
 	}
 
-	//变速积分不完全微分PID算法
+	//微分先行PID算法
 	float refresh(float feedback)
 	{
 		float err;
@@ -133,7 +152,7 @@ public:
 		//初始时使微分为0，避免突然的巨大错误微分
 		if (isBegin)
 		{
-			errOld = err;
+			feedbackOld = feedback;
 			isBegin = false;
 		}
 
@@ -142,17 +161,16 @@ public:
 			(output == outputLimH && err < 0) ||
 			(output == outputLimL && err > 0))
 		{
-			float ek = (err + errOld) / 2;
-			integral += ki*fek(ek)*ek;
+			integral += ki*(err + errOld) / 2;
 		}
-		output = kp*err + integral + filter.getFilterOut(kd*(err - errOld));
+		output = kp*err + integral + kd*(feedbackOld- feedback);
 		limit<float>(output, outputLimL, outputLimH);
 
 		errOld = err;
+		feedbackOld = feedback;
 		return output;
 	}
 };
-
 
 
 #endif
