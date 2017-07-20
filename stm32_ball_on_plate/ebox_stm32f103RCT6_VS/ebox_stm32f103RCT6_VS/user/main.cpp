@@ -49,8 +49,8 @@ const float factorPID = 1.24;
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15);
 PIDGshifIntIncDiff
-pidX(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 10),
-pidY(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 10);
+pidX(0.3f*factorPID, 0.25f*factorPID, 0.17f*factorPID, 1.f / 30.f, 10),
+pidY(0.3f*factorPID, 0.25f*factorPID, 0.17f*factorPID, 1.f / 30.f, 10);
 //PIDDifferentialAhead
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f);
@@ -59,8 +59,8 @@ filterTargetX(100, 1), filterTargetY(100, 1);
 float outX, outY;
 
 //¶¯Á¦
-Servo servoX(&PB9, 100, 0.7, 2.3);
-Servo servoY(&PB8, 100, 0.88, 2.3);
+Servo servoX(&PB9, 300, 0.7, 2.3);
+Servo servoY(&PB8, 300, 0.85, 2.3);
 
 //µ××ù
 const float factorServo = 6.5;
