@@ -49,8 +49,8 @@ const float factorPID = 1.24;
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15);
 PIDGshifIntIncDiff
-pidX(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8),
-pidY(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 8);
+pidX(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 10),
+pidY(0.3f*factorPID, 0.25f*factorPID, 0.16f*factorPID, 1.f / 30.f, 10);
 //PIDDifferentialAhead
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f);
@@ -59,8 +59,8 @@ filterTargetX(100, 1), filterTargetY(100, 1);
 float outX, outY;
 
 //动力
-Servo servoX(&PB8, 100, 0.81, 2.35);
-Servo servoY(&PB9, 100, 0.72, 2.35);
+Servo servoX(&PB9, 100, 0.7, 2.3);
+Servo servoY(&PB8, 100, 0.88, 2.3);
 
 //底座
 const float factorServo = 6.5;
@@ -102,7 +102,7 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 
 			outX = 0, outY = 0;
 			outX += pidX.refresh(posX);
-			outY += pidY.refresh(posY);
+			outY -= pidY.refresh(posY);
 
 			//outX = filterOutX.getFilterOut(outX);
 			//outY = filterOutY.getFilterOut(outY);
@@ -134,7 +134,7 @@ void mpuRefresh(void *pvParameters)
 	{
 		//对mpu角度进行反馈
 		mpu.getAngle(angle, angle + 1, angle + 2);
-		servoX.setPct(outX + angle[1] * factorServo);
+		servoX.setPct(outX - angle[1] * factorServo);
 		servoY.setPct(outY - angle[0] * factorServo);
 		fpsMPUtemp = fpsMPU.getFps();
 		vTaskDelayUntil(&xLastWakeTime, (10 / portTICK_RATE_MS));
@@ -237,11 +237,11 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
 	//pidX.setISepPoint(15);
-	//pidX.setGearshiftPoint(10, 50);
+	pidX.setGearshiftPoint(5, 30);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
 	//pidY.setISepPoint(15);
-	//pidX.setGearshiftPoint(10, 50);
+	pidX.setGearshiftPoint(5, 30);
 
 	//动力
 	servoY.begin();
@@ -253,13 +253,14 @@ void setup()
 
 	//底座
 	mpu.setGyroBias(-0.0151124271, -0.00376615906, 0.0124653624);
-	mpu.setAccelBias(-0.0271704104, -0.00390625, 0.132741705);
+	mpu.setAccelBias(-0.0590917952, -0.0075366213, 0.120300293);
 	mpu.setMagBiasSens(
 		-18.786200, 17.835992, 14.496549,
 		0.986133, 1.038038, 0.975829);
 	mpu.setOrien(1, 2, 3);
 	mpu.begin(400000, 100, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
-
+	//float bias[3];
+	//mpu.getAccelBias(bias, bias + 1, bias + 2);
 
 	//交互
 	keyD.begin();
