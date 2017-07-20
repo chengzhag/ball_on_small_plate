@@ -13,6 +13,8 @@
 #include <algorithm>
 #include "uart_num.h"
 
+#include "wiringPi.h"
+
 
 using namespace cv;
 using namespace std;
@@ -23,6 +25,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+	piHiPri(99);//最高优先级
 	///声明变量
 #ifdef SOCKET_SEND_IMAGE
 	cout << "socket connecting..." << endl;
@@ -32,7 +35,7 @@ int main(int argc, char **argv)
 	//摄像头
 	raspicam::RaspiCam_Cv cam;
 	//参数设置
-	float imRawFactor = 0.2;
+	float imRawFactor = 0.25;
 	cam.set(CV_CAP_PROP_FORMAT, CV_8UC1);
 	cam.set(CV_CAP_PROP_FRAME_WIDTH, cam.get(CV_CAP_PROP_FRAME_WIDTH) * imRawFactor);
 	cam.set(CV_CAP_PROP_FRAME_HEIGHT, cam.get(CV_CAP_PROP_FRAME_HEIGHT) * imRawFactor);
@@ -68,7 +71,7 @@ int main(int argc, char **argv)
 	
 	//剪切平板位置图像
 	float plateRegionHeight = 0.67;//, plateRegionWidth = 0.52;
-	float plateRegionOffH = -0.038, plateRegionOffW = 0.03;
+	float plateRegionOffH = -0.043, plateRegionOffW = 0.03;
 	Rect plateRegion(
 		int(imRawW*(0.5 + plateRegionOffW) - imRawH*plateRegionHeight / 2),
 		int(imRawH*(0.5 + plateRegionOffH - plateRegionHeight / 2)),
@@ -130,7 +133,7 @@ int main(int argc, char **argv)
 #endif // SOCKET_SEND_IMAGE
 	}
 	threshBinary /= 30;
-	threshBinary -= 10;
+	threshBinary -= 5;
 
 	double timeStart = 0, timeEnd = 0;
 

@@ -42,25 +42,26 @@ float posX = -1;
 float posY = -1;
 
 //PID
+const float ratePID = 34;
 float targetX = maxX / 2, targetY = maxY / 2,
 targetXraw = targetX, targetYraw = targetY;
 const float factorPID = 1.24;
 //PIDIntSepIncDiff
-//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15),
-//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f, 15);
+//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
+//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
 PIDGshifIntIncDiff
-pidX(0.3f*factorPID, 0.25f*factorPID, 0.17f*factorPID, 1.f / 30.f, 10),
-pidY(0.3f*factorPID, 0.25f*factorPID, 0.17f*factorPID, 1.f / 30.f, 10);
+pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
+pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
 //PIDDifferentialAhead
-//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f),
-//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / 30.f);
-RcFilter filterX(30, 7), filterY(30, 7), filterOutX(30, 10), filterOutY(30, 10),
+//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
+//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
+RcFilter filterX(ratePID, 7), filterY(ratePID, 7), filterOutX(ratePID, 10), filterOutY(ratePID, 10),
 filterTargetX(100, 1), filterTargetY(100, 1);
 float outX, outY;
 
 //动力
-Servo servoX(&PB9, 300, 0.7, 2.3);
-Servo servoY(&PB8, 300, 0.85, 2.3);
+Servo servoX(&PB9, 200, 0.7, 2.3);
+Servo servoY(&PB8, 200, 0.75, 2.35);
 
 //底座
 const float factorServo = 6.5;
@@ -237,11 +238,11 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
 	//pidX.setISepPoint(15);
-	pidX.setGearshiftPoint(5, 30);
+	pidX.setGearshiftPoint(10, 50);
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
 	//pidY.setISepPoint(15);
-	pidX.setGearshiftPoint(5, 30);
+	pidY.setGearshiftPoint(10, 50);
 
 	//动力
 	servoY.begin();
@@ -272,7 +273,7 @@ void setup()
 
 	//照明
 	ws2812.begin();
-	ws2812.setAllDataHSV(90, 0, 0.3);
+	ws2812.setAllDataHSV(90, 0, 0.5);
 
 	//操作系统
 	set_systick_user_event_per_sec(configTICK_RATE_HZ);
