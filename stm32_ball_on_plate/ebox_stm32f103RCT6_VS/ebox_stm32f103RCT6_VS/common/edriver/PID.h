@@ -148,10 +148,11 @@ class PIDFeedforward :public PID
 {
 protected:
 	FunctionPointerArg1<float, float> feedforwardH;
+	float feedforward;
 public:
 	//前馈补偿PID算法
 	PIDFeedforward(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
-		PID(kp, ki, kd, interval)
+		PID(kp, ki, kd, interval), feedforward(0)
 	{
 
 	}
@@ -188,13 +189,20 @@ public:
 		{
 			integral += ki*(err + errOld) / 2;
 		}
+		feedforward = feedforwardH.call(target);
 		output = kp*err + integral + kd*(err - errOld) 
-			+ feedforwardH.call(target);//FunctionPointer未绑定时默认返回0
+			+ feedforward;//FunctionPointer未绑定时默认返回0
 
 		limit<float>(output, outputLimL, outputLimH);
 
 		errOld = err;
 		return output;
+	}
+
+	//获取当前前馈补偿值
+	float getFeedforward()
+	{
+		return feedforward;
 	}
 };
 
