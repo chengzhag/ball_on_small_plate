@@ -279,3 +279,37 @@ float PIDGshifIntIncDiff::refresh(float feedback)
 	errOld = err;
 	return output;
 }
+
+PIDDifferentialAhead::PIDDifferentialAhead(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
+	PID(kp, ki, kd, interval),
+	feedbackOld(0)
+{
+
+}
+
+float PIDDifferentialAhead::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		feedbackOld = feedback;
+		isBegin = false;
+	}
+
+	//超过输出范围停止积分继续增加
+	if ((output > outputLimL && output < outputLimH) ||
+		(output == outputLimH && err < 0) ||
+		(output == outputLimL && err > 0))
+	{
+		integral += ki*(err + errOld) / 2;
+	}
+	output = kp*err + integral + kd*(feedbackOld - feedback);
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	feedbackOld = feedback;
+	return output;
+}

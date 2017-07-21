@@ -5,6 +5,7 @@
 #include "my_math.h"
 #include "signal_stream.h"
 #include <math.h>
+#include "FunctionPointer.h"
 
 //PID基类
 class PID
@@ -136,14 +137,38 @@ class PIDDifferentialAhead :public PID
 	float feedbackOld;
 public:
 	//微分先行PID算法
-	PIDDifferentialAhead(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01):
-		PID(kp, ki, kd, interval),
-		feedbackOld(0)
+	PIDDifferentialAhead(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
+
+	//微分先行PID算法
+	float refresh(float feedback);
+};
+
+//前馈补偿PID
+class PIDFeedforward :public PID
+{
+protected:
+	FunctionPointerArg1<float, float> feedforwardH;
+public:
+	//前馈补偿PID算法
+	PIDFeedforward(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
+		PID(kp, ki, kd, interval)
 	{
 
 	}
 
-	//微分先行PID算法
+	//绑定系统函数feedforwardH，参数为时域离散信号，返回系统输出信号
+	void attach(float(*feedforwardH)(float input))
+	{
+		this->feedforwardH.attach(feedforwardH);
+	}
+
+	//绑定系统函数feedforwardH，参数为时域离散信号，返回系统输出信号
+	template<typename T>
+	void attach(T *pObj, float (T::*feedforwardH)(float input))
+	{
+		this->feedforwardH.attach(pObj, feedforwardH);
+	}
+
 	float refresh(float feedback)
 	{
 		float err;
@@ -152,7 +177,7 @@ public:
 		//初始时使微分为0，避免突然的巨大错误微分
 		if (isBegin)
 		{
-			feedbackOld = feedback;
+			errOld = err;
 			isBegin = false;
 		}
 
@@ -163,11 +188,12 @@ public:
 		{
 			integral += ki*(err + errOld) / 2;
 		}
-		output = kp*err + integral + kd*(feedbackOld- feedback);
+		output = kp*err + integral + kd*(err - errOld) 
+			+ feedforwardH.call(target);//FunctionPointer未绑定时默认返回0
+
 		limit<float>(output, outputLimL, outputLimH);
 
 		errOld = err;
-		feedbackOld = feedback;
 		return output;
 	}
 };

@@ -43,18 +43,66 @@ float posY = -1;
 
 //PID
 const float ratePID = 34;
+//前馈补偿PID前馈系统：
+//H(s)=s^2/gk
+//H(z)=4/gkT^2*(z^2-2z+1)/(z^2+2z+1)
+//k为舵机摇臂与平板摇臂之比
+//g为重力加速度
+class FeedforwardSys
+{
+protected:
+	float xn1, xn2, yn1, yn2;
+	float k, T, factor;
+	bool isBegin;
+public:
+	FeedforwardSys(float k, float T) :
+		xn1(0), xn2(0), yn1(0), yn2(0),
+		k(k), T(T), factor(4 / 9.8 / k / T / T),
+		isBegin(true)
+	{
+
+	}
+
+	float getY(float x)
+	{
+		float y = 0;
+		x /= 1000;//转换为标准单位
+
+		if (isBegin)
+		{
+			xn1 = x;
+			xn2 = x;
+			yn1 = 0;
+			yn2 = 0;
+			isBegin = false;
+		}
+		y = (x - 2 * xn1 + xn2)*factor - 2 * yn1 + yn2;
+
+		xn2 = xn1;
+		xn1 = x;
+		yn2 = yn1;
+		yn1 = y;
+		return y;
+	}
+}feedforwardSysX(1.9 / 9, 1 / ratePID),
+feedforwardSysY(1.9 / 9, 1 / ratePID);
+
 float targetX = maxX / 2, targetY = maxY / 2,
 targetXraw = targetX, targetYraw = targetY;
 const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
-PIDGshifIntIncDiff
-pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
-pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
+//PIDGshifIntIncDiff
+//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
+//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
 //PIDDifferentialAhead
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
+PIDFeedforward
+pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
+pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
+
 RcFilter filterX(ratePID, 7), filterY(ratePID, 7), filterOutX(ratePID, 10), filterOutY(ratePID, 10),
 filterTargetX(100, 1), filterTargetY(100, 1);
 float outX, outY;
@@ -238,11 +286,14 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
 	//pidX.setISepPoint(15);
-	pidX.setGearshiftPoint(10, 50);
+	//pidX.setGearshiftPoint(10, 50);
+	pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
+	
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
 	//pidY.setISepPoint(15);
-	pidY.setGearshiftPoint(10, 50);
+	//pidY.setGearshiftPoint(10, 50);
+	pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
 
 	//动力
 	servoY.begin();
