@@ -44,18 +44,18 @@ public:
 };
 
 //普通梯形积分PID
-class PIDnorm:public PID
+class PIDnorm:virtual public PID
 {
 public:
 	//普通梯形积分PID算法
 	PIDnorm(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
 
 	//普通PID的算法
-	float refresh(float feedback);
+	virtual float refresh(float feedback);
 };
 
 //积分分离PID
-class PIDIntegralSeperate :public PID
+class PIDIntegralSeperate :virtual public PID
 {
 protected:
 	float ISepPoint;
@@ -67,11 +67,11 @@ public:
 	void setISepPoint(float ISepPoint);
 
 	//积分分离PID算法
-	float refresh(float feedback);
+	virtual float refresh(float feedback);
 };
 
 //不完全微分PID
-class PIDIncompleteDiff :public PID
+class PIDIncompleteDiff :virtual public PID
 {
 protected:
 	RcFilter filter;
@@ -80,24 +80,22 @@ public:
 	PIDIncompleteDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50);
 
 	//不完全微分PID算法
-	float refresh(float feedback);
+	virtual float refresh(float feedback);
 };
 
 //积分分离不完全微分PID
-class PIDIntSepIncDiff :public PIDIntegralSeperate
+class PIDIntSepIncDiff : public PIDIntegralSeperate, public PIDIncompleteDiff
 {
-protected:
-	RcFilter filter;
 public:
 	//积分分离不完全微分PID算法
 	PIDIntSepIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50);
 
 	//积分分离不完全微分PID算法
-	float refresh(float feedback);
+	virtual float refresh(float feedback);
 };
 
 //变速积分PID
-class PIDGearshiftIntegral :public PID
+class PIDGearshiftIntegral :virtual public PID
 {
 protected:
 	float gearshiftPointL, gearshiftPointH;
@@ -114,25 +112,23 @@ public:
 	void setGearshiftPoint(float pointL, float pointH);
 
 	//变速积分PID算法
-	float refresh(float feedback);
+	virtual float refresh(float feedback);
 
 };
 
 //变速积分不完全微分PID
-class PIDGshifIntIncDiff:public PIDGearshiftIntegral
+class PIDGshifIntIncDiff:public PIDGearshiftIntegral,public PIDIncompleteDiff
 {
-protected:
-	RcFilter filter;
 public:
 	//变速积分不完全微分PID算法
 	PIDGshifIntIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50);
 
 	//变速积分不完全微分PID算法
-	float refresh(float feedback);
+	virtual float refresh(float feedback);
 };
 
 //微分先行PID
-class PIDDifferentialAhead :public PID
+class PIDDifferentialAhead :virtual public PID
 {
 	float feedbackOld;
 public:
@@ -140,71 +136,39 @@ public:
 	PIDDifferentialAhead(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
 
 	//微分先行PID算法
-	float refresh(float feedback);
+	virtual float refresh(float feedback);
 };
 
 //前馈补偿PID
-class PIDFeedforward :public PID
+class PIDFeedforward :virtual public PID
 {
 protected:
 	FunctionPointerArg1<float, float> feedforwardH;
 	float feedforward;
 public:
 	//前馈补偿PID算法
-	PIDFeedforward(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
-		PID(kp, ki, kd, interval), feedforward(0)
-	{
-
-	}
+	PIDFeedforward(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
 
 	//绑定系统函数feedforwardH，参数为时域离散信号，返回系统输出信号
-	void attach(float(*feedforwardH)(float input))
-	{
-		this->feedforwardH.attach(feedforwardH);
-	}
+	void attach(float(*feedforwardH)(float input));
 
 	//绑定系统函数feedforwardH，参数为时域离散信号，返回系统输出信号
 	template<typename T>
-	void attach(T *pObj, float (T::*feedforwardH)(float input))
-	{
-		this->feedforwardH.attach(pObj, feedforwardH);
-	}
+	void attach(T *pObj, float (T::*feedforwardH)(float input));
 
-	float refresh(float feedback)
-	{
-		float err;
-		err = target - feedback;
-
-		//初始时使微分为0，避免突然的巨大错误微分
-		if (isBegin)
-		{
-			errOld = err;
-			isBegin = false;
-		}
-
-		//超过输出范围停止积分继续增加
-		if ((output > outputLimL && output < outputLimH) ||
-			(output == outputLimH && err < 0) ||
-			(output == outputLimL && err > 0))
-		{
-			integral += ki*(err + errOld) / 2;
-		}
-		feedforward = feedforwardH.call(target);
-		output = kp*err + integral + kd*(err - errOld) 
-			+ feedforward;//FunctionPointer未绑定时默认返回0
-
-		limit<float>(output, outputLimL, outputLimH);
-
-		errOld = err;
-		return output;
-	}
+	virtual float refresh(float feedback);
 
 	//获取当前前馈补偿值
-	float getFeedforward()
-	{
-		return feedforward;
-	}
+	float getFeedforward();
 };
+template<typename T>
+void PIDFeedforward::attach(T *pObj, float (T::*feedforwardH)(float input))
+{
+	this->feedforwardH.attach(pObj, feedforwardH);
+}
+
+//前馈补偿变速积分不完全微分PID
+//class PIDFeforGshifIntIncDiff:public
 
 
 #endif

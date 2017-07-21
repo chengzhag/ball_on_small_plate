@@ -151,8 +151,9 @@ float PIDIncompleteDiff::refresh(float feedback)
 }
 
 PIDIntSepIncDiff::PIDIntSepIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
+	PID(kp, ki, kd, interval),
 	PIDIntegralSeperate(kp, ki, kd, interval),
-	filter(1 / interval, stopFrq)
+	PIDIncompleteDiff(kp, ki, kd, interval, stopFrq)
 {
 
 }
@@ -247,8 +248,9 @@ float PIDGearshiftIntegral::refresh(float feedback)
 }
 
 PIDGshifIntIncDiff::PIDGshifIntIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
+	PID(kp, ki, kd, interval),
 	PIDGearshiftIntegral(kp, ki, kd, interval),
-	filter(1 / interval, stopFrq)
+	PIDIncompleteDiff(kp, ki, kd, interval, stopFrq)
 {
 
 }
@@ -312,4 +314,49 @@ float PIDDifferentialAhead::refresh(float feedback)
 	errOld = err;
 	feedbackOld = feedback;
 	return output;
+}
+
+PIDFeedforward::PIDFeedforward(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
+	PID(kp, ki, kd, interval), feedforward(0)
+{
+
+}
+
+void PIDFeedforward::attach(float(*feedforwardH)(float input))
+{
+	this->feedforwardH.attach(feedforwardH);
+}
+
+float PIDFeedforward::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+
+	//超过输出范围停止积分继续增加
+	if ((output > outputLimL && output < outputLimH) ||
+		(output == outputLimH && err < 0) ||
+		(output == outputLimL && err > 0))
+	{
+		integral += ki*(err + errOld) / 2;
+	}
+	feedforward = feedforwardH.call(target);
+	output = kp*err + integral + kd*(err - errOld)
+		+ feedforward;//FunctionPointer未绑定时默认返回0
+
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	return output;
+}
+
+float PIDFeedforward::getFeedforward()
+{
+	return feedforward;
 }
