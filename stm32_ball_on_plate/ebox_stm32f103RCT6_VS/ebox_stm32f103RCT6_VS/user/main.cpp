@@ -42,7 +42,7 @@ float posX = -1;
 float posY = -1;
 
 //PID
-const float ratePID = 34;
+const float ratePID = 33;
 //前馈补偿PID前馈系统：
 //H(s)=s^2/gk
 //tustin: H(z)=4/gkT^2*(z^2-2z+1)/(z^2+2z+1)
@@ -93,15 +93,15 @@ const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
-PIDGshifIntIncDiff
-pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
-pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
+//PIDGshifIntIncDiff
+//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
+//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
 //PIDDifferentialAhead
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
-//PIDFeedforward
-//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
-//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
+PIDFeedforward
+pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
+pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
 
 RcFilter filterX(ratePID, 7), filterY(ratePID, 7), filterOutX(ratePID, 10), filterOutY(ratePID, 10),
 filterTargetX(100, 2), filterTargetY(100, 2);
@@ -233,8 +233,8 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 	}
 	fpsPIDtemp = fpsPID.getFps();
 	float vscan[] = { posX,posY,outX,outY
-		,fpsPIDtemp,fpsUItemp
-		//,pidX.getFeedforward(),pidY.getFeedforward()
+		//,fpsPIDtemp,fpsUItemp
+		,pidX.getFeedforward(),pidY.getFeedforward()
 		,targetX,targetY };
 	uartVscan.sendOscilloscope(vscan, 8);
 }
@@ -257,7 +257,6 @@ void mpuRefresh(void *pvParameters)
 }
 
 //UI交互
-//int runTime = 0;
 void uiRefresh(void *pvParameters)
 {
 	portTickType xLastWakeTime;
@@ -265,11 +264,6 @@ void uiRefresh(void *pvParameters)
 
 	while (1)
 	{
-		//runTime++;
-
-		//if (runTime>=5)
-		//{
-			//runTime = 0;
 		switch (index)
 		{
 		case 0:
@@ -288,7 +282,6 @@ void uiRefresh(void *pvParameters)
 		oled.printf(0, 4, 2, "%.1f %.1f   ", angle[0], angle[1]);
 		fpsUItemp = fpsUI.getFps();
 		oled.printf(0, 6, 2, "%.0f %.0f %.0f ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
-		//}
 
 		vTaskDelayUntil(&xLastWakeTime, (100 / portTICK_RATE_MS));
 	}
@@ -311,18 +304,20 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
 	//pidX.setISepPoint(15);
-	pidX.setGearshiftPoint(10, 50);
-	//pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
+	//pidX.setGearshiftPoint(10, 50);
+	pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
 
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
 	//pidY.setISepPoint(15);
-	pidY.setGearshiftPoint(10, 50);
-	//pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
+	//pidY.setGearshiftPoint(10, 50);
+	pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
 
 	//动力
-	servoY.begin();
 	servoX.begin();
+	servoX.setPct(0);
+	servoY.begin();
+	servoY.setPct(0);
 
 	//定位
 	uartNum.begin(115200);
@@ -349,7 +344,7 @@ void setup()
 
 	//照明
 	ws2812.begin();
-	ws2812.setAllDataHSV(90, 0, 0.5);
+	ws2812.setAllDataHSV(90, 0, 0.7);
 
 	//操作系统
 	set_systick_user_event_per_sec(configTICK_RATE_HZ);

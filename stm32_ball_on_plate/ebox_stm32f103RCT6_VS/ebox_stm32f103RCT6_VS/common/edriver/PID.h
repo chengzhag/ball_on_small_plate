@@ -168,7 +168,47 @@ void PIDFeedforward::attach(T *pObj, float (T::*feedforwardH)(float input))
 }
 
 //前馈补偿变速积分不完全微分PID
-//class PIDFeforGshifIntIncDiff:public
+class PIDFeforGshifIntIncDiff :public PIDFeedforward, public PIDGearshiftIntegral, public PIDIncompleteDiff
+{
+public:
+	PIDFeforGshifIntIncDiff(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01, float stopFrq = 50) :
+		PID(kp, ki, kd, interval),
+		PIDFeedforward(kp, ki, kd, interval),
+		PIDGearshiftIntegral(kp, ki, kd, interval),
+		PIDIncompleteDiff(kp, ki, kd, interval, stopFrq)
+	{
+
+	}
+
+	float refresh(float feedback)
+	{
+		float err;
+		err = target - feedback;
+
+		//初始时使微分为0，避免突然的巨大错误微分
+		if (isBegin)
+		{
+			errOld = err;
+			isBegin = false;
+		}
+
+		//超过输出范围停止积分继续增加
+		if ((output > outputLimL && output < outputLimH) ||
+			(output == outputLimH && err < 0) ||
+			(output == outputLimL && err > 0))
+		{
+			float ek = (err + errOld) / 2;
+			integral += ki*fek(ek)*ek;
+		}
+		feedforward = feedforwardH.call(target);
+		output = kp*err + integral + filter.getFilterOut(kd*(err - errOld))
+			+ feedforward;//FunctionPointer未绑定时默认返回0
+		limit<float>(output, outputLimL, outputLimH);
+
+		errOld = err;
+		return output;
+	}
+};
 
 
 #endif
