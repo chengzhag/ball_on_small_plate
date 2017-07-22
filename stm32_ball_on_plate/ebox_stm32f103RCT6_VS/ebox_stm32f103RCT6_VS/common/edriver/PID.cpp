@@ -41,18 +41,18 @@ void PID::setTarget(float target)
 
 void PID::resetState()
 {
-	integral = 0;
 	errOld = 0;
 	isBegin = true;
+	output = 0;
 }
 
-PIDnorm::PIDnorm(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
+PIDPosition::PIDPosition(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
 	PID(kp, ki, kd, interval)
 {
-
+	resetState();
 }
 
-float PIDnorm::refresh(float feedback)
+float PIDPosition::refresh(float feedback)
 {
 	float err;
 	err = target - feedback;
@@ -78,8 +78,14 @@ float PIDnorm::refresh(float feedback)
 	return output;
 }
 
+void PIDPosition::resetState()
+{
+	integral = 0;
+	PID::resetState();
+}
+
 PIDIntegralSeperate::PIDIntegralSeperate(float kp, float ki, float kd, float interval) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	ISepPoint(std::numeric_limits<float>::max())//初始化使I默认全程有效
 {
 
@@ -123,7 +129,7 @@ float PIDIntegralSeperate::refresh(float feedback)
 }
 
 PIDIncompleteDiff::PIDIncompleteDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	filter(1 / interval, stopFrq)
 {
 
@@ -156,7 +162,7 @@ float PIDIncompleteDiff::refresh(float feedback)
 }
 
 PIDIntSepIncDiff::PIDIntSepIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	PIDIntegralSeperate(kp, ki, kd, interval),
 	PIDIncompleteDiff(kp, ki, kd, interval, stopFrq)
 {
@@ -212,7 +218,7 @@ float PIDGearshiftIntegral::fek(float ek)
 }
 
 PIDGearshiftIntegral::PIDGearshiftIntegral(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	gearshiftPointL(std::numeric_limits<float>::max()),
 	gearshiftPointH(std::numeric_limits<float>::max())////初始化使I默认全程有效
 {
@@ -253,7 +259,7 @@ float PIDGearshiftIntegral::refresh(float feedback)
 }
 
 PIDGshifIntIncDiff::PIDGshifIntIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	PIDGearshiftIntegral(kp, ki, kd, interval),
 	PIDIncompleteDiff(kp, ki, kd, interval, stopFrq)
 {
@@ -288,7 +294,7 @@ float PIDGshifIntIncDiff::refresh(float feedback)
 }
 
 PIDDifferentialAhead::PIDDifferentialAhead(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	feedbackOld(0)
 {
 
@@ -322,7 +328,8 @@ float PIDDifferentialAhead::refresh(float feedback)
 }
 
 PIDFeedforward::PIDFeedforward(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
-	PID(kp, ki, kd, interval), feedforward(0)
+	PIDPosition(kp, ki, kd, interval),
+	feedforward(0)
 {
 
 }
@@ -367,7 +374,7 @@ float PIDFeedforward::getFeedforward()
 }
 
 PIDFeforGshifIntIncDiff::PIDFeforGshifIntIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	PIDFeedforward(kp, ki, kd, interval),
 	PIDGearshiftIntegral(kp, ki, kd, interval),
 	PIDIncompleteDiff(kp, ki, kd, interval, stopFrq)
@@ -405,7 +412,7 @@ float PIDFeforGshifIntIncDiff::refresh(float feedback)
 }
 
 PIDDeadzone::PIDDeadzone(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float deadzone /*= 0*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	deadzone(deadzone)
 {
 
@@ -447,7 +454,7 @@ float PIDDeadzone::refresh(float feedback)
 }
 
 PIDFeforGshifIntIncDiffDezone::PIDFeforGshifIntIncDiffDezone(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/, float deadzone /*= 0*/) :
-	PID(kp, ki, kd, interval),
+	PIDPosition(kp, ki, kd, interval),
 	PIDFeforGshifIntIncDiff(kp, ki, kd, interval, stopFrq),
 	PIDDeadzone(kp, ki, kd, interval, deadzone)
 {
@@ -490,4 +497,38 @@ float PIDFeforGshifIntIncDiffDezone::refresh(float feedback)
 
 	errOld = err;
 	return output;
+}
+
+PIDIncrease::PIDIncrease(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/) :
+	PID(kp, ki, kd, interval)
+{
+	resetState();
+}
+
+float PIDIncrease::refresh(float feedback)
+{
+	//计算err、deltaErr
+	//参与控制的变量还有errOld、deltaErrOld
+	float err;
+	err = target - feedback;
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+	float deltaErr = err - errOld;
+
+	output = kp*deltaErr + ki*err + kd*(deltaErr - deltaErrOld);
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	deltaErrOld = deltaErr;
+	return output;
+}
+
+void PIDIncrease::resetState()
+{
+	deltaErrOld = 0;
+	PID::resetState();
 }

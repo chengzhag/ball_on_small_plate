@@ -27,7 +27,7 @@ class EncoderMotor
 	float percent;
 	float refreshInt;
 public:
-	PIDnorm pid;
+	PIDPosition pid;
 
 	EncoderMotor(TIM_TypeDef *TIMx,
 		Gpio *motorPinA, Gpio *motorPinB, Gpio *motorPinPwm,

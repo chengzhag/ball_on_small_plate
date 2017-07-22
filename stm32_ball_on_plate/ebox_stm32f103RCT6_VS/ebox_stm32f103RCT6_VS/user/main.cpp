@@ -105,8 +105,11 @@ pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
 //PIDFeedforward
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
+//PIDExpert
+//pidX(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
+//pidY(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
 
-RcFilter filterX(ratePID, 7), filterY(ratePID, 7), filterOutX(ratePID, 10), filterOutY(ratePID, 10),
+RcFilter filterX(ratePID, 15), filterY(ratePID, 15), filterOutX(ratePID, 10), filterOutY(ratePID, 10),
 filterTargetX(100, 2), filterTargetY(100, 2);
 float outX, outY;
 
@@ -238,6 +241,7 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 	float vscan[] = { posX,posY,outX,outY
 		//,fpsPIDtemp,fpsUItemp
 		,pidX.getFeedforward(),pidY.getFeedforward()
+		//,(float)pidX.getCurrentRule(),(float)pidY.getCurrentRule()
 		,targetX,targetY };
 	uartVscan.sendOscilloscope(vscan, 8);
 }
@@ -305,16 +309,19 @@ void setup()
 
 	//PID
 	pidX.setTarget(maxX / 2);
-	pidX.setOutputLim(-100, 100);
+	pidX.setOutputLim(-50, 50);
 	//pidX.setISepPoint(15);
 	pidX.setGearshiftPoint(10, 50);
 	pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
+	//pidX.setParams(80, 30, 1.5, 0.5, 10);
 
 	pidY.setTarget(maxY / 2);
-	pidY.setOutputLim(-100, 100);
+	pidY.setOutputLim(-50, 50);
 	//pidY.setISepPoint(15);
 	pidY.setGearshiftPoint(10, 50);
 	pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
+	//pidY.setParams(80, 30, 1.5, 0.5, 10);
+
 
 	//¶¯Á¦
 	servoX.begin();
