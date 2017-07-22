@@ -360,3 +360,129 @@ float PIDFeedforward::getFeedforward()
 {
 	return feedforward;
 }
+
+PIDFeforGshifIntIncDiff::PIDFeforGshifIntIncDiff(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/) :
+	PID(kp, ki, kd, interval),
+	PIDFeedforward(kp, ki, kd, interval),
+	PIDGearshiftIntegral(kp, ki, kd, interval),
+	PIDIncompleteDiff(kp, ki, kd, interval, stopFrq)
+{
+
+}
+
+float PIDFeforGshifIntIncDiff::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+
+	//超过输出范围停止积分继续增加
+	if ((output > outputLimL && output < outputLimH) ||
+		(output == outputLimH && err < 0) ||
+		(output == outputLimL && err > 0))
+	{
+		float ek = (err + errOld) / 2;
+		integral += ki*fek(ek)*ek;
+	}
+	feedforward = feedforwardH.call(target);
+	output = kp*err + integral + filter.getFilterOut(kd*(err - errOld))
+		+ feedforward;//FunctionPointer未绑定时默认返回0
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	return output;
+}
+
+PIDDeadzone::PIDDeadzone(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float deadzone /*= 0*/) :
+	PID(kp, ki, kd, interval),
+	deadzone(deadzone)
+{
+
+}
+
+float PIDDeadzone::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+
+	//如果在死区外
+	if (err > deadzone || err < -deadzone)
+	{
+		//超过输出范围停止积分继续增加
+		if ((output > outputLimL && output < outputLimH) ||
+			(output == outputLimH && err < 0) ||
+			(output == outputLimL && err > 0))
+		{
+			integral += ki*(err + errOld) / 2;
+		}
+		output = kp*err + integral + kd*(err - errOld);
+	}
+	else
+	{
+		output = integral;//在死区内保留旧积分项
+	}
+	limit<float>(output, outputLimL, outputLimH);
+
+
+	errOld = err;
+	return output;
+}
+
+PIDFeforGshifIntIncDiffDezone::PIDFeforGshifIntIncDiffDezone(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*= 0.01*/, float stopFrq /*= 50*/, float deadzone /*= 0*/) :
+	PID(kp, ki, kd, interval),
+	PIDFeforGshifIntIncDiff(kp, ki, kd, interval, stopFrq),
+	PIDDeadzone(kp, ki, kd, interval, deadzone)
+{
+
+}
+
+float PIDFeforGshifIntIncDiffDezone::refresh(float feedback)
+{
+	float err;
+	err = target - feedback;
+
+	//初始时使微分为0，避免突然的巨大错误微分
+	if (isBegin)
+	{
+		errOld = err;
+		isBegin = false;
+	}
+
+	//如果在死区外
+	if (err > deadzone || err < -deadzone)
+	{
+		//超过输出范围停止积分继续增加
+		if ((output > outputLimL && output < outputLimH) ||
+			(output == outputLimH && err < 0) ||
+			(output == outputLimL && err > 0))
+		{
+			float ek = (err + errOld) / 2;
+			integral += ki*fek(ek)*ek;
+		}
+		feedforward = feedforwardH.call(target);
+		output = kp*err + integral + filter.getFilterOut(kd*(err - errOld))
+			+ feedforward;//FunctionPointer未绑定时默认返回0
+	}
+	else
+	{
+		feedforward = feedforwardH.call(target);
+		output = integral + feedforward;//FunctionPointer未绑定时默认返回0
+	}
+	limit<float>(output, outputLimL, outputLimH);
+
+	errOld = err;
+	return output;
+}
