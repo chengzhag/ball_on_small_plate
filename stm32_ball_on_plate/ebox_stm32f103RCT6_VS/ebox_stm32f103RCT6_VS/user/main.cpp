@@ -93,15 +93,15 @@ const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
-//PIDGshifIntIncDiff
-//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
-//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
+PIDFeforGshifIntIncDiff
+pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
+pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
 //PIDDifferentialAhead
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
-PIDFeedforward
-pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
-pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
+//PIDFeedforward
+//pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
+//pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
 
 RcFilter filterX(ratePID, 7), filterY(ratePID, 7), filterOutX(ratePID, 10), filterOutY(ratePID, 10),
 filterTargetX(100, 2), filterTargetY(100, 2);
@@ -304,13 +304,13 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-100, 100);
 	//pidX.setISepPoint(15);
-	//pidX.setGearshiftPoint(10, 50);
+	pidX.setGearshiftPoint(10, 50);
 	pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
 
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-100, 100);
 	//pidY.setISepPoint(15);
-	//pidY.setGearshiftPoint(10, 50);
+	pidY.setGearshiftPoint(10, 50);
 	pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
 
 	//¶¯Á¦

@@ -160,7 +160,7 @@ int main(int argc, char **argv)
 		threshold(imRaw, imProcess, threshBinary, 255, CV_THRESH_BINARY_INV);
 //		threshold(imThresh, imThresh, 0, 255, CV_THRESH_OTSU);
 //		morphologyEx(imRaw, imProcess, CV_MOP_TOPHAT, element);
-//		morphologyEx(imProcess, imProcess, CV_MOP_DILATE, element);
+		morphologyEx(imProcess, imProcess, CV_MOP_DILATE, element);
 //		medianBlur(imProcess, imProcess, 9);
 //		GaussianBlur(imRaw, imProcess, 
 //			Size(int(0.01*imRawH) * 2 + 1, int(0.01*imRawW) * 2 + 1), 
