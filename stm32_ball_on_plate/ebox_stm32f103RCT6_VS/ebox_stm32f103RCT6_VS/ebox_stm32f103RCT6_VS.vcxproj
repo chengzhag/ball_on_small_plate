@@ -63,6 +63,7 @@
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="debug.mak" />
     <None Include="ebox_stm32f103RCT6_VS-Debug.vgdbsettings" />
     <None Include="ebox_stm32f103RCT6_VS-Release.vgdbsettings" />

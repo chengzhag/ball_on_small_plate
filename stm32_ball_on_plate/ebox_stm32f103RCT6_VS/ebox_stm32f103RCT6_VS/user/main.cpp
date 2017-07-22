@@ -227,8 +227,8 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 		}
 		else
 		{
-			pidX.reset();
-			pidY.reset();
+			pidX.resetState();
+			pidY.resetState();
 			outX = 0; outY = 0;
 			//servoX.setPct(0);
 			//servoY.setPct(0);

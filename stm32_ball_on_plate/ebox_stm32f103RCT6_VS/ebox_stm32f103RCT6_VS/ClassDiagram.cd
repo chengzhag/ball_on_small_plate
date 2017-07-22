@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PID">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAsAAEBAABAAAIAAAAACACABABAQBAACoAACASAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDDeadzone" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDDifferentialAhead" Collapsed="true">
+    <Position X="3" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAACAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDFeedforward" Collapsed="true">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAAAAAIAAEAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDFeforGshifIntIncDiff" Collapsed="true">
+    <Position X="5.75" Y="3" Width="2" />
+    <InheritanceLine Type="PIDGearshiftIntegral" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="3.688" />
+        <Point X="5.75" Y="3.688" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="PIDIncompleteDiff" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="5.062" />
+        <Point X="6.75" Y="5.062" />
+        <Point X="6.75" Y="3.936" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDFeforGshifIntIncDiffDezone" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDGearshiftIntegral" Collapsed="true">
+    <Position X="3" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAIAAAAAAAAAAIAAAAAAAAAAAAAAoAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDGshifIntIncDiff" Collapsed="true">
+    <Position X="3" Y="6" Width="2" />
+    <InheritanceLine Type="PIDGearshiftIntegral" FixedToPoint="true">
+      <Path>
+        <Point X="4" Y="4.177" />
+        <Point X="4" Y="4.477" />
+        <Point X="2.7" Y="4.477" />
+        <Point X="2.7" Y="6.438" />
+        <Point X="3" Y="6.438" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDIncompleteDiff" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDIntegralSeperate" Collapsed="true">
+    <Position X="3" Y="7.25" Width="2" />
+    <InheritanceLine Type="PID" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="5.145" />
+        <Point X="1.25" Y="7.625" />
+        <Point X="3" Y="7.625" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAgAAAIAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PIDIntSepIncDiff" Collapsed="true">
+    <Position X="6" Y="6" Width="1.5" />
+    <InheritanceLine Type="PIDIntegralSeperate" FixedFromPoint="true">
+      <Path>
+        <Point X="5" Y="7.625" />
+        <Point X="5.375" Y="7.625" />
+        <Point X="5.375" Y="6.52" />
+        <Point X="6" Y="6.52" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="PIDIncompleteDiff" FixedFromPoint="true">
+      <Path>
+        <Point X="4.75" Y="5.25" />
+        <Point X="5.625" Y="5.25" />
+        <Point X="5.625" Y="6.17" />
+        <Point X="6" Y="6.17" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>common\edriver\PID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

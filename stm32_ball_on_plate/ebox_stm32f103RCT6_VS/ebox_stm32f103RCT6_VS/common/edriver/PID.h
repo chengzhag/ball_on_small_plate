@@ -28,6 +28,9 @@ public:
 
 	//调用setPID前必须先设置好interval
 	void setPID(float kp, float ki, float kd);
+
+	//同时设置interval和PID
+	void setBasic(float kp, float ki, float kd, float interval);
 	
 	//设置输出范围，超过范围停止积分继续增加
 	void setOutputLim(float limL, float limH);
@@ -36,7 +39,7 @@ public:
 	void setTarget(float target);
 
 	//清除积分项、其他暂存项
-	void reset();
+	void resetState();
 
 	//待实现的PID算法
 	virtual float refresh(float feedback) = 0;
@@ -196,5 +199,6 @@ public:
 
 	virtual float refresh(float feedback);
 };
+
 
 #endif

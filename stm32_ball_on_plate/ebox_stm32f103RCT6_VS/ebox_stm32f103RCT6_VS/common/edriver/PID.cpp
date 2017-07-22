@@ -4,11 +4,10 @@ PID::PID(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 0*/, float interval /*
 	isBegin(true),
 	output(0)
 {
-	setInterval(interval);
-	setPID(kp, ki, kd);
+	setBasic(kp, ki, kd, interval);
 	setOutputLim(-std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
 	setTarget(0);
-	reset();
+	resetState();
 }
 
 void PID::setInterval(float interval)
@@ -23,6 +22,12 @@ void PID::setPID(float kp, float ki, float kd)
 	this->kd = kd / interval;
 }
 
+void PID::setBasic(float kp, float ki, float kd, float interval)
+{
+	setInterval(interval);
+	setPID(kp, ki, kd);
+}
+
 void PID::setOutputLim(float limL, float limH)
 {
 	this->outputLimL = limL;
@@ -34,7 +39,7 @@ void PID::setTarget(float target)
 	this->target = target;
 }
 
-void PID::reset()
+void PID::resetState()
 {
 	integral = 0;
 	errOld = 0;
