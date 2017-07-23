@@ -25,6 +25,8 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+	const float targetFPS = 30;
+	const float targetInterval = 1 / targetFPS;
 	piHiPri(99);//最高优先级
 	///声明变量
 #ifdef SOCKET_SEND_IMAGE
@@ -200,6 +202,7 @@ int main(int argc, char **argv)
 		
 		
 #ifdef STDIO_DEBUG
+		timeEnd = (double)getTickCount();
 		//计算算法帧率
 		cout << "fps: " << 1.0 / (timeEnd - timeStart)*(double)getTickFrequency()
 				<< "\t" << pos[0] << " of " << maxX 
@@ -207,9 +210,8 @@ int main(int argc, char **argv)
 				<< "\t" << "thres: " << threshBinary 
 				<< endl;
 		timeStart = timeEnd;
-		timeEnd = (double)getTickCount();
 #endif // STDIO_DEBUG
-		
+
 		uart.sendNum(pos, 2);
 
 		///小球定位算法结束

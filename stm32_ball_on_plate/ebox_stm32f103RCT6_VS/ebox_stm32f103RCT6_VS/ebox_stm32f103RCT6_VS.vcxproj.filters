@@ -1411,6 +1411,9 @@
     <ClInclude Include="common\util\interpolation.h">
       <Filter>Header files\common\util</Filter>
     </ClInclude>
+    <ClInclude Include="common\util\signal_table.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

@@ -362,6 +362,7 @@
     <ClInclude Include="common\util\printable.h" />
     <ClInclude Include="common\util\ringbuf.h" />
     <ClInclude Include="common\util\signal_stream.h" />
+    <ClInclude Include="common\util\signal_table.h" />
     <ClInclude Include="common\util\util.h" />
     <ClInclude Include="common\util\WString.h" />
     <ClInclude Include="example\23.usb_device\USB_msd_sd\usb_msd_sd.h" />

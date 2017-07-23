@@ -26,6 +26,12 @@
 
 
 
+//#define SYSTEM_IDENTIFICATION
+#define BALL_BALANCE
+
+#ifdef SYSTEM_IDENTIFICATION
+#include "signal_table.h"
+#endif // SYSTEM_IDENTIFICATION
 
 using namespace std;
 
@@ -42,7 +48,7 @@ float posX = -1;
 float posY = -1;
 
 //PID
-const float ratePID = 33;
+const float ratePID = 32;
 //前馈补偿PID前馈系统：
 //H(s)=s^2/gk
 //tustin: H(z)=4/gkT^2*(z^2-2z+1)/(z^2+2z+1)
@@ -93,9 +99,9 @@ const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
-PIDFeforGshifIntIncDiff
-pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8),
-pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8);
+PIDGshifIntIncDiff
+pidX(0.25f*factorPID, 0.2f*factorPID, 0.14f*factorPID, 1.f / ratePID, 30),
+pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
 //PIDFeforGshifIntIncDiffDezone
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8, 2),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8, 2);
@@ -239,8 +245,8 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 	}
 	fpsPIDtemp = fpsPID.getFps();
 	float vscan[] = { posX,posY,outX,outY
-		//,fpsPIDtemp,fpsUItemp
-		,pidX.getFeedforward(),pidY.getFeedforward()
+		,fpsPIDtemp,fpsUItemp
+		//,pidX.getFeedforward(),pidY.getFeedforward()
 		//,(float)pidX.getCurrentRule(),(float)pidY.getCurrentRule()
 		,targetX,targetY };
 	uartVscan.sendOscilloscope(vscan, 8);
@@ -295,7 +301,61 @@ void uiRefresh(void *pvParameters)
 
 }
 
+#ifdef SYSTEM_IDENTIFICATION
+void systemIdentificationTask(void *pvParameters)
+{
+	portTickType xLastWakeTime;
+	xLastWakeTime = xTaskGetTickCount();
+	float timeStamp = 0, input = 0, output;
+	const float sampleInterval = 1000 / (int)ratePID / 1000.f;
+	float angle[3];
 
+	bool isStable = false;
+	bool isEnd = false;
+	int index = 0;
+
+	while (1)
+	{
+		timeStamp += sampleInterval;
+		mpu.getAngle(angle, angle + 1, angle + 2);
+		output = -angle[0];
+
+		if (!isStable)
+		{
+			if (timeStamp > 10)
+			{
+				isStable = true;
+				timeStamp = 0;
+			}
+		}
+		else
+		{
+			if (!isEnd)
+			{
+				input = 30 * sweepSignal[index];
+
+				servoX.setPct(input);
+				index++;
+				if (index >= sweepSignalLength)
+				{
+					isEnd = true;
+				}
+
+				uart1.printf("%f\t%f\t%f\r\n", timeStamp, input, output);
+			}
+
+		}
+
+		//float dataSend[] = { timeStamp,input,output };
+		//uartVscan.sendOscilloscope(dataSend, 3);
+
+		
+
+		vTaskDelayUntil(&xLastWakeTime, (1000 / ratePID / portTICK_RATE_MS));
+	}
+
+}
+#endif // SYSTEM_IDENTIFICATION
 
 void setup()
 {
@@ -312,14 +372,14 @@ void setup()
 	pidX.setOutputLim(-50, 50);
 	//pidX.setISepPoint(15);
 	pidX.setGearshiftPoint(10, 50);
-	pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
+	//pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
 	//pidX.setParams(80, 30, 1.5, 0.5, 10);
 
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-50, 50);
 	//pidY.setISepPoint(15);
 	pidY.setGearshiftPoint(10, 50);
-	pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
+	//pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
 	//pidY.setParams(80, 30, 1.5, 0.5, 10);
 
 
@@ -331,7 +391,6 @@ void setup()
 
 	//定位
 	uartNum.begin(115200);
-	uartNum.attach(posReceiveEvent);
 
 	//底座
 	mpu.setGyroBias(-0.0151124271, -0.00376615906, 0.0124653624);
@@ -340,9 +399,7 @@ void setup()
 		-18.786200, 17.835992, 14.496549,
 		0.986133, 1.038038, 0.975829);
 	mpu.setOrien(1, 2, 3);
-	mpu.begin(400000, 100, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
-	//float bias[3];
-	//mpu.getAccelBias(bias, bias + 1, bias + 2);
+
 
 	//交互
 	keyD.begin();
@@ -354,14 +411,31 @@ void setup()
 
 	//照明
 	ws2812.begin();
-	ws2812.setAllDataHSV(90, 0, 0.7);
 
+
+
+
+#ifdef SYSTEM_IDENTIFICATION
+	mpu.begin(400000, ratePID, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g
+		,MPU6500_DLPF_Bandwidth_250Hz,MPU6500_A_DLPF_Bandwidth_420Hz);
 	//操作系统
 	set_systick_user_event_per_sec(configTICK_RATE_HZ);
 	attach_systick_user_event(xPortSysTickHandler);
+	xTaskCreate(systemIdentificationTask, "mpuRefresh", 512, NULL, 0, NULL);
+#endif // SYSTEM_IDENTIFICATION
 
+#ifdef BALL_BALANCE
+	mpu.begin(400000, 100, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
+	//float bias[3];
+	//mpu.getAccelBias(bias, bias + 1, bias + 2);
+	uartNum.attach(posReceiveEvent);
+	ws2812.setAllDataHSV(60, 1, 0.7);
+	//操作系统
+	set_systick_user_event_per_sec(configTICK_RATE_HZ);
+	attach_systick_user_event(xPortSysTickHandler);
 	xTaskCreate(mpuRefresh, "mpuRefresh", 512, NULL, 0, NULL);
 	xTaskCreate(uiRefresh, "uiRefresh", 512, NULL, 0, NULL);
+#endif // BALL_BALANCE
 	vTaskStartScheduler();
 }
 
