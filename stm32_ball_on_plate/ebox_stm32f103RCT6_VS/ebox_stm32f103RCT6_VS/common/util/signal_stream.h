@@ -102,4 +102,33 @@ private:
 	float yOld;
 };
 
+//只有零点的系统
+class SysWithOnlyZero
+{
+	SignalStream<float> xn;
+	float *args;
+	int num;
+public:
+	//只有零点的系统
+	//args是z^0, z^-1,z^-2...的系数
+	SysWithOnlyZero(float *args, int num):
+		xn(num),
+		args(args),
+		num(num)
+	{
+		
+	}
+
+	float getY(float x)
+	{
+		float y = 0;
+		xn.push(x);
+		for (int i = 0; i < num; i++)
+		{
+			y += args[i] * xn[i];
+		}
+		return y;
+	}
+};
+
 #endif

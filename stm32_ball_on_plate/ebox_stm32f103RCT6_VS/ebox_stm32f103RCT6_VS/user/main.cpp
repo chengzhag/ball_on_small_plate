@@ -49,49 +49,16 @@ float posY = -1;
 
 //PID
 const float ratePID = 32;
-//前馈补偿PID前馈系统：
-//H(s)=s^2/gk
-//tustin: H(z)=4/gkT^2*(z^2-2z+1)/(z^2+2z+1)
-//向后差分: H(z)=200/gkpiT^2(1-2z^-1+z^-2)
-//k为舵机摇臂与平板摇臂之比
-//g为重力加速度
-class FeedforwardSys
-{
-protected:
-	float xn1, xn2, yn1, yn2;
-	float k, T, factor;
-	bool isBegin;
-	RcFilter filter;
-public:
-	FeedforwardSys(float k, float T) :
-		xn1(0), xn2(0),
-		k(k), T(T), factor(300 / 9.8 / k / M_PI / T / T),
-		isBegin(true),
-		filter(30, 3)
-	{
+const float intervalPID = 1 / ratePID;
 
-	}
-
-	float getY(float x)
-	{
-		float y = 0;
-		x /= 1000;//转换为标准单位
-
-		if (isBegin)
-		{
-			xn1 = x;
-			xn2 = x;
-			isBegin = false;
-		}
-		y = (x - 2 * xn1 + xn2)*factor;
-
-		xn2 = xn1;
-		xn1 = x;
-		y = filter.getFilterOut(y);
-		return y;
-	}
-}feedforwardSysX(1.9 / 9, 1 / ratePID),
-feedforwardSysY(1.9 / 9, 1 / ratePID);
+const float servoFactor = 1;
+const float gzDenominator = servoFactor*26.4106* intervalPID *intervalPID;
+float feedforwardSysH[] = {
+	1 / gzDenominator,
+	-2/ gzDenominator,
+	1 / gzDenominator
+};
+SysWithOnlyZero feedforwardSysX(feedforwardSysH, 3), feedforwardSysY(feedforwardSysH, 3);
 
 float targetX = maxX / 2, targetY = maxY / 2,
 targetXraw = targetX, targetYraw = targetY;
@@ -99,7 +66,7 @@ const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
-PIDGshifIntIncDiff
+PIDFeforGshifIntIncDiff
 pidX(0.25f*factorPID, 0.2f*factorPID, 0.14f*factorPID, 1.f / ratePID, 30),
 pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
 //PIDFeforGshifIntIncDiffDezone
@@ -245,8 +212,8 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 	}
 	fpsPIDtemp = fpsPID.getFps();
 	float vscan[] = { posX,posY,outX,outY
-		,fpsPIDtemp,fpsUItemp
-		//,pidX.getFeedforward(),pidY.getFeedforward()
+		//,fpsPIDtemp,fpsUItemp
+		,pidX.getFeedforward(),pidY.getFeedforward()
 		//,(float)pidX.getCurrentRule(),(float)pidY.getCurrentRule()
 		,targetX,targetY };
 	uartVscan.sendOscilloscope(vscan, 8);
@@ -372,14 +339,14 @@ void setup()
 	pidX.setOutputLim(-50, 50);
 	//pidX.setISepPoint(15);
 	pidX.setGearshiftPoint(10, 50);
-	//pidX.attach(&feedforwardSysX, &FeedforwardSys::getY);
+	pidX.attach(&feedforwardSysX, &SysWithOnlyZero::getY);
 	//pidX.setParams(80, 30, 1.5, 0.5, 10);
 
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-50, 50);
 	//pidY.setISepPoint(15);
 	pidY.setGearshiftPoint(10, 50);
-	//pidY.attach(&feedforwardSysY, &FeedforwardSys::getY);
+	pidY.attach(&feedforwardSysY, &SysWithOnlyZero::getY);
 	//pidY.setParams(80, 30, 1.5, 0.5, 10);
 
 
