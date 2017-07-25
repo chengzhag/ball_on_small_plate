@@ -39,6 +39,11 @@ void PID::setTarget(float target)
 	this->target = target;
 }
 
+float PID::getTarget()
+{
+	return target;
+}
+
 void PID::resetState()
 {
 	errOld = 0;

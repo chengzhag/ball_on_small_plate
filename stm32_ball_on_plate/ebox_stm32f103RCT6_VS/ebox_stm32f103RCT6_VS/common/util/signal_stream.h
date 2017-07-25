@@ -2,7 +2,7 @@
 #define __SIGNAL_STREAM
 
 #include "ebox.h"
-
+#include "my_math.h"
 
 //用circle buffer实现的试试信号处理类
 //仅做信号存储，通过继承或实例化实现信号处理函数
@@ -34,9 +34,30 @@ public:
 	//压入最新的数据并弹出最旧的数据
 	void push(T signal);
 
+	//重新设置队列长度
+	void setLength(int length);
+
+	//获取最旧的数据
+	float getOldest();
+
 	//重载[]操作符，从0开始为从新到旧的数据
 	T &operator [](int index);
 };
+
+template<typename T>
+float SignalStream<T>::getOldest()
+{
+	return operator [](length - 1);
+}
+
+template<typename T>
+void SignalStream<T>::setLength(int length)
+{
+	this->length = length;
+	ebox_free(buf);
+	buf = (T *)ebox_malloc(sizeof(T)*length);
+	clear();
+}
 
 template<typename T>
 SignalStream<T>::SignalStream(int length) :
@@ -91,19 +112,37 @@ public:
 };
 
 class RcFilter
-
 {
-public:
-	RcFilter(float sampleFrq, float stopFrq);
-	float getFilterOut(float x);
-private:
+protected:
 	float k;
 	float sampleFrq;
 	float yOld;
+
+public:
+	RcFilter(float sampleFrq, float stopFrq);
+	
+	//获取滤波器输出
+	float getFilterOut(float x);
+
+	//设置采样率和截止频率
+	void setParams(float sampleFrq, float stopFrq);
+
+	//设置截止频率
+	void setStopFrq(float stopFrq);
+
+	//清除上一次输出
+	void clear();
+};
+
+//z变换表示的离散系统
+class SysZ
+{
+public:
+	virtual float getY(float x) = 0;
 };
 
 //只有零点的系统
-class SysWithOnlyZero
+class SysWithOnlyZero:public SysZ
 {
 	SignalStream<float> xn;
 	float *args;
@@ -119,16 +158,11 @@ public:
 		
 	}
 
-	float getY(float x)
-	{
-		float y = 0;
-		xn.push(x);
-		for (int i = 0; i < num; i++)
-		{
-			y += args[i] * xn[i];
-		}
-		return y;
-	}
+	//传入输入，获取输出
+	float getY(float x);
+
+	//清除系统历史数据
+	void clear();
 };
 
 #endif

@@ -38,6 +38,9 @@ public:
 	//设置控制目标
 	void setTarget(float target);
 
+	//获取控制目标
+	float getTarget();
+
 	//清除暂存项
 	virtual void resetState();
 
@@ -373,4 +376,59 @@ public:
 //	}
 //
 //};
+
+//重复控制器，与PID联合使用
+//作用在PID之前，与实际测量值相减输入到PID中
+class RepetitiveController
+{
+protected:
+	SignalStream<float> err;
+	RcFilter filter;
+	float k;
+	SysZ *sz;
+	int forwardCorrect;
+public:
+	//重复控制器，与PID联合使用
+	//作用在PID之前，与实际测量值相减输入到PID中
+	//length是扰动或控制信号的周期
+	//k是输出增益
+	//frq、fh是输出低通滤波器的参数
+	//Sz是重复控制器的补偿系统，为受控对象的逆
+	RepetitiveController(int length,int forwardCorrect, float k, float frq, float fh,SysZ *sz) :
+		err(length),
+		filter(frq, fh),
+		k(k),
+		sz(sz),
+		forwardCorrect(forwardCorrect)
+	{
+
+	}
+
+	//清除历史误差
+	void clear()
+	{
+		err.clear();
+		filter.clear();
+	}
+
+	//输出补偿信号
+	float refresh(float feedback)
+	{
+		float oldestErr = err.getOldest();
+		float filterOut = filter.getFilterOut(feedback);
+		err.push(k*filterOut + oldestErr);
+
+		//float output = sz->getY(err.getOldest());
+		
+		return err[err.getLength()-1- forwardCorrect];
+	}
+
+	//设置周期
+	void setLength(int length)
+	{
+		err.setLength(length);
+	}
+
+};
+
 #endif

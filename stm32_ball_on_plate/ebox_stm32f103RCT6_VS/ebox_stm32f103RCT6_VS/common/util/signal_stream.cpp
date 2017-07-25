@@ -1,5 +1,5 @@
 #include "signal_stream.h"
-#include "my_math.h"
+
 
 
 AverageFilter::AverageFilter(float sampleFrq, float stopFrq) :
@@ -18,11 +18,9 @@ float AverageFilter::getFilterOut(float newNum)
 
 
 RcFilter::RcFilter(float sampleFrq, float stopFrq):
-	sampleFrq(sampleFrq),
-	k(1 / (1 + (2 * M_PI *stopFrq / sampleFrq))),
 		yOld(0)
 {
-
+	setParams(sampleFrq, stopFrq);
 }
 
 float RcFilter::getFilterOut(float x)
@@ -32,5 +30,35 @@ float RcFilter::getFilterOut(float x)
 	return y;
 }
 
+void RcFilter::setParams(float sampleFrq, float stopFrq)
+{
+	this->sampleFrq = sampleFrq;
+	setStopFrq(stopFrq);
+}
+
+void RcFilter::setStopFrq(float stopFrq)
+{
+	k = 1 / (1 + (2 * M_PI *stopFrq / sampleFrq));
+}
+
+void RcFilter::clear()
+{
+	yOld = 0;
+}
 
 
+float SysWithOnlyZero::getY(float x)
+{
+	float y = 0;
+	xn.push(x);
+	for (int i = 0; i < num; i++)
+	{
+		y += args[i] * xn[i];
+	}
+	return y;
+}
+
+void SysWithOnlyZero::clear()
+{
+	xn.clear();
+}

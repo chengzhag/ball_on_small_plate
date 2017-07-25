@@ -50,16 +50,21 @@ float posY = -1;
 //PID
 const float ratePID = 32;
 const float intervalPID = 1 / ratePID;
-
-const float servoFactor = 1;
-const float gzDenominator = servoFactor*26.4106* intervalPID *intervalPID;
+//前馈系统
+const float feedForwardSysK = 1;
+const float gzDenominator 
+= feedForwardSysK*26.4106* intervalPID *intervalPID;
 float feedforwardSysH[] = {
 	1 / gzDenominator,
 	-2/ gzDenominator,
 	1 / gzDenominator
 };
-SysWithOnlyZero feedforwardSysX(feedforwardSysH, 3), feedforwardSysY(feedforwardSysH, 3);
+SysWithOnlyZero feedforwardSysX(feedforwardSysH, 3)
+, feedforwardSysY(feedforwardSysH, 3)
+, repetitiveControllerSzX(feedforwardSysH, 3)
+, repetitiveControllerSzY(feedforwardSysH, 3);
 
+//pid参数
 float targetX = maxX / 2, targetY = maxY / 2,
 targetXraw = targetX, targetYraw = targetY;
 const float factorPID = 1.24;
@@ -81,22 +86,33 @@ pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
 //PIDExpert
 //pidX(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
 //pidY(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
-
-RcFilter filterX(ratePID, 15), filterY(ratePID, 15), filterOutX(ratePID, 10), filterOutY(ratePID, 10),
-filterTargetX(100, 2), filterTargetY(100, 2);
+RcFilter filterX(ratePID, 15), filterY(ratePID, 15)
+, filterOutX(ratePID, 10), filterOutY(ratePID, 10)
+, filterTargetX(100, 2), filterTargetY(100, 2);
 float outX, outY;
+//重复控制补偿系统
+const float rateCircle = 0.5;
+const int lengthRepetitiveController = ratePID / rateCircle;
+RepetitiveController repetitiveControllerX(lengthRepetitiveController, 12, 0.25, ratePID, 3, &repetitiveControllerSzX)
+, repetitiveControllerY(lengthRepetitiveController, 12, 0.25, ratePID, 3, &repetitiveControllerSzY);
+float outRepetitiveControllerX = 0, outRepetitiveControllerY = 0;
+bool isBallCircle = false, isBallCircleOld = false;
 
 //动力
 Servo servoX(&PB9, 200, 0.7, 2.3);
 Servo servoY(&PB8, 200, 0.75, 2.35);
 
 //底座
+const float rateMPU = 100;
+const float intervalMPU = 1 / rateMPU;
 const float factorServo = 6.5;
 float angle[3];
 SoftI2c si2c3(&PB3, &PB11);
 MPU9250AHRS mpu(&si2c3, MPU6500_Model_6555);
 
 //交互
+const float rateUI = 10;
+const float intervalUI = 1 / rateUI;
 Button keyL(&PB4, 1);
 Button keyR(&PB1, 1);
 Button keyU(&PC5, 1);
@@ -113,6 +129,7 @@ WS2812 ws2812(&PB0);
 int index = 0;
 float circleR = 0;
 float theta = 0;
+bool isBallBack = true;
 void posReceiveEvent(UartNum<float, 2>* uartNum)
 {
 	//按键响应
@@ -151,22 +168,33 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 	}
 
 	//功能
+	isBallCircleOld = isBallCircle;
 	switch (index)
 	{
 	case 0:
 		targetXraw += increase;
 		limit<float>(targetXraw, 30, maxX - 30);
+		isBallCircle = false;
 		break;
 	case 1:
 		targetYraw += increase;
 		limit<float>(targetYraw, 30, maxY - 30);
+		isBallCircle = false;
 		break;
 	case 2:
 		circleR = circleR + increase;
 		limit<float>(circleR, 0, (maxY - 100) / 2);
-		theta += 2 * PI / 35 * 0.5;//0.5圈一秒
+		theta += 2 * PI *intervalPID * rateCircle;//0.5圈一秒
 		targetXraw = maxX / 2 + circleR*sin(theta);
 		targetYraw = maxY / 2 + circleR*cos(theta);
+		if (circleR>5)
+		{
+			isBallCircle = true;
+		}
+		else
+		{
+			isBallCircle = false;
+		}
 		break;
 	default:
 		break;
@@ -187,12 +215,42 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 
 		if (!isnan(posX) && !isnan(posY))
 		{
+			if (isBallBack == false)
+			{
+				repetitiveControllerX.clear();
+				repetitiveControllerY.clear();
+				pidX.resetState();
+				pidY.resetState();
+
+				isBallBack = true;
+			}
+			
+
 			//posX = filterX.getFilterOut(posX);
 			//posY = filterY.getFilterOut(posY);
 
+			//进行周期控制
+			if (isBallCircle == true && isBallCircleOld == true)
+			{
+				outRepetitiveControllerX =
+					repetitiveControllerX.refresh(targetX - posX);
+				outRepetitiveControllerY =
+					repetitiveControllerY.refresh(targetY - posY);
+				//outX += outRepetitiveControllerX;
+				//outY -= outRepetitiveControllerY;
+			}
+			else if (isBallCircle == false && isBallCircleOld == true)
+			{
+				repetitiveControllerX.clear();
+				repetitiveControllerY.clear();
+				outRepetitiveControllerX = 0;
+				outRepetitiveControllerY = 0;
+			}
+
 			outX = 0, outY = 0;
-			outX += pidX.refresh(posX);
-			outY -= pidY.refresh(posY);
+			outX += pidX.refresh(posX - outRepetitiveControllerX);
+			outY -= pidY.refresh(posY - outRepetitiveControllerY);
+
 
 			//outX = filterOutX.getFilterOut(outX);
 			//outY = filterOutY.getFilterOut(outY);
@@ -203,17 +261,15 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 		}
 		else
 		{
-			pidX.resetState();
-			pidY.resetState();
 			outX = 0; outY = 0;
-			//servoX.setPct(0);
-			//servoY.setPct(0);
+			isBallBack = false;
 		}
 	}
 	fpsPIDtemp = fpsPID.getFps();
 	float vscan[] = { posX,posY,outX,outY
 		//,fpsPIDtemp,fpsUItemp
-		,pidX.getFeedforward(),pidY.getFeedforward()
+		//,pidX.getFeedforward(),pidY.getFeedforward()
+		,outRepetitiveControllerX,outRepetitiveControllerY
 		//,(float)pidX.getCurrentRule(),(float)pidY.getCurrentRule()
 		,targetX,targetY };
 	uartVscan.sendOscilloscope(vscan, 8);
@@ -231,7 +287,7 @@ void mpuRefresh(void *pvParameters)
 		servoX.setPct(outX - angle[1] * factorServo);
 		servoY.setPct(outY - angle[0] * factorServo);
 		fpsMPUtemp = fpsMPU.getFps();
-		vTaskDelayUntil(&xLastWakeTime, (10 / portTICK_RATE_MS));
+		vTaskDelayUntil(&xLastWakeTime, (100 * intervalMPU / portTICK_RATE_MS));
 	}
 
 }
@@ -263,7 +319,7 @@ void uiRefresh(void *pvParameters)
 		fpsUItemp = fpsUI.getFps();
 		oled.printf(0, 6, 2, "%.0f %.0f %.0f ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
 
-		vTaskDelayUntil(&xLastWakeTime, (100 / portTICK_RATE_MS));
+		vTaskDelayUntil(&xLastWakeTime, (1000 * intervalUI / portTICK_RATE_MS));
 	}
 
 }
@@ -318,7 +374,7 @@ void systemIdentificationTask(void *pvParameters)
 
 		
 
-		vTaskDelayUntil(&xLastWakeTime, (1000 / ratePID / portTICK_RATE_MS));
+		vTaskDelayUntil(&xLastWakeTime, (1000 * intervalPID / portTICK_RATE_MS));
 	}
 
 }
@@ -392,7 +448,7 @@ void setup()
 #endif // SYSTEM_IDENTIFICATION
 
 #ifdef BALL_BALANCE
-	mpu.begin(400000, 100, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
+	mpu.begin(400000, rateMPU, MPU6500_Gyro_Full_Scale_500dps, MPU6500_Accel_Full_Scale_4g);
 	//float bias[3];
 	//mpu.getAccelBias(bias, bias + 1, bias + 2);
 	uartNum.attach(posReceiveEvent);
