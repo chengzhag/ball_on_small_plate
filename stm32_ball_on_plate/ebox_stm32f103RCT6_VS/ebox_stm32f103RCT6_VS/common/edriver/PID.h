@@ -6,6 +6,7 @@
 #include "signal_stream.h"
 #include <math.h>
 #include "FunctionPointer.h"
+#include "interpolation.h"
 
 
 //PID»ùÀà
