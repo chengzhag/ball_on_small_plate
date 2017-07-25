@@ -2,8 +2,19 @@
 #include "my_math.h"
 #include "uart_vcan.h"
 #include "interpolation.h"
+//#define  searchDebug
 //#define LinearInterpolationDebug
-#define  QuadraticInterpolationDebug
+//#define  QuadraticInterpolationDebug
+#define  Interpolation2DDebug
+
+UartVscan vscan(&uart1);
+void setup()
+{
+	uart1.begin(115200);
+	vscan.begin(115200);
+	PA8.mode(OUTPUT_PP);
+}
+
 #ifdef LinearInterpolationDebug
 float x[5] = { 1,2,3,4,5 };
 float y[5] = { 5,3,2,4,5 };
@@ -23,15 +34,25 @@ FpsCounter fps;
 QuadraticInterpolation Quadratic(x, y, length);
 #endif
 
-UartVscan vscan(&uart1);
 
-void setup()
+
+#ifdef searchDebug
+float x[5] = { 1, 2, 3, 4, 5 };
+float y[5] = { 1, 2, 3, 4, 5 };
+int length = 5;
+LinearInterpolation SearchDebug(x, y, length);
+int main()
 {
-	ebox_init();
-	uart1.begin(115200);
-	vscan.begin(115200);
-	PA8.mode(OUTPUT_PP);
+	setup()
+	int z = SearchDebug.search(1.1);
+	while (1)
+	{
+		PA8.toggle();
+		delay_ms(100);
+	}
+	return 0;
 }
+#endif 
 
 #ifdef LinearInterpolationDebug
 int main()
@@ -39,20 +60,26 @@ int main()
 	float y;
 
 	setup();
-
-	//验证合理外推
-	float x = -1;
+	while (1)
+	{
+	//验证线性插值
+	float x = 5;
 	for (int i = 0; i < 100; i++)
 	{
 		y = liner.getY(x);
-		x += 0.1;
+		x += 0.01;
 		uart1.printf("%.3f\r\n", y);
-		delay_ms(1);
 	}
-	PA8.toggle();
 
-	while (1)
-	{
+	//验证合理外推
+	//float x = -1;
+	//for (int i = 0; i < 100; i++)
+	//{
+	//	y = liner.getY(x);
+	//	x += 0.1;
+	//	uart1.printf("%.3f\r\n", y);
+	//}
+	//PA8.toggle();
 	}
 	return 1;
 
@@ -88,20 +115,50 @@ int main()
 
 	//验证边界之外的插值结果
 	float t = 0.1;
-	for (int i = 1; i < 120; i++)
+	for (int i = 1; i < 70; i++)
 	{
 		t += 0.2;
 		y = Quadratic.getY(t);
 		uart1.printf("%.5f\r\n", y);
-		delay_ms(1);
 	}
 	PA8.toggle();
-	while (1)
-	{
-	}
+
 
 	return 0;
 
 }
 
 #endif
+
+
+
+#ifdef Interpolation2DDebug
+float x[4] = { 1,2,3,4 };
+float y[4] = { 1,2,3,4 };
+//由随机数函数获取
+float z[16] = { 41.000,  67.000,  34.000,   0.000,
+69.000,  24.000,  78.000,  58.000,
+62.000,  64.000,   5.000,  45.000,
+81.000 , 27.000 , 61.000 , 91.000, };
+int lengthx = 4;
+int lengthy = 4;
+Interpolation2D Binary(x, y, z, lengthx, lengthy);
+int main()
+{
+	//setup();
+	float t1 = 0.9, t2 = 0.9;
+	for (int i = 0; i <33; i++)
+	{
+		t2 = 0.9;
+		for (int j = 0; j < 33; j++)
+		{
+			float fz = Binary.getZ(t2, t1);
+			printf("%8.3f", fz);
+			t2 += 0.1;
+		}
+		printf("\n");
+		t1 += 0.1;
+	}
+	return 0;
+}
+#endif // Interpolation2DDebug
