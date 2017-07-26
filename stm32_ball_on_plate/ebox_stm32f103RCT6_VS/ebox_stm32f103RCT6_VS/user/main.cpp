@@ -60,9 +60,7 @@ float feedforwardSysH[] = {
 	1 / gzDenominator
 };
 SysWithOnlyZero feedforwardSysX(feedforwardSysH, 3)
-, feedforwardSysY(feedforwardSysH, 3)
-, repetitiveControllerSzX(feedforwardSysH, 3)
-, repetitiveControllerSzY(feedforwardSysH, 3);
+, feedforwardSysY(feedforwardSysH, 3);
 
 //pid参数
 float targetX = maxX / 2, targetY = maxY / 2,
@@ -93,8 +91,8 @@ float outX, outY;
 //重复控制补偿系统
 const float rateCircle = 0.5;
 const int lengthRepetitiveController = ratePID / rateCircle;
-RepetitiveController repetitiveControllerX(lengthRepetitiveController, 12, 0.25, ratePID, 3, &repetitiveControllerSzX)
-, repetitiveControllerY(lengthRepetitiveController, 12, 0.25, ratePID, 3, &repetitiveControllerSzY);
+RepetitiveController repetitiveControllerX(lengthRepetitiveController, 12, 0.25, ratePID, 3)
+, repetitiveControllerY(lengthRepetitiveController, 12, 0.25, ratePID, 3);
 float outRepetitiveControllerX = 0, outRepetitiveControllerY = 0;
 bool isBallCircle = false, isBallCircleOld = false;
 

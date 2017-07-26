@@ -368,7 +368,7 @@ public:
 //class PIDfuzzy :virtual public PID 
 //{
 //protected:
-//
+//	Interpolation2D t
 //public:
 //	PIDfuzzy(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01) :
 //		PID(kp, ki, kd, interval)
@@ -386,7 +386,6 @@ protected:
 	SignalStream<float> err;
 	RcFilter filter;
 	float k;
-	SysZ *sz;
 	int forwardCorrect;
 public:
 	//重复控制器，与PID联合使用
@@ -395,11 +394,10 @@ public:
 	//k是输出增益
 	//frq、fh是输出低通滤波器的参数
 	//Sz是重复控制器的补偿系统，为受控对象的逆
-	RepetitiveController(int length,int forwardCorrect, float k, float frq, float fh,SysZ *sz) :
+	RepetitiveController(int length,int forwardCorrect, float k, float frq, float fh) :
 		err(length),
 		filter(frq, fh),
 		k(k),
-		sz(sz),
 		forwardCorrect(forwardCorrect)
 	{
 
@@ -431,5 +429,6 @@ public:
 	}
 
 };
+
 
 #endif
