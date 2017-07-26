@@ -117,7 +117,6 @@
     <ClCompile Include="common\edriver\oled_i2c.cpp" />
     <ClCompile Include="common\edriver\OLED_ssd1306.cpp" />
     <ClCompile Include="common\edriver\parallel_gpio.cpp" />
-    <ClCompile Include="common\edriver\PID.cpp" />
     <ClCompile Include="common\edriver\servo.cpp" />
     <ClCompile Include="common\edriver\si4432.cpp" />
     <ClCompile Include="common\edriver\tb6612fng.cpp" />
@@ -165,6 +164,7 @@
     <ClCompile Include="common\util\interpolation.cpp" />
     <ClCompile Include="common\util\itoa.c" />
     <ClCompile Include="common\util\my_math.cpp" />
+    <ClCompile Include="common\util\PID.cpp" />
     <ClCompile Include="common\util\print.cpp" />
     <ClCompile Include="common\util\ringbuf.cpp" />
     <ClCompile Include="common\util\signal_stream.cpp" />
@@ -271,7 +271,6 @@
     <ClInclude Include="common\edriver\oled_i2c.h" />
     <ClInclude Include="common\edriver\OLED_ssd1306.h" />
     <ClInclude Include="common\edriver\parallel_gpio.h" />
-    <ClInclude Include="common\edriver\PID.h" />
     <ClInclude Include="common\edriver\servo.h" />
     <ClInclude Include="common\edriver\si4432.h" />
     <ClInclude Include="common\edriver\tb6612fng.h" />
@@ -354,15 +353,16 @@
     <ClInclude Include="common\util\crc.h" />
     <ClInclude Include="common\util\dtostrf.h" />
     <ClInclude Include="common\util\ebox_mem.h" />
+    <ClInclude Include="common\util\fuzzyTable.h" />
     <ClInclude Include="common\util\heap.h" />
     <ClInclude Include="common\util\interpolation.h" />
     <ClInclude Include="common\util\itoa.h" />
     <ClInclude Include="common\util\my_math.h" />
+    <ClInclude Include="common\util\PID.h" />
     <ClInclude Include="common\util\print.h" />
     <ClInclude Include="common\util\printable.h" />
     <ClInclude Include="common\util\ringbuf.h" />
     <ClInclude Include="common\util\signal_stream.h" />
-    <ClInclude Include="common\util\signal_table.h" />
     <ClInclude Include="common\util\util.h" />
     <ClInclude Include="common\util\WString.h" />
     <ClInclude Include="example\23.usb_device\USB_msd_sd\usb_msd_sd.h" />
@@ -441,6 +441,7 @@
     <ClInclude Include="user\bsp.h" />
     <ClInclude Include="user\FreeRTOSConfig.h" />
     <ClInclude Include="user\os_cfg.h" />
+    <ClInclude Include="user\signal_table.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MCU.xml" />

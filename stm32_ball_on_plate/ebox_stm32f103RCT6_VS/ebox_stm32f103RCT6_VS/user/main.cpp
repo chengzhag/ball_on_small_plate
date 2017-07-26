@@ -4,10 +4,13 @@
 #include "led.h"
 #include "my_math.h"
 #include "uart_vcan.h"
+#include "math.h"
 //PID
 #include "PID.h"
 #include "signal_stream.h"
 #include <math.h>
+#include "interpolation.h"
+#include "fuzzyTable.h"
 //动力
 #include "servo.h"
 //定位
@@ -28,6 +31,7 @@
 
 //#define SYSTEM_IDENTIFICATION
 #define BALL_BALANCE
+//#define ENABLE_REPETITIVE_CONTROLLER
 
 #ifdef SYSTEM_IDENTIFICATION
 #include "signal_table.h"
@@ -69,9 +73,9 @@ const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
-PIDFeforGshifIntIncDiff
-pidX(0.25f*factorPID, 0.2f*factorPID, 0.14f*factorPID, 1.f / ratePID, 30),
-pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
+//PIDFeforGshifIntIncDiff
+//pidX(0.25f*factorPID, 0.2f*factorPID, 0.14f*factorPID, 1.f / ratePID, 30),
+//pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
 //PIDFeforGshifIntIncDiffDezone
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8, 2),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8, 2);
@@ -81,28 +85,38 @@ pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
 //PIDFeedforward
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
-//PIDExpert
-//pidX(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
-//pidY(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID);
+//PIDPosition
+//pidX(0.2f*factorPID, 0.f*factorPID, 0.12f*factorPID, 1.f / ratePID),
+//pidY(0.24f*factorPID, 0.f*factorPID, 0.14f*factorPID, 1.f / ratePID);
+Interpolation2D
+fuzzyPIDDeltaKpTable((float*)fuzzyPIDDeltaKpX, (float*)fuzzyPIDDeltaKpY, (float*)fuzzyPIDDeltaKpZ, sizeof(fuzzyPIDDeltaKpX) / sizeof(float), sizeof(fuzzyPIDDeltaKpY) / sizeof(float))
+, fuzzyPIDDeltaKiTable((float*)fuzzyPIDDeltaKiX, (float*)fuzzyPIDDeltaKiY, (float*)fuzzyPIDDeltaKiZ, sizeof(fuzzyPIDDeltaKiX) / sizeof(float), sizeof(fuzzyPIDDeltaKiY) / sizeof(float))
+, fuzzyPIDDeltaKdTable((float*)fuzzyPIDDeltaKdX, (float*)fuzzyPIDDeltaKdY, (float*)fuzzyPIDDeltaKdZ, sizeof(fuzzyPIDDeltaKdX) / sizeof(float), sizeof(fuzzyPIDDeltaKdY) / sizeof(float));
+PIDFuzzy
+pidX(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
+pidY(0.27f*factorPID, 0.18f*factorPID, 0.19f*factorPID, 1.f / ratePID);
 RcFilter filterX(ratePID, 15), filterY(ratePID, 15)
 , filterOutX(ratePID, 10), filterOutY(ratePID, 10)
 , filterTargetX(100, 2), filterTargetY(100, 2);
 float outX, outY;
 //重复控制补偿系统
 const float rateCircle = 0.5;
+#ifdef ENABLE_REPETITIVE_CONTROLLER
 const int lengthRepetitiveController = ratePID / rateCircle;
 RepetitiveController repetitiveControllerX(lengthRepetitiveController, 12, 0.25, ratePID, 3)
 , repetitiveControllerY(lengthRepetitiveController, 12, 0.25, ratePID, 3);
 float outRepetitiveControllerX = 0, outRepetitiveControllerY = 0;
 bool isBallCircle = false, isBallCircleOld = false;
+#endif // ENABLE_REPETITIVE_CONTROLLER
 
 //动力
 Servo servoX(&PB9, 200, 0.7, 2.3);
-Servo servoY(&PB8, 200, 0.75, 2.35);
+Servo servoY(&PB8, 200, 0.79, 2.39);
 
 //底座
 const float rateMPU = 100;
 const float intervalMPU = 1 / rateMPU;
+const uint32_t mpuRefreshDelay = ((1000 * intervalMPU + 0.5) / portTICK_RATE_MS);
 const float factorServo = 6.5;
 float angle[3];
 SoftI2c si2c3(&PB3, &PB11);
@@ -111,6 +125,7 @@ MPU9250AHRS mpu(&si2c3, MPU6500_Model_6555);
 //交互
 const float rateUI = 10;
 const float intervalUI = 1 / rateUI;
+const uint32_t uiRefreshDelay = ((1000 * intervalUI + 0.5) / portTICK_RATE_MS);
 Button keyL(&PB4, 1);
 Button keyR(&PB1, 1);
 Button keyU(&PC5, 1);
@@ -166,18 +181,26 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 	}
 
 	//功能
+#ifdef ENABLE_REPETITIVE_CONTROLLER
 	isBallCircleOld = isBallCircle;
+#endif // ENABLE_REPETITIVE_CONTROLLER
+
+	
 	switch (index)
 	{
 	case 0:
 		targetXraw += increase;
 		limit<float>(targetXraw, 30, maxX - 30);
+#ifdef ENABLE_REPETITIVE_CONTROLLER
 		isBallCircle = false;
+#endif // ENABLE_REPETITIVE_CONTROLLER
 		break;
 	case 1:
 		targetYraw += increase;
 		limit<float>(targetYraw, 30, maxY - 30);
+#ifdef ENABLE_REPETITIVE_CONTROLLER
 		isBallCircle = false;
+#endif // ENABLE_REPETITIVE_CONTROLLER
 		break;
 	case 2:
 		circleR = circleR + increase;
@@ -185,7 +208,8 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 		theta += 2 * PI *intervalPID * rateCircle;//0.5圈一秒
 		targetXraw = maxX / 2 + circleR*sin(theta);
 		targetYraw = maxY / 2 + circleR*cos(theta);
-		if (circleR>5)
+#ifdef ENABLE_REPETITIVE_CONTROLLER
+		if (circleR > 5)
 		{
 			isBallCircle = true;
 		}
@@ -193,6 +217,7 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 		{
 			isBallCircle = false;
 		}
+#endif // ENABLE_REPETITIVE_CONTROLLER
 		break;
 	default:
 		break;
@@ -215,8 +240,11 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 		{
 			if (isBallBack == false)
 			{
+#ifdef ENABLE_REPETITIVE_CONTROLLER
 				repetitiveControllerX.clear();
 				repetitiveControllerY.clear();
+#endif // ENABLE_REPETITIVE_CONTROLLER
+
 				pidX.resetState();
 				pidY.resetState();
 
@@ -227,7 +255,8 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 			//posX = filterX.getFilterOut(posX);
 			//posY = filterY.getFilterOut(posY);
 
-			//进行周期控制
+#ifdef ENABLE_REPETITIVE_CONTROLLER
+			//进行重复补偿控制
 			if (isBallCircle == true && isBallCircleOld == true)
 			{
 				outRepetitiveControllerX =
@@ -248,6 +277,11 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 			outX = 0, outY = 0;
 			outX += pidX.refresh(posX - outRepetitiveControllerX);
 			outY -= pidY.refresh(posY - outRepetitiveControllerY);
+#else
+			outX = 0, outY = 0;
+			outX += pidX.refresh(posX);
+			outY -= pidY.refresh(posY);
+#endif // ENABLE_REPETITIVE_CONTROLLER
 
 
 			//outX = filterOutX.getFilterOut(outX);
@@ -264,12 +298,20 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 		}
 	}
 	fpsPIDtemp = fpsPID.getFps();
-	float vscan[] = { posX,posY,outX,outY
+	float kpX, kiX, kdX;
+	pidX.getPID(&kpX, &kiX, &kdX);
+	float kpY, kiY, kdY;
+	pidX.getPID(&kpY, &kiY, &kdY);
+	float vscan[] = { 
+		posX,posY
+		//,outX,outY
 		//,fpsPIDtemp,fpsUItemp
 		//,pidX.getFeedforward(),pidY.getFeedforward()
-		,outRepetitiveControllerX,outRepetitiveControllerY
+		//,outRepetitiveControllerX,outRepetitiveControllerY
 		//,(float)pidX.getCurrentRule(),(float)pidY.getCurrentRule()
-		,targetX,targetY };
+		, kpX, kiX, kdX, kpY, kiY, kdY
+		//,targetX,targetY 
+	};
 	uartVscan.sendOscilloscope(vscan, 8);
 }
 
@@ -285,7 +327,7 @@ void mpuRefresh(void *pvParameters)
 		servoX.setPct(outX - angle[1] * factorServo);
 		servoY.setPct(outY - angle[0] * factorServo);
 		fpsMPUtemp = fpsMPU.getFps();
-		vTaskDelayUntil(&xLastWakeTime, (100 * intervalMPU / portTICK_RATE_MS));
+		vTaskDelayUntil(&xLastWakeTime, mpuRefreshDelay);
 	}
 
 }
@@ -317,7 +359,7 @@ void uiRefresh(void *pvParameters)
 		fpsUItemp = fpsUI.getFps();
 		oled.printf(0, 6, 2, "%.0f %.0f %.0f ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
 
-		vTaskDelayUntil(&xLastWakeTime, (1000 * intervalUI / portTICK_RATE_MS));
+		vTaskDelayUntil(&xLastWakeTime, uiRefreshDelay);
 	}
 
 }
@@ -392,16 +434,18 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-50, 50);
 	//pidX.setISepPoint(15);
-	pidX.setGearshiftPoint(10, 50);
-	pidX.attach(&feedforwardSysX, &SysWithOnlyZero::getY);
+	//pidX.setGearshiftPoint(10, 50);
+	//pidX.attach(&feedforwardSysX, &SysWithOnlyZero::getY);
 	//pidX.setParams(80, 30, 1.5, 0.5, 10);
+	pidX.setFuzzyTable(&fuzzyPIDDeltaKpTable, &fuzzyPIDDeltaKiTable, &fuzzyPIDDeltaKdTable);
 
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-50, 50);
 	//pidY.setISepPoint(15);
-	pidY.setGearshiftPoint(10, 50);
-	pidY.attach(&feedforwardSysY, &SysWithOnlyZero::getY);
+	//pidY.setGearshiftPoint(10, 50);
+	//pidY.attach(&feedforwardSysY, &SysWithOnlyZero::getY);
 	//pidY.setParams(80, 30, 1.5, 0.5, 10);
+	pidY.setFuzzyTable(&fuzzyPIDDeltaKpTable, &fuzzyPIDDeltaKiTable, &fuzzyPIDDeltaKdTable);
 
 
 	//动力

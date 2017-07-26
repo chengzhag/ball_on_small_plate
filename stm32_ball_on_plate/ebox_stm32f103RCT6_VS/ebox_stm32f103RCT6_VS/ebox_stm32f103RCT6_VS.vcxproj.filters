@@ -662,9 +662,6 @@
     <ClCompile Include="common\edriver\encoder_timer.cpp">
       <Filter>Source files\common\edriver</Filter>
     </ClCompile>
-    <ClCompile Include="common\edriver\PID.cpp">
-      <Filter>Source files\common\edriver</Filter>
-    </ClCompile>
     <ClCompile Include="common\edriver\tb6612fng.cpp">
       <Filter>Source files\common\edriver</Filter>
     </ClCompile>
@@ -768,6 +765,9 @@
       <Filter>Source files\common\util</Filter>
     </ClCompile>
     <ClCompile Include="common\util\signal_stream.cpp">
+      <Filter>Source files\common\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\util\PID.cpp">
       <Filter>Source files\common\util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1393,9 +1393,6 @@
     <ClInclude Include="common\edriver\oled_i2c.h">
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
-    <ClInclude Include="common\edriver\PID.h">
-      <Filter>Header files\common\edriver</Filter>
-    </ClInclude>
     <ClInclude Include="common\edriver\mpu9250.h">
       <Filter>Header files\common\edriver</Filter>
     </ClInclude>
@@ -1411,7 +1408,13 @@
     <ClInclude Include="common\util\interpolation.h">
       <Filter>Header files\common\util</Filter>
     </ClInclude>
-    <ClInclude Include="common\util\signal_table.h">
+    <ClInclude Include="user\signal_table.h">
+      <Filter>Header files\user</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\PID.h">
+      <Filter>Header files\common\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\util\fuzzyTable.h">
       <Filter>Header files\common\util</Filter>
     </ClInclude>
   </ItemGroup>

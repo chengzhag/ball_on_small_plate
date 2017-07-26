@@ -64,8 +64,23 @@ public:
 
 	//寻找插值点的X轴和Y轴的偏移量
 	int search1D(float *xaxis, float x, int length);
+
 	//寻找插值点Z值
 	float getZ(float x, float y);
+
+	//获取x的取值范围
+	void getXLim(float *limL, float *limH)
+	{
+		*limL = x[0];
+		*limH = x[lengthX - 1];
+	}
+
+	//获取y的取值范围
+	void getYLim(float *limL, float *limH)
+	{
+		*limL = y[0];
+		*limH = y[lengthY - 1];
+	}
 };
 
 #endif
