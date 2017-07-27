@@ -31,7 +31,7 @@
 
 //#define SYSTEM_IDENTIFICATION
 #define BALL_BALANCE
-//#define ENABLE_REPETITIVE_CONTROLLER
+#define ENABLE_REPETITIVE_CONTROLLER
 
 #ifdef SYSTEM_IDENTIFICATION
 #include "signal_table.h"
@@ -73,9 +73,9 @@ const float factorPID = 1.24;
 //PIDIntSepIncDiff
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 15);
-//PIDFeforGshifIntIncDiff
-//pidX(0.25f*factorPID, 0.2f*factorPID, 0.14f*factorPID, 1.f / ratePID, 30),
-//pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
+PIDFeforGshifIntIncDiff
+pidX(0.25f*factorPID, 0.2f*factorPID, 0.14f*factorPID, 1.f / ratePID, 30),
+pidY(0.27f*factorPID, 0.18f*factorPID, 0.17f*factorPID, 1.f / ratePID, 30);
 //PIDFeforGshifIntIncDiffDezone
 //pidX(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8, 2),
 //pidY(0.3f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID, 8, 2);
@@ -88,16 +88,16 @@ const float factorPID = 1.24;
 //PIDPosition
 //pidX(0.2f*factorPID, 0.f*factorPID, 0.12f*factorPID, 1.f / ratePID),
 //pidY(0.24f*factorPID, 0.f*factorPID, 0.14f*factorPID, 1.f / ratePID);
-Interpolation2D
-fuzzyPIDDeltaKpTable((float*)fuzzyPIDDeltaKpX, (float*)fuzzyPIDDeltaKpY, (float*)fuzzyPIDDeltaKpZ, sizeof(fuzzyPIDDeltaKpX) / sizeof(float), sizeof(fuzzyPIDDeltaKpY) / sizeof(float))
-, fuzzyPIDDeltaKiTable((float*)fuzzyPIDDeltaKiX, (float*)fuzzyPIDDeltaKiY, (float*)fuzzyPIDDeltaKiZ, sizeof(fuzzyPIDDeltaKiX) / sizeof(float), sizeof(fuzzyPIDDeltaKiY) / sizeof(float))
-, fuzzyPIDDeltaKdTable((float*)fuzzyPIDDeltaKdX, (float*)fuzzyPIDDeltaKdY, (float*)fuzzyPIDDeltaKdZ, sizeof(fuzzyPIDDeltaKdX) / sizeof(float), sizeof(fuzzyPIDDeltaKdY) / sizeof(float));
-PIDFuzzy
-pidX(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
-pidY(0.27f*factorPID, 0.18f*factorPID, 0.19f*factorPID, 1.f / ratePID);
+//Interpolation2D
+//fuzzyPIDDeltaKpTable((float*)fuzzyPIDDeltaKpX, (float*)fuzzyPIDDeltaKpY, (float*)fuzzyPIDDeltaKpZ, sizeof(fuzzyPIDDeltaKpX) / sizeof(float), sizeof(fuzzyPIDDeltaKpY) / sizeof(float))
+//, fuzzyPIDDeltaKiTable((float*)fuzzyPIDDeltaKiX, (float*)fuzzyPIDDeltaKiY, (float*)fuzzyPIDDeltaKiZ, sizeof(fuzzyPIDDeltaKiX) / sizeof(float), sizeof(fuzzyPIDDeltaKiY) / sizeof(float))
+//, fuzzyPIDDeltaKdTable((float*)fuzzyPIDDeltaKdX, (float*)fuzzyPIDDeltaKdY, (float*)fuzzyPIDDeltaKdZ, sizeof(fuzzyPIDDeltaKdX) / sizeof(float), sizeof(fuzzyPIDDeltaKdY) / sizeof(float));
+//PIDFuzzy
+//pidX(0.25f*factorPID, 0.2f*factorPID, 0.16f*factorPID, 1.f / ratePID),
+//pidY(0.27f*factorPID, 0.18f*factorPID, 0.19f*factorPID, 1.f / ratePID);
 RcFilter filterX(ratePID, 15), filterY(ratePID, 15)
 , filterOutX(ratePID, 10), filterOutY(ratePID, 10)
-, filterTargetX(100, 2), filterTargetY(100, 2);
+, filterTargetX(ratePID, 1), filterTargetY(ratePID, 1);
 float outX, outY;
 //重复控制补偿系统
 const float rateCircle = 0.5;
@@ -298,19 +298,19 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 		}
 	}
 	fpsPIDtemp = fpsPID.getFps();
-	float kpX, kiX, kdX;
-	pidX.getPID(&kpX, &kiX, &kdX);
-	float kpY, kiY, kdY;
-	pidX.getPID(&kpY, &kiY, &kdY);
+	//float kpX, kiX, kdX;
+	//pidX.getPID(&kpX, &kiX, &kdX);
+	//float kpY, kiY, kdY;
+	//pidX.getPID(&kpY, &kiY, &kdY);
 	float vscan[] = { 
 		posX,posY
-		//,outX,outY
+		,outX,outY
 		//,fpsPIDtemp,fpsUItemp
 		//,pidX.getFeedforward(),pidY.getFeedforward()
-		//,outRepetitiveControllerX,outRepetitiveControllerY
+		,outRepetitiveControllerX,outRepetitiveControllerY
 		//,(float)pidX.getCurrentRule(),(float)pidY.getCurrentRule()
-		, kpX, kiX, kdX, kpY, kiY, kdY
-		//,targetX,targetY 
+		//, kpX, kiX, kdX, kpY, kiY, kdY
+		,targetX,targetY 
 	};
 	uartVscan.sendOscilloscope(vscan, 8);
 }
@@ -434,18 +434,18 @@ void setup()
 	pidX.setTarget(maxX / 2);
 	pidX.setOutputLim(-50, 50);
 	//pidX.setISepPoint(15);
-	//pidX.setGearshiftPoint(10, 50);
-	//pidX.attach(&feedforwardSysX, &SysWithOnlyZero::getY);
+	pidX.setGearshiftPoint(10, 50);
+	pidX.attachFeedForwardH(&feedforwardSysX, &SysWithOnlyZero::getY);
 	//pidX.setParams(80, 30, 1.5, 0.5, 10);
-	pidX.setFuzzyTable(&fuzzyPIDDeltaKpTable, &fuzzyPIDDeltaKiTable, &fuzzyPIDDeltaKdTable);
+	//pidX.setFuzzyTable(&fuzzyPIDDeltaKpTable, &fuzzyPIDDeltaKiTable, &fuzzyPIDDeltaKdTable);
 
 	pidY.setTarget(maxY / 2);
 	pidY.setOutputLim(-50, 50);
 	//pidY.setISepPoint(15);
-	//pidY.setGearshiftPoint(10, 50);
-	//pidY.attach(&feedforwardSysY, &SysWithOnlyZero::getY);
+	pidY.setGearshiftPoint(10, 50);
+	pidY.attachFeedForwardH(&feedforwardSysY, &SysWithOnlyZero::getY);
 	//pidY.setParams(80, 30, 1.5, 0.5, 10);
-	pidY.setFuzzyTable(&fuzzyPIDDeltaKpTable, &fuzzyPIDDeltaKiTable, &fuzzyPIDDeltaKdTable);
+	//pidY.setFuzzyTable(&fuzzyPIDDeltaKpTable, &fuzzyPIDDeltaKiTable, &fuzzyPIDDeltaKdTable);
 
 
 	//动力

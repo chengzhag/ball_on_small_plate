@@ -181,11 +181,11 @@ public:
 	PIDFeedforward(float kp = 0, float ki = 0, float kd = 0, float interval = 0.01);
 
 	//绑定系统函数feedforwardH，参数为时域离散信号，返回系统输出信号
-	void attach(float(*feedforwardH)(float input));
+	void attachFeedForwardH(float(*feedforwardH)(float input));
 
 	//绑定系统函数feedforwardH，参数为时域离散信号，返回系统输出信号
 	template<typename T>
-	void attach(T *pObj, float (T::*feedforwardH)(float input));
+	void attachFeedForwardH(T *pObj, float (T::*feedforwardH)(float input));
 
 	virtual float refresh(float feedback);
 
@@ -193,7 +193,7 @@ public:
 	float getFeedforward();
 };
 template<typename T>
-void PIDFeedforward::attach(T *pObj, float (T::*feedforwardH)(float input))
+void PIDFeedforward::attachFeedForwardH(T *pObj, float (T::*feedforwardH)(float input))
 {
 	this->feedforwardH.attach(pObj, feedforwardH);
 }

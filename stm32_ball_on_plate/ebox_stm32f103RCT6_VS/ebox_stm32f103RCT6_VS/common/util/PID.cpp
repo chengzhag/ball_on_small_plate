@@ -351,7 +351,7 @@ PIDFeedforward::PIDFeedforward(float kp /*= 0*/, float ki /*= 0*/, float kd /*= 
 
 }
 
-void PIDFeedforward::attach(float(*feedforwardH)(float input))
+void PIDFeedforward::attachFeedForwardH(float(*feedforwardH)(float input))
 {
 	this->feedforwardH.attach(feedforwardH);
 }
