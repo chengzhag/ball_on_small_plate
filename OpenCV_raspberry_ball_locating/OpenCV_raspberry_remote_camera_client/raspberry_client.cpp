@@ -14,6 +14,7 @@
 #include "uart_num.h"
 
 #include "wiringPi.h"
+#include "wiringSerial.h"
 
 
 using namespace cv;
@@ -224,6 +225,25 @@ int main(int argc, char **argv)
 //		threshold(imTrans, imSend, threshBinary, 255, CV_THRESH_BINARY);
 		socketMat.transmit(imSend, 80);
 #endif // SOCKET_SEND_IMAGE
+		
+		//判断单片机发来的关机指令或按键发来的关机指令
+		int fd = uart.getFd();
+		char c;
+		if (int num = serialDataAvail(fd) > 0)
+		{
+			for (int i = 0; i < num; i++)
+			{
+				c = serialGetchar(fd);
+			}
+		}
+		if (c == 's')
+		{
+			system("sudo shutdown -h now");
+		}
+		else if (c == 'k')
+		{
+			system("sudo killall OpenCVCameraDemo");
+		}
 		
 		
 	}

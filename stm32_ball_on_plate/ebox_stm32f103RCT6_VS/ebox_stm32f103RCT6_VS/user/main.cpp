@@ -143,8 +143,10 @@ int index = 0;
 float circleR = 0;
 float theta = 0;
 bool isBallBack = true;
+bool isShutdown = false;
 void posReceiveEvent(UartNum<float, 2>* uartNum)
 {
+	isShutdown = false;
 	//按键响应
 	keyL.loop();
 	keyR.loop();
@@ -178,6 +180,14 @@ void posReceiveEvent(UartNum<float, 2>* uartNum)
 	if (keyD.pressed_for(200, 0))
 	{
 		increase -= 1;
+	}
+	if (keyR.pressed_for(5000, 1))
+	{
+		uartNum->printf("s");
+	}
+	if (keyL.pressed_for(5000, 1))
+	{
+		uartNum->printf("k");
 	}
 
 	//功能
@@ -340,6 +350,12 @@ void uiRefresh(void *pvParameters)
 
 	while (1)
 	{
+		//判断是否树莓派已关机
+		if (isShutdown = true)
+		{
+			fpsPIDtemp = 0;
+		}
+
 		switch (index)
 		{
 		case 0:
@@ -358,6 +374,9 @@ void uiRefresh(void *pvParameters)
 		oled.printf(0, 4, 2, "%.1f %.1f   ", angle[0], angle[1]);
 		fpsUItemp = fpsUI.getFps();
 		oled.printf(0, 6, 2, "%.0f %.0f %.0f ", fpsPIDtemp, fpsUItemp, fpsMPUtemp);
+		
+		//把关机置1，等待串口中断来置0
+		isShutdown = true;
 
 		vTaskDelayUntil(&xLastWakeTime, uiRefreshDelay);
 	}

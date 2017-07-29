@@ -85,6 +85,8 @@ uart_num.h
 C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/uart_num.h
 wiringPi.h
 C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/wiringPi.h
+wiringSerial.h
+C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/wiringSerial.h
 
 C:/Users/Sky/Desktop/ball_on_plate/OpenCV_raspberry_ball_locating/OpenCV_raspberry_remote_camera_client/util/my_opencv.cpp
 my_opencv.h

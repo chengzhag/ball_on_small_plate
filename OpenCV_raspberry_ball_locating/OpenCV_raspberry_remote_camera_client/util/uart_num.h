@@ -59,4 +59,10 @@ template<typename NumType = float>
 			}
 			serialPutchar(fd, '\n');
 		}
+		
+		//ªÒ»°fd
+		int getFd()
+		{
+			return fd;
+		}
 	};
